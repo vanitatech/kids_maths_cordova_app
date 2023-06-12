@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "minuend_min": "1",
+    "minuend_max": 10,
+    "subtrahend": 1
+  },
+  {
+    "id": 2,
+    "minuend_min": "1",
+    "minuend_max": 10,
+    "subtrahend": 2
+  },
+  {
+    "id": 3,
+    "minuend_min": "1",
+    "minuend_max": 10,
+    "subtrahend": 3
+  },
+  {
+    "id": 4,
+    "minuend_min": "1",
+    "minuend_max": 10,
+    "subtrahend": 4
+  },
+  {
+    "id": 5,
+    "minuend_min": "1",
+    "minuend_max": 10,
+    "subtrahend": 5
+  },
+  {
+    "id": 6,
+    "minuend_min": 1,
+    "minuend_max": 20,
+    "subtrahend": 6
+  },
+  {
+    "id": 7,
+    "minuend_min": 1,
+    "minuend_max": 20,
+    "subtrahend": 7
+  },
+  {
+    "id": 8,
+    "minuend_min": 1,
+    "minuend_max": 20,
+    "subtrahend": 8
+  },
+  {
+    "id": 9,
+    "minuend_min": 1,
+    "minuend_max": 20,
+    "subtrahend": 9
+  },
+  {
+    "id": 10,
+    "minuend_min": 1,
+    "minuend_max": 20,
+    "subtrahend": 10
+  }
+]

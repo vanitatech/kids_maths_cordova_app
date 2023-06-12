@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "augend_min": 1,
+    "augend_max": 9,
+    "addend": 1
+  },
+  {
+    "id": 2,
+    "augend_min": 1,
+    "augend_max": 8,
+    "addend": 2
+  },
+  {
+    "id": 3,
+    "augend_min": 1,
+    "augend_max": 7,
+    "addend": 3
+  },
+  {
+    "id": 4,
+    "augend_min": 1,
+    "augend_max": 6,
+    "addend": 4
+  },
+  {
+    "id": 5,
+    "augend_min": 1,
+    "augend_max": 5,
+    "addend": 5
+  },
+  {
+    "id": 6,
+    "augend_min": 1,
+    "augend_max": 14,
+    "addend": 6
+  },
+  {
+    "id": 7,
+    "augend_min": 1,
+    "augend_max": 13,
+    "addend": 7
+  },
+  {
+    "id": 8,
+    "augend_min": 1,
+    "augend_max": 12,
+    "addend": 8
+  },
+  {
+    "id": 9,
+    "augend_min": 1,
+    "augend_max": 11,
+    "addend": 9
+  },
+  {
+    "id": 10,
+    "augend_min": 1,
+    "augend_max": 10,
+    "addend": 10
+  }
+]
