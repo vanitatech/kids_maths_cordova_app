@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "parrot",
+    "img": "parrot.png",
+    "cost": 0
+  },
+  {
+    "id": 2,
+    "name": "elephant",
+    "img": "elephant.png",
+    "cost": 50
+  },
+  {
+    "id": 3,
+    "name": "seahorse",
+    "img": "seahorse.png",
+    "cost": 150
+  },
+  {
+    "id": 4,
+    "name": "penguin",
+    "img": "penguin.png",
+    "cost": 300
+  }
+]
