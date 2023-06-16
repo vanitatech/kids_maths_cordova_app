@@ -2,6 +2,7 @@ const MascotView = {
   // TODO
   display: function (mascots) {
     let mascotList = document.getElementById('mascot-list');
+    console.log(mascotList);
     mascotList.innerHTML = '';
 
     mascots.forEach(function (mascot) {

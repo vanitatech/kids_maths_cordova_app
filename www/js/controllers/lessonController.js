@@ -1,5 +1,5 @@
-import LessonModel from "../models/lessonModel";
-import LessonView from "../views/lessonView";
+import LessonModel from "../models/lessonModel.js";
+import LessonView from "../views/lessonView.js";
 
 const LessonController = {
   populateLessons: function () {

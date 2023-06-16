@@ -1,5 +1,5 @@
-import MascotModel from "../models/mascotModel";
-import MascotView from "../views/mascotView";
+import MascotModel from "../models/mascotModel.js";
+import MascotView from "../views/mascotView.js";
 
 const MascotController = {
   populateMascots: function () {
