@@ -15,4 +15,4 @@ db.version(databaseVersion).stores({
   mascots: "id",
 });
 
-export { db, databaseVersion };
+export default db;

@@ -7,7 +7,6 @@ const LessonController = {
     try {
       const completedLessons = UserProgressModel.getLessonsCompleted();
       const currentLessonId = parseInt(completedLessons) + 1;
-
       const currentLesson = await LessonModel.get(currentLessonId);
       LessonView.renderCurrentLessonNumber(currentLesson.id);
 

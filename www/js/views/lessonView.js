@@ -6,7 +6,7 @@ const LessonView = {
   renderNextLessonButton: function (number) {
     // Prepare button HTML
     const nextLessonButtonHtml = `
-    <button id="next-lesson-button" data-lesson="${number}">
+    <button id="next-lesson-button" data-lesson="${number}" disabled>
         <span>Next Lesson</span>
         <span id="next-lesson-number" class="lesson-number">${number}</span>
         <img src="img/thick-arrow-right-long.svg">

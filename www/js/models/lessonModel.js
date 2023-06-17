@@ -1,8 +1,8 @@
-import { db } from '../database/database.js';
+import db from '../database/database.js';
 
 const LessonModel = {
   getTotal: function () {
-    return db.lessons.count;
+    return db.lessons.count();
   },
   getAll: function () {
     return db.lessons.toArray();
