@@ -1,8 +1,221 @@
+/* CSS Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Header Styles */
+#header {
+  display: flex;
+  background: #cce5ff;
+  padding: 15px 20px;
+  border-radius: 0 0 15px 15px;
+  gap: 25px;
+  position: fixed;
+  top: 0;
+  height: 60px;
+  width: 100%;
+}
+
+#home-button img {
+  width: 34px;
+}
+
+#progress-stars-button img {
+  width: 40px;
+}
+
 #progress-background {
+  background: #ffffff;
   width: 100%;
   height: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
 }
+
 #progress-bar {
   color: #00aa00;
   height: 100%;
+}
+
+#progress-numbers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#progress-stars-button {
+  position: relative;
+}
+
+#progress-stars-amount {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app-views {
+  margin-top: 60px;
+  padding: 0 20px;
+}
+
+/* Mascot Styles */
+.mascot-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  padding: 20px 0;
+}
+
+.mascot-speech {
+  background: #f3f3f3;
+  border-radius: 7px;
+  padding: 15px;
+  position: relative;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.mascot-speech:before {
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  content: '';
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.mascot-speech-left:before {
+  right: -20px;
+  border-left: 20px solid #f3f3f3;
+}
+
+.mascot-speech-right:before {
+  left: -20px;
+  border-right: 20px solid #f3f3f3;
+}
+
+/* Lesson View Styles */
+#lesson-view .mascot-speech {
+  font-size: 1.25rem;
+}
+
+#lesson-view .lesson-number {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#current-lesson-number {
+  background: #fff;
+}
+
+#next-lesson-button {
+  font-size: 1.25rem;
+  opacity: 0.5;
+  justify-content: center;
+  margin: 15px auto;
+}
+
+#next-lesson-number {
+  background: #eee;
+  font-size: 1.25rem;
+}
+
+#next-lesson-button img {
+  width: 30px;
+}
+
+/* Activity View */
+
+#activity-progress {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #cce5ff;
+  padding: 20px 20px;
+  border-radius: 15px 15px 0 0;
+  gap: 25px;
+}
+
+#activity-progress-stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }

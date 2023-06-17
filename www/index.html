@@ -19,31 +19,34 @@
             <button id="home-button">
                 <img src="img/home.svg">
             </button>
-            <div id=" progress-background">
+            <div id="progress-background">
                 <div id="progress-bar"></div>
+                <div id="progress-numbers">
+                    <span id="progress-numbers-count"></span>/<span id="progress-numbers-total"></span>
+                </div>
             </div>
-            <button id="progress-stars">
+            <button id="progress-stars-button">
                 <img src="img/star-yellow.svg">
                 <span id="progress-stars-amount"></span>
             </button>
         </div>
 
-        <div class="app-views">
+        <div id="app-views">
             <div id="lesson-view">
                 <div class="mascot-header">
                     <div class="mascot-img mascot-img-left"></div>
 
                     <div class="mascot-speech mascot-speech-right">
                         <span>Lesson</span>
-                        <span id="current-lesson-number"></span>
+                        <span id="current-lesson-number" class="lesson-number"></span>
                     </div>
                 </div>
 
                 <div id="activities-list"></div>
 
                 <button id="next-lesson-button">
-                    <span>Go To Lesson</span>
-                    <span id="next-lesson-number"></span>
+                    <span>Next Lesson</span>
+                    <span id="next-lesson-number" class="lesson-number"></span>
                     <img src="img/thick-arrow-right-long.svg">
                 </button>
             </div>
@@ -68,7 +71,7 @@
 
                 <div id="activity-progress">
                     <div>Score</div>
-                    <div id="activity-progress-stars"></div>
+                    <ul id="activity-progress-stars"></ul>
                 </div>
             </div>
 
@@ -79,7 +82,7 @@
                     <div class="mascot-speech mascot-speech-right">
                         <div class="mascot-speech-part">Yahoo! Unlock new friends</div>
                         <div class="mascot-speech-part">
-                            <img src="img/unlock.svg">
+                            <img src="img/unlock-keyhole.svg">
                         </div>
                     </div>
                 </div>
