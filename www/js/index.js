@@ -1,4 +1,5 @@
 import Seeder from './database/seeder.js';
+import AppController from './controllers/appController.js';
 import UserProgressController from './controllers/userProgressController.js';
 import LessonController from './controllers/lessonController.js';
 import MascotController from './controllers/mascotController.js';
@@ -16,6 +17,9 @@ async function onDeviceReady() {
     // User Progress
     UserProgressController.showLessonsCompleted();
     UserProgressController.showPoints();
+
+    // Show app
+    AppController.show();
 
     // Mascots
     MascotController.showMascot();
