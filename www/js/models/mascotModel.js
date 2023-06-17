@@ -1,7 +1,7 @@
 import { db } from '../database/database.js';
 
 const MascotModel = {
-  getAll() {
+  getAll: function () {
     return db.mascots.toArray();
   }
 }

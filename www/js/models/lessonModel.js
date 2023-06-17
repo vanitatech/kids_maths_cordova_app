@@ -1,7 +1,7 @@
 import { db } from '../database/database.js';
 
 const LessonModel = {
-  getAll() {
+  getAll: function () {
     return db.lessons.toArray();
   }
 }
