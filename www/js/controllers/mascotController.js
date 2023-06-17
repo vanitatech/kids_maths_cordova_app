@@ -5,8 +5,9 @@ import UserProgressModel from "../models/userProgressModel.js";
 const MascotController = {
   showMascots: async function () {
     try {
+      const currentMascotId = UserProgressModel.getCurrentMascot();
       const mascots = await MascotModel.getAll();
-      MascotView.renderList(mascots);
+      MascotView.renderList(mascots, currentMascotId);
     } catch (error) {
       console.error('Error:', error);
     }

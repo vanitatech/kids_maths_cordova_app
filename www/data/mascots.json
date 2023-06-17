@@ -3,24 +3,28 @@
     "id": 1,
     "name": "parrot",
     "img": "parrot.png",
-    "cost": 0
+    "cost": 0,
+    "unlocked": true
   },
   {
     "id": 2,
     "name": "elephant",
     "img": "elephant.png",
-    "cost": 50
+    "cost": 50,
+    "unlocked": false
   },
   {
     "id": 3,
     "name": "seahorse",
     "img": "seahorse.png",
-    "cost": 150
+    "cost": 150,
+    "unlocked": false
   },
   {
     "id": 4,
     "name": "penguin",
     "img": "penguin.png",
-    "cost": 300
+    "cost": 300,
+    "unlocked": false
   }
 ]

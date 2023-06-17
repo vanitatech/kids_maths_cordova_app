@@ -17,14 +17,17 @@ async function onDeviceReady() {
     UserProgressController.showLessonsCompleted();
     UserProgressController.showPoints();
 
+    // Mascots
+    MascotController.showMascot();
+
     // TODO: Only show lesson on lesson-view
-    // TODO: Lessons
+    // TODO: Lesson View
     LessonController.showCurrentLesson();
 
     // TODO: Activity view
     // ...
 
-    // TODO: Only show mascots on mascot-library-view
-    // Mascots
+    // TODO: Only show mascots list on mascot-library-view
+    // TODO: Mascots library view
     MascotController.showMascots();
 }

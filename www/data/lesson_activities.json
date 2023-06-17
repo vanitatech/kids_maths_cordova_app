@@ -3,216 +3,252 @@
     "id": 1,
     "lesson_id": 1,
     "activity_type": "counting",
-    "activity_id": 1
+    "activity_id": 1,
+    "completed": false
   },
   {
     "id": 2,
     "lesson_id": 1,
     "activity_type": "addition",
-    "activity_id": 1
+    "activity_id": 1,
+    "completed": false
   },
   {
     "id": 3,
     "lesson_id": 1,
     "activity_type": "subtraction",
-    "activity_id": 1
+    "activity_id": 1,
+    "completed": false
   },
   {
     "id": 4,
     "lesson_id": 2,
     "activity_type": "counting",
-    "activity_id": 2
+    "activity_id": 2,
+    "completed": false
   },
   {
     "id": 5,
     "lesson_id": 2,
     "activity_type": "addition",
-    "activity_id": 2
+    "activity_id": 2,
+    "completed": false
   },
   {
     "id": 6,
     "lesson_id": 2,
     "activity_type": "subtraction",
-    "activity_id": 2
+    "activity_id": 2,
+    "completed": false
   },
   {
     "id": 7,
     "lesson_id": 3,
     "activity_type": "counting",
-    "activity_id": 3
+    "activity_id": 3,
+    "completed": false
   },
   {
     "id": 8,
     "lesson_id": 3,
     "activity_type": "addition",
-    "activity_id": 3
+    "activity_id": 3,
+    "completed": false
   },
   {
     "id": 9,
     "lesson_id": 3,
     "activity_type": "subtraction",
-    "activity_id": 3
+    "activity_id": 3,
+    "completed": false
   },
   {
     "id": 10,
     "lesson_id": 4,
     "activity_type": "counting",
-    "activity_id": 4
+    "activity_id": 4,
+    "completed": false
   },
   {
     "id": 11,
     "lesson_id": 4,
     "activity_type": "addition",
-    "activity_id": 4
+    "activity_id": 4,
+    "completed": false
   },
   {
     "id": 12,
     "lesson_id": 4,
     "activity_type": "subtraction",
-    "activity_id": 4
+    "activity_id": 4,
+    "completed": false
   },
   {
     "id": 13,
     "lesson_id": 5,
     "activity_type": "counting",
-    "activity_id": 5
+    "activity_id": 5,
+    "completed": false
   },
   {
     "id": 14,
     "lesson_id": 5,
     "activity_type": "addition",
-    "activity_id": 5
+    "activity_id": 5,
+    "completed": false
   },
   {
     "id": 15,
     "lesson_id": 5,
     "activity_type": "subtraction",
-    "activity_id": 5
+    "activity_id": 5,
+    "completed": false
   },
   {
     "id": 16,
     "lesson_id": 6,
     "activity_type": "counting",
-    "activity_id": 3
+    "activity_id": 3,
+    "completed": false
   },
   {
     "id": 17,
     "lesson_id": 6,
     "activity_type": "addition",
-    "activity_id": 4
+    "activity_id": 4,
+    "completed": false
   },
   {
     "id": 18,
     "lesson_id": 6,
     "activity_type": "subtraction",
-    "activity_id": 5
+    "activity_id": 5,
+    "completed": false
   },
   {
     "id": 19,
     "lesson_id": 7,
     "activity_type": "counting",
-    "activity_id": 6
+    "activity_id": 6,
+    "completed": false
   },
   {
     "id": 20,
     "lesson_id": 7,
     "activity_type": "addition",
-    "activity_id": 6
+    "activity_id": 6,
+    "completed": false
   },
   {
     "id": 21,
     "lesson_id": 7,
     "activity_type": "subtraction",
-    "activity_id": 6
+    "activity_id": 6,
+    "completed": false
   },
   {
     "id": 22,
     "lesson_id": 8,
     "activity_type": "counting",
-    "activity_id": 7
+    "activity_id": 7,
+    "completed": false
   },
   {
     "id": 23,
     "lesson_id": 8,
     "activity_type": "addition",
-    "activity_id": 7
+    "activity_id": 7,
+    "completed": false
   },
   {
     "id": 24,
     "lesson_id": 8,
     "activity_type": "subtraction",
-    "activity_id": 7
+    "activity_id": 7,
+    "completed": false
   },
   {
     "id": 25,
     "lesson_id": 9,
     "activity_type": "counting",
-    "activity_id": 8
+    "activity_id": 8,
+    "completed": false
   },
   {
     "id": 26,
     "lesson_id": 9,
     "activity_type": "addition",
-    "activity_id": 8
+    "activity_id": 8,
+    "completed": false
   },
   {
     "id": 27,
     "lesson_id": 9,
     "activity_type": "subtraction",
-    "activity_id": 8
+    "activity_id": 8,
+    "completed": false
   },
   {
     "id": 28,
     "lesson_id": 10,
     "activity_type": "counting",
-    "activity_id": 9
+    "activity_id": 9,
+    "completed": false
   },
   {
     "id": 29,
     "lesson_id": 10,
     "activity_type": "addition",
-    "activity_id": 9
+    "activity_id": 9,
+    "completed": false
   },
   {
     "id": 30,
     "lesson_id": 10,
     "activity_type": "subtraction",
-    "activity_id": 9
+    "activity_id": 9,
+    "completed": false
   },
   {
     "id": 31,
     "lesson_id": 11,
     "activity_type": "counting",
-    "activity_id": 10
+    "activity_id": 1,
+    "completed": false
   },
   {
     "id": 32,
     "lesson_id": 11,
     "activity_type": "addition",
-    "activity_id": 10
+    "activity_id": 1,
+    "completed": false
   },
   {
     "id": 33,
     "lesson_id": 11,
     "activity_type": "subtraction",
-    "activity_id": 10
+    "activity_id": 1,
+    "completed": false
   },
   {
     "id": 34,
     "lesson_id": 12,
     "activity_type": "counting",
-    "activity_id": 8
+    "activity_id": 8,
+    "completed": false
   },
   {
     "id": 35,
     "lesson_id": 12,
     "activity_type": "addition",
-    "activity_id": 9
+    "activity_id": 9,
+    "completed": false
   },
   {
     "id": 36,
     "lesson_id": 12,
     "activity_type": "subtraction",
-    "activity_id": 10
+    "activity_id": 1,
+    "completed": false
   }
 ]
