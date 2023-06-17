@@ -1,10 +1,18 @@
 const UserProgressView = {
   renderProgressBar: function (progressCount, totalCount) {
-    const progressBarElement = document.getElementById('progress-bar');
     // Calculate progress as a percentage
     const progressPercentage = (progressCount / totalCount) * 100;
+
     // Update the progress bar width
-    progressBarElement.style.width = `${progressPercentage}%`;
+    document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+
+    // Update numbers
+    document.getElementById('progress-numbers-count').innerHTML = progressCount;
+    document.getElementById('progress-numbers-total').innerHTML = totalCount;
+  },
+  renderProgressStars: function (count) {
+    // Update progress stars
+    document.getElementById('progress-stars-amount').innerHTML = count;
   }
 }
 

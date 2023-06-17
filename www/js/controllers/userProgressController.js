@@ -9,6 +9,12 @@ const UserProgressController = {
       const totalLessons = lessons.length;
       UserProgressView.renderProgressBar(completedLessons, totalLessons);
     });
+  },
+  showPoints: function () {
+    const pointsAwarded = UserProgressModel.getPointsAwarded();
+    const pointsRedeemed = UserProgressModel.getPointsRedeeded();
+    const pointsRemaining = pointsAwarded - pointsRedeemed;
+    UserProgressView.renderProgressStars(pointsRemaining);
   }
 }
 

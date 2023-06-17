@@ -22,6 +22,7 @@ function onDeviceReady() {
 
     // User Progress
     UserProgressController.showLessonsCompleted();
+    UserProgressController.showPoints();
 
     // TODO: Lessons
     // LessonController.showLessons();
