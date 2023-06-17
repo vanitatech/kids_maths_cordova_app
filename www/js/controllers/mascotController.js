@@ -3,7 +3,7 @@ import MascotView from "../views/mascotView.js";
 import UserProgressModel from "../models/userProgressModel.js";
 
 const MascotController = {
-  showMascots: async function () {
+  showAll: async function () {
     try {
       const currentMascotId = UserProgressModel.getCurrentMascot();
       const mascots = await MascotModel.getAll();
@@ -12,7 +12,7 @@ const MascotController = {
       console.error('Error:', error);
     }
   },
-  showMascot: async function () {
+  showCurrent: async function () {
     try {
       const currentMascotId = UserProgressModel.getCurrentMascot();
       const mascot = await MascotModel.get(currentMascotId);

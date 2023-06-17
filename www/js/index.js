@@ -3,6 +3,7 @@ import AppController from './controllers/appController.js';
 import UserProgressController from './controllers/userProgressController.js';
 import LessonController from './controllers/lessonController.js';
 import MascotController from './controllers/mascotController.js';
+import LessonActivityController from './controllers/lessonActivityController.js';
 
 // Wait for the deviceready event before using any of Cordova's device APIs
 document.addEventListener('deviceready', onDeviceReady, false);
@@ -22,16 +23,17 @@ async function onDeviceReady() {
     AppController.show();
 
     // Mascots
-    MascotController.showMascot();
+    MascotController.showCurrent();
 
     // TODO: Only show lesson on lesson-view
     // TODO: Lesson View
-    LessonController.showCurrentLesson();
+    LessonController.showCurrent();
+    LessonActivityController.showAllCurrent();
 
     // TODO: Activity view
     // ...
 
     // TODO: Only show mascots list on mascot-library-view
     // TODO: Mascots library view
-    MascotController.showMascots();
+    MascotController.showAll();
 }

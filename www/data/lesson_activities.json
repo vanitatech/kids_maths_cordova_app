@@ -213,21 +213,21 @@
     "id": 31,
     "lesson_id": 11,
     "activity_type": "counting",
-    "activity_id": 1,
+    "activity_id": 10,
     "completed": false
   },
   {
     "id": 32,
     "lesson_id": 11,
     "activity_type": "addition",
-    "activity_id": 1,
+    "activity_id": 10,
     "completed": false
   },
   {
     "id": 33,
     "lesson_id": 11,
     "activity_type": "subtraction",
-    "activity_id": 1,
+    "activity_id": 10,
     "completed": false
   },
   {
@@ -248,7 +248,7 @@
     "id": 36,
     "lesson_id": 12,
     "activity_type": "subtraction",
-    "activity_id": 1,
+    "activity_id": 10,
     "completed": false
   }
 ]

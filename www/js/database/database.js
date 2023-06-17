@@ -10,8 +10,8 @@ db.version(databaseVersion).stores({
   additionActivities: "id",
   subtractionActivities: "id",
   countingActivities: "id",
-  lessonActivities: "id, lessonId",
-  lessonWorksheet: "id, lessonId",
+  lessonActivities: "id, lesson_id",
+  // TODO: // lessonWorksheet: "id, lesson_id",
   mascots: "id",
 });
 

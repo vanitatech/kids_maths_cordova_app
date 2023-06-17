@@ -17,7 +17,7 @@ const Seeder = {
       await seedTableIfEmpty('subtractionActivities', subtractionActivitiesData);
       await seedTableIfEmpty('countingActivities', countingActivitiesData);
       await seedTableIfEmpty('lessonActivities', lessonActivitiesData);
-      await seedTableIfEmpty('lessonWorksheet', lessonsData);
+      // TODO: // await seedTableIfEmpty('lessonWorksheet', );
       await seedTableIfEmpty('mascots', mascotsData);
     } catch (error) {
       console.error('Error:', error);
