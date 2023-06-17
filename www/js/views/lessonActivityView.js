@@ -31,7 +31,7 @@ const LessonActivityView = {
       case 'addition':
         return 'plus-circle.svg';
       case 'counting':
-        return '';
+        return 'numbers-circle.svg';
       case 'subtraction':
         return 'minus-circle.svg';
       default:

@@ -160,7 +160,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 35px;
-  padding: 20px 0;
+  margin: 75px 0 20px 0;
 }
 
 .mascot-img-container img {
@@ -224,7 +224,7 @@ button {
   font-size: 1.25rem;
   opacity: 0.4;
   justify-content: center;
-  margin: 15px auto;
+  margin: 20px auto 15px auto;
 }
 
 #next-lesson-number {
@@ -234,6 +234,47 @@ button {
 
 #next-lesson-button img {
   width: 30px;
+}
+
+/* Activities List */
+
+#activities-list .activity-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  gap: 20px;
+}
+
+#activities-list .activity-item img {
+  width: 40px;
+}
+
+#activities-list .activity-checkbox {
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+#activities-list .activity-type {
+  font-size: 1.4rem;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+
+#activities-list .activity-type-addition {
+  background: #3399ff;
+}
+
+#activities-list .activity-type-counting {
+  background: #ff3333;
+}
+
+#activities-list .activity-type-subtraction {
+  background: #00cc66;
 }
 
 /* Activity View */
