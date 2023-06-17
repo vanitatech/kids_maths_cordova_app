@@ -1,0 +1,8 @@
+#progress-background {
+  width: 100%;
+  height: 30px;
+}
+#progress-bar {
+  color: #00aa00;
+  height: 100%;
+}

@@ -1,6 +1,6 @@
 const LessonView = {
   // TODO
-  display: function (lessons) {
+  renderList: function (lessons) {
     // this.lessonsList.innerHTML = '';
     // lessons.forEach(lesson => {
     //   const listItem = document.createElement('li');

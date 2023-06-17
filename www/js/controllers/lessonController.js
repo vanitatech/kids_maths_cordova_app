@@ -2,9 +2,9 @@ import LessonModel from "../models/lessonModel.js";
 import LessonView from "../views/lessonView.js";
 
 const LessonController = {
-  populateLessons: function () {
+  showLessons: function () {
     LessonModel.getAll().then(lessons => {
-      LessonView.display(lessons);
+      LessonView.renderList(lessons);
     });
   }
 }

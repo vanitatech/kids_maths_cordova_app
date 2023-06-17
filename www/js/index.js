@@ -7,6 +7,7 @@ import subtractionActivitiesData from '../data/activities_subtraction.json' asse
 import countingActivitiesData from '../data/activities_counting.json' assert { type: "json" };
 import mascotsData from '../data/mascots.json' assert { type: "json" };
 
+import UserProgressController from './controllers/userProgressController.js';
 import LessonController from './controllers/lessonController.js';
 import MascotController from './controllers/mascotController.js';
 
@@ -19,15 +20,14 @@ function onDeviceReady() {
 
     initDB();
 
-    // TODO: Initialise the local storage data (user progress and daily target)
+    // User Progress
+    UserProgressController.showLessonsCompleted();
 
     // TODO: Lessons
-    // const lessonController = Object.create(LessonController);
-    // lessonController.populateLessons();
+    // LessonController.showLessons();
 
     // Mascots
-    const mascotController = Object.create(MascotController);
-    mascotController.populateMascots();
+    MascotController.showMascots();
 }
 
 function initDB() {

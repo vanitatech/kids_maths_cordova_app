@@ -2,9 +2,9 @@ import MascotModel from "../models/mascotModel.js";
 import MascotView from "../views/mascotView.js";
 
 const MascotController = {
-  populateMascots: function () {
+  showMascots: function () {
     MascotModel.getAll().then(mascots => {
-      MascotView.display(mascots);
+      MascotView.renderList(mascots);
     });
   }
 }
