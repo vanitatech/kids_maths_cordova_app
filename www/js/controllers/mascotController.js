@@ -2,10 +2,13 @@ import MascotModel from "../models/mascotModel.js";
 import MascotView from "../views/mascotView.js";
 
 const MascotController = {
-  showMascots: function () {
-    MascotModel.getAll().then(mascots => {
+  showMascots: async function () {
+    try {
+      const mascots = await MascotModel.getAll();
       MascotView.renderList(mascots);
-    });
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
 }
 

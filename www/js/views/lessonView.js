@@ -1,12 +1,19 @@
 const LessonView = {
-  // TODO
-  renderList: function (lessons) {
-    // this.lessonsList.innerHTML = '';
-    // lessons.forEach(lesson => {
-    //   const listItem = document.createElement('li');
-    //   listItem.textContent = lesson.name;
-    //   this.lessonsList.appendChild(listItem);
-    // });
+  renderCurrentLessonNumber: function (number) {
+    // Update lesson number
+    document.getElementById('current-lesson-number').innerHTML = number;
+  },
+  renderNextLessonButton: function (number) {
+    // Prepare button HTML
+    const nextLessonButtonHtml = `
+    <button id="next-lesson-button" data-lesson="${number}">
+        <span>Next Lesson</span>
+        <span id="next-lesson-number" class="lesson-number">${number}</span>
+        <img src="img/thick-arrow-right-long.svg">
+    </button>`;
+
+    // Update the DOM
+    document.getElementById('next-lesson-button-container').innerHTML = nextLessonButtonHtml;
   }
 }
 

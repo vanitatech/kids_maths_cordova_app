@@ -3,12 +3,14 @@ import UserProgressView from "../views/userProgressView.js";
 import LessonModel from "../models/lessonModel.js";
 
 const UserProgressController = {
-  showLessonsCompleted: function () {
-    const completedLessons = UserProgressModel.getLessonsCompleted();
-    LessonModel.getAll().then(lessons => {
-      const totalLessons = lessons.length;
+  showLessonsCompleted: async function () {
+    try {
+      const completedLessons = UserProgressModel.getLessonsCompleted();
+      const totalLessons = await LessonModel.getTotal();
       UserProgressView.renderProgressBar(completedLessons, totalLessons);
-    });
+    } catch (error) {
+      console.error('Error:', error);
+    }
   },
   showPoints: function () {
     const pointsAwarded = UserProgressModel.getPointsAwarded();
