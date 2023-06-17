@@ -3,15 +3,6 @@
 
 <head>
     <meta charset="utf-8">
-    <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
     <meta name="format-detection" content="telephone=no">
@@ -25,8 +16,10 @@
 <body>
     <div id="app">
         <div id="header">
-            <button id="home-button"></button>
-            <div id="progress-background">
+            <button id="home-button">
+                <img src="img/home.svg">
+            </button>
+            <div id=" progress-background">
                 <div id="progress-bar"></div>
             </div>
             <button id="progress-stars">
@@ -37,15 +30,61 @@
 
         <div class="app-views">
             <div id="lesson-view">
+                <div class="mascot-header">
+                    <div class="mascot-img mascot-img-left"></div>
 
+                    <div class="mascot-speech mascot-speech-right">
+                        <span>Lesson</span>
+                        <span id="current-lesson-number"></span>
+                    </div>
+                </div>
+
+                <div id="activities-list"></div>
+
+                <button id="next-lesson-button">
+                    <span>Go To Lesson</span>
+                    <span id="next-lesson-number"></span>
+                    <img src="img/thick-arrow-right-long.svg">
+                </button>
             </div>
 
             <div id="activity-view">
+                <div class="mascot-header">
+                    <div class="mascot-speech mascot-speech-left">
+                        <div class="mascot-speech-part">
+                            <span>Let's Learn</span>
+                            <span id="activity-type"></span>
+                        </div>
 
+                        <div class="mascot-speech-part">
+                            <div id="activity-icon"></div>
+                        </div>
+                    </div>
+
+                    <div class="mascot-img mascot-img-right"></div>
+                </div>
+
+                <div id="activity-content"></div>
+
+                <div id="activity-progress">
+                    <div>Score</div>
+                    <div id="activity-progress-stars"></div>
+                </div>
             </div>
 
             <div id="mascot-library-view">
-                <ul id="mascot-list"></ul>
+                <div class="mascot-header">
+                    <div class="mascot-img mascot-img-left"></div>
+
+                    <div class="mascot-speech mascot-speech-right">
+                        <div class="mascot-speech-part">Yahoo! Unlock new friends</div>
+                        <div class="mascot-speech-part">
+                            <img src="img/unlock.svg">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mascots-list"></div>
             </div>
         </div>
     </div>
