@@ -5,8 +5,8 @@ const LessonActivityView = {
 
     activities.forEach(activity => {
       const activityItem = document.createElement('div');
-      activityItem.setAttribute('data-id', activity.activity_id);
-      activityItem.setAttribute('class', 'activity-item activity-type-' + activity.activity_type);
+      activityItem.setAttribute('data-id', activity.activityId);
+      activityItem.setAttribute('class', 'activity-item activity-type-' + activity.activityType);
 
       if (activity.completed) {
         activityItem.setAttribute('data-completed', '');
@@ -14,10 +14,10 @@ const LessonActivityView = {
 
       let activityItemHtml = `
         <div class="activity-checkbox"></div>
-        <div class="activity-type">${activity.activity_type}</div>
+        <div class="activity-type">${activity.activityType}</div>
         `;
 
-      const activityIcon = this.getActivityIcon(activity.activity_type);
+      const activityIcon = this.getActivityIcon(activity.activityType);
       if (activityIcon) {
         activityItemHtml += `<img src="img/${activityIcon}">`;
       }
@@ -32,7 +32,7 @@ const LessonActivityView = {
         return 'plus-circle.svg';
       case 'counting':
         return '';
-      case 'substraction':
+      case 'subtraction':
         return 'minus-circle.svg';
       default:
         return '';

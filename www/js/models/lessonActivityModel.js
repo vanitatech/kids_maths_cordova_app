@@ -8,7 +8,7 @@ const LessonActivityModel = {
     return db.lessonActivities.toArray();
   },
   getByLesson: function (lessonId) {
-    return db.lessonActivities.where('lesson_id').equals(lessonId).toArray();
+    return db.lessonActivities.where('lessonId').equals(lessonId).toArray();
   }
 }
 
