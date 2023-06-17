@@ -9,6 +9,12 @@ const MascotView = {
       listItem.textContent = mascot.name;
       mascotList.appendChild(listItem);
     });
+  },
+  renderMascot: function (mascot) {
+    let mascotImgContainers = document.querySelectorAll('.mascot-img-container');
+    mascotImgContainers.forEach(function (container) {
+      container.innerHTML = `<img src="img/mascots/${mascot.img}">`;
+    });
   }
 }
 

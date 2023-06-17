@@ -10,16 +10,21 @@ async function onDeviceReady() {
     // Cordova is now initialized
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
 
-    // Initialise Database
+    // Seed database if empty
     await Seeder.seedDatabase();
 
     // User Progress
     UserProgressController.showLessonsCompleted();
     UserProgressController.showPoints();
 
+    // TODO: Only show lesson on lesson-view
     // TODO: Lessons
     LessonController.showCurrentLesson();
 
+    // TODO: Activity view
+    // ...
+
+    // TODO: Only show mascots on mascot-library-view
     // Mascots
     MascotController.showMascots();
 }
