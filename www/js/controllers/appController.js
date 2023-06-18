@@ -2,7 +2,10 @@ import AppView from "../views/appView.js";
 
 const AppController = {
   show: function () {
-    AppView.reveal();
+    AppView.removeLoader();
+  },
+  showView: function (button) {
+    AppView.showView(button);
   }
 }
 

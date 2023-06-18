@@ -85,6 +85,14 @@ button {
   display: none;
 }
 
+.app-view {
+  display: none;
+}
+
+.app-view[data-active] {
+  display: block;
+}
+
 /* Header */
 
 #header {
@@ -106,6 +114,18 @@ button {
 
 #progress-stars-button img {
   width: 40px;
+}
+
+.show-view-button.active img {
+  filter: drop-shadow(2px 2px 0px white) drop-shadow(-2px 2px 0px white) drop-shadow(-2px -2px 0px white) drop-shadow(2px -2px 0px white);
+}
+
+#home-button.active {
+
+}
+
+#progress-stars-button.active {
+  
 }
 
 #progress-background {
@@ -300,7 +320,6 @@ button {
 /* Activity View */
 
 #activity-view {
-  display: none;
   margin-bottom: 60px;
 }
 
@@ -329,7 +348,6 @@ button {
 
 /* Mascot Library View */
 #mascot-library-view {
-  display: none;
 }
 
 #mascot-unlock-img {

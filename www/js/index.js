@@ -21,6 +21,8 @@ async function onDeviceReady() {
 
     // Show app
     AppController.show();
+    // Make the AppController globally accessible
+    window.AppController = AppController;
 
     // Mascots
     MascotController.showCurrent();
