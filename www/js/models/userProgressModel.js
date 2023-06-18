@@ -15,6 +15,9 @@ const UserProgressModel = {
   getCurrentLessonId: function () {
     return parseInt(this.getLessonsCompleted()) + 1;
   },
+  getNextLessonId: function () {
+    return parseInt(this.getCurrentLessonId()) + 1;
+  },
   // Mutators
   setPointsAwarded: function (points) {
     localStorage.setItem('userProgress.pointsAwarded', points);

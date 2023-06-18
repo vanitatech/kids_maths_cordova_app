@@ -5,8 +5,8 @@ const LessonActivityView = {
 
     activities.forEach(activity => {
       const activityItem = document.createElement('div');
-      activityItem.setAttribute('data-id', activity.id);
       activityItem.setAttribute('class', 'activity-item activity-type-' + activity.activityType);
+      activityItem.setAttribute('onclick', 'LessonActivityController.show(' + activity.id + ')');
 
       if (activity.completed) {
         activityItem.setAttribute('data-completed', '');

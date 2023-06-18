@@ -21,21 +21,22 @@ async function onDeviceReady() {
 
     // Show app
     AppController.show();
-    // Make the AppController globally accessible
-    window.AppController = AppController;
 
     // Mascots
     MascotController.showCurrent();
 
-    // TODO: Only show lesson on lesson-view
-    // TODO: Lesson View
+    // Lesson View
     LessonController.showCurrent();
     LessonActivityController.showAllCurrent();
 
     // TODO: Activity view
-    // ...
+    // ... onclick
 
-    // TODO: Only show mascots list on mascot-library-view
-    // TODO: Mascots library view
+    // Mascots library view
     MascotController.showAll();
+
+    // Make controllers globally accessible
+    window.AppController = AppController;
+    window.LessonController = LessonController;
+    window.LessonActivityController = LessonActivityController;
 }

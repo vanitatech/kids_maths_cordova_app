@@ -242,9 +242,12 @@ button {
 
 #next-lesson-button {
   font-size: 1.25rem;
-  opacity: 0.4;
   justify-content: center;
   margin: 20px auto 15px auto;
+}
+
+#next-lesson-button[disabled] {
+  opacity: 0.25;
 }
 
 #next-lesson-number {

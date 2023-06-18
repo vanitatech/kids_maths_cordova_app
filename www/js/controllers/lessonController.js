@@ -12,12 +12,20 @@ const LessonController = {
       LessonView.renderCurrentLessonNumber(currentLesson.id);
 
       // Next lesson button
-      const nextLessonId = parseInt(currentLesson.id) + 1;
+      const nextLessonId = UserProgressModel.getNextLessonId();
       const totalLessons = await LessonModel.getTotal();
       if (nextLessonId <= totalLessons) {
         const nextLesson = await LessonModel.get(nextLessonId);
         LessonView.renderNextLessonButton(nextLesson.id);
       }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  },
+  showNext: async function () {
+    try {
+      const nextLessonId = UserProgressModel.getNextLessonId();
+
     } catch (error) {
       console.error('Error:', error);
     }

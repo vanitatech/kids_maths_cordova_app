@@ -11,6 +11,14 @@ const LessonActivityController = {
     } catch (error) {
       console.error('Error:', error);
     }
+  },
+  show: async function (id) {
+    const lessonActivity = await LessonActivityModel.get(id);
+
+    // Populate activity view
+
+    // Show activity view
+
   }
 }
 
