@@ -30,6 +30,19 @@ const LessonActivityView = {
       activitiesListElement.appendChild(activityItem);
     });
   },
+  renderMascotSpeech: function (type, img) {
+    document.getElementById('activity-type').innerHTML = type;
+    document.getElementById('activity-icon').innerHTML = `<img src="img/${img}">`;
+  },
+  renderScore: function (questions) {
+    const activityProgress = document.getElementById('activity-progress-stars');
+    questions.forEach(function (question) {
+      // if (question.completed) {
+      //   if ()
+      // }
+      activityProgress.append('<img src="img/star-grey-hollow.svg">');
+    });
+  },
   getActivityIcon: function (activityType) {
     switch (activityType) {
       case 'addition':
