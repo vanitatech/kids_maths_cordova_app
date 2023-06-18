@@ -9,6 +9,7 @@ const Seeder = {
       const additionActivitiesData = await fetchJSON('../data/activities_addition.json');
       const subtractionActivitiesData = await fetchJSON('../data/activities_subtraction.json');
       const countingActivitiesData = await fetchJSON('../data/activities_counting.json');
+      const worksheetActivitiesData = await fetchJSON('../data/activities_worksheet.json');
       const mascotsData = await fetchJSON('../data/mascots.json');
 
       // Seed database
@@ -16,8 +17,8 @@ const Seeder = {
       await seedTableIfEmpty('additionActivities', additionActivitiesData);
       await seedTableIfEmpty('subtractionActivities', subtractionActivitiesData);
       await seedTableIfEmpty('countingActivities', countingActivitiesData);
+      await seedTableIfEmpty('worksheetActivities', worksheetActivitiesData);
       await seedTableIfEmpty('lessonActivities', lessonActivitiesData);
-      // TODO: // await seedTableIfEmpty('lessonWorksheet', );
       await seedTableIfEmpty('mascots', mascotsData);
     } catch (error) {
       console.error('Error:', error);

@@ -257,6 +257,22 @@ button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  position: relative;
+}
+
+#activities-list .activity-item[data-completed] .activity-checkbox:after {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='1em' viewBox='0 0 512 512'%3E%3Cpath d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z' fill='%23aaa'/%3E%3C/svg%3E");
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 34px;
+  height: 34px;
+  margin-top: -17px;
+  margin-left: -17px;
 }
 
 #activities-list .activity-type {
@@ -275,6 +291,10 @@ button {
 
 #activities-list .activity-type-subtraction {
   background: #00cc66;
+}
+
+#activities-list .activity-type-worksheet {
+  background: #ff9933;
 }
 
 /* Activity View */
