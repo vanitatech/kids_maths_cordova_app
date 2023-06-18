@@ -5,7 +5,9 @@ const AppController = {
     AppView.removeLoader();
   },
   showView: function (button) {
-    AppView.showView(button);
+    const view = button.getAttribute('data-target-view');
+    AppView.showView(view);
+    AppView.activateViewButton(view)
   }
 }
 

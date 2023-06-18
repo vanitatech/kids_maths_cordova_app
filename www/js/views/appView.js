@@ -3,9 +3,7 @@ const AppView = {
     document.getElementById('loading').remove();
     document.getElementById('app').style.display = 'block';
   },
-  showView: function (button) {
-    const targetView = button.getAttribute('data-target-view');
-
+  showView: function (targetView) {
     document.querySelectorAll('.app-view').forEach(function (appViewElement) {
       const view = appViewElement.getAttribute('data-view');
       if (view == targetView) {
@@ -14,7 +12,8 @@ const AppView = {
         appViewElement.removeAttribute('data-active');
       }
     });
-
+  },
+  activateViewButton: function (targetView) {
     document.querySelectorAll('.show-view-button').forEach(function (buttonElement) {
       const buttonView = buttonElement.getAttribute('data-target-view');
       if (buttonView == targetView) {

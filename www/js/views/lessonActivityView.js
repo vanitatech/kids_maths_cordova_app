@@ -5,8 +5,9 @@ const LessonActivityView = {
 
     activities.forEach(activity => {
       const activityItem = document.createElement('div');
-      activityItem.setAttribute('class', 'activity-item activity-type-' + activity.activityType);
-      activityItem.setAttribute('onclick', 'LessonActivityController.show(' + activity.id + ')');
+      activityItem.setAttribute('class', `activity-item activity-type-${activity.activityType}`);
+      const activityController = this.getActivityController(activity.activityType);
+      activityItem.setAttribute('onclick', `${activityController}.show(${activity.activityId})`);
 
       if (activity.completed) {
         activityItem.setAttribute('data-completed', '');
@@ -39,6 +40,20 @@ const LessonActivityView = {
         return 'minus-circle.svg';
       case 'worksheet':
         return 'printer.svg';
+      default:
+        return '';
+    }
+  },
+  getActivityController: function (activityType) {
+    switch (activityType) {
+      case 'addition':
+        return 'AdditionActivityController';
+      case 'counting':
+        return 'CountingActivityController';
+      case 'subtraction':
+        return 'SubtractionActivityController';
+      case 'worksheet':
+        return 'WorksheetActivityController';
       default:
         return '';
     }
