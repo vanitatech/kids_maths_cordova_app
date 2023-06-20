@@ -35,6 +35,7 @@ const LessonActivityView = {
     document.getElementById('activity-icon').innerHTML = `<img src="img/${img}">`;
   },
   renderScore: function (questions) {
+    // TODO
     const activityProgress = document.getElementById('activity-progress-stars');
     questions.forEach(function (question) {
       // if (question.completed) {

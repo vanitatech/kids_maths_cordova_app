@@ -1,26 +1,26 @@
 import LessonActivityView from "./lessonActivityView.js";
 
 const AdditionActivityView = {
-  render: function (augend, addend, total, options) {
+  render: function (question) {
     const objectImg = LessonActivityView.getObjectImg();
-    const augendImg = LessonActivityView.getImagesHtml(augend, objectImg);
-    const addendImg = LessonActivityView.getImagesHtml(addend, objectImg);
-    const totalImg = LessonActivityView.getImagesHtml(total, objectImg);
-    const optionsHtml = LessonActivityView.getOptionsHtml(options);
+    const augendImg = LessonActivityView.getImagesHtml(question.augend, objectImg);
+    const addendImg = LessonActivityView.getImagesHtml(question.addend, objectImg);
+    const totalImg = LessonActivityView.getImagesHtml(question.total, objectImg);
+    const optionsHtml = LessonActivityView.getOptionsHtml(question.options);
 
     const activityHtml = `
       <table id="activity-table">
         <tr class="augend">
           <td></td>
           <td class="augend-number activity-number">
-            <div class="card-holder" data-number="${augend}"></div>
+            <div class="card-holder" data-number="${question.augend}"></div>
           </td>
           <td class="augend-img activity-img">${augendImg}</td>
         </tr>
         <tr class="addend">
           <td class="activity-operator"><img src="img/plus.svg"></td>
           <td class="addend-number activity-number">
-            <div class="card-holder" data-number="${addend}"></div>
+            <div class="card-holder" data-number="${question.addend}"></div>
           </td>
           <td class="addend-img activity-img">${addendImg}</td>
         </tr>
@@ -34,7 +34,7 @@ const AdditionActivityView = {
         <tr class="total">
           <td></td>
           <td class="total-number activity-number">
-            <div class="card-holder" data-number="${total}"></div>
+            <div class="card-holder" data-number="${question.total}"></div>
           </td>
           <td class="total-img activity-img">${totalImg}</td>
         </tr>

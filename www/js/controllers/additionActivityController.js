@@ -2,6 +2,7 @@ import AppView from "../views/appView.js";
 import AdditionActivityModel from "../models/additionActivityModel.js";
 import AdditionActivityView from "../views/additionActivityView.js";
 import LessonActivityView from "../views/lessonActivityView.js";
+import QuestionsModel from "../models/questionsModel.js";
 
 const AdditionActivityController = {
   show: async function (id) {
@@ -9,38 +10,64 @@ const AdditionActivityController = {
 
     LessonActivityView.renderMascotSpeech('Addition', 'plus-circle.svg');
 
-    const augend = this.getAugend(activity.augendMin, activity.augendMax);
-    const total = augend + parseInt(activity.addend);
-    const options = this.getOptions(activity.augendMin, augend, activity.addend, total);
-    AdditionActivityView.render(augend, activity.addend, total, options);
+    const questions = this.getQuestions(activity.augendMin, activity.augendMax, activity.addend);
+    QuestionsModel.setQuestions(questions);
+    QuestionsModel.setCurrentQuestionIndex(0);
 
-    // Score (stars)
-    LessonActivityView.renderScore([]);
+    console.log(questions);
+
+    AdditionActivityView.render(questions[0]);
+
+    // TODO: function to render next question, etc.
+
+    // // TODO: Score (stars)
+    // LessonActivityView.renderScore(questions);
 
     AppView.showView('activity');
     AppView.disableViewButtons();
+  },
+  getQuestions: function (augendMin, augendMax, addend) {
+    let questions = [];
+
+    for (let x = 0; x < 5; x++) {
+      let augend = this.getAugend(augendMin, augendMax);
+      let total = augend + parseInt(addend);
+
+      questions.push({
+        "augend": augend,
+        "addend": addend,
+        "total": total,
+        "options": this.getOptions(augendMin, augend, addend, total)
+      });
+    }
+
+    return questions;
   },
   getAugend: function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   },
   getOptions: function (minimum, augend, addend, total) {
-    let numberArray = [augend, addend, total];
+    // Create array of numbers
+    let numbers = this.arrayRange(minimum, total);
+    let options = [augend, addend, total];
 
-    // Generate unique random numbers
-    while (numberArray.length < 5) {
-      let randomNumber = Math.floor(Math.random() * (total - minimum + 1)) + minimum;
-      if (!numberArray.includes(randomNumber)) {
-        numberArray.push(randomNumber);
-      }
+    // Filter to remove augend, addend, and total
+    const numbersFiltered = numbers.filter(function (e) {
+      return options.indexOf(e) > -1;
+    });
+
+    // Add two of the numbers to the options
+    for (let x = 0; x < 2; x++) {
+      // Get random index value
+      const randomIndex = Math.floor(Math.random() * numbersFiltered.length);
+      // Get random item
+      options.push(numbersFiltered[randomIndex]);
     }
 
-    // Shuffle the array randomly
-    for (let i = numberArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [numberArray[i], numberArray[j]] = [numberArray[j], numberArray[i]];
-    }
-
-    return numberArray;
+    return options;
+  },
+  arrayRange: function (start, stop) {
+    return Array.from(Array(stop - start + 1).keys(), i => i + start);
   }
 }
 
