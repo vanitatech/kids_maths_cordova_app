@@ -7,21 +7,34 @@ const AdditionActivityView = {
     const optionsHtml = this.getOptionsHtml(options);
 
     const activityHtml = `
-      <table>
+      <table id="activity-table">
         <tr class="augend">
           <td></td>
-          <td class="augend-number" data-number="${augend}"></td>
-          <td class="augend-img">${augendImg}</td>
+          <td class="augend-number activity-number">
+            <div class="card-holder" data-number="${augend}"></div>
+          </td>
+          <td class="augend-img activity-img">${augendImg}</td>
         </tr>
         <tr class="addend">
-          <td><img src="img/minus.svg"></td>
-          <td class="addend-number" data-number="${addend}"></td>
-          <td class="addend-img">${addendImg}</td>
+          <td class="activity-operator"><img src="img/plus.svg"></td>
+          <td class="addend-number activity-number">
+            <div class="card-holder" data-number="${addend}"></div>
+          </td>
+          <td class="addend-img activity-img">${addendImg}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan="2">
+            <div class="activity-equals"></div>
+            <div class="activity-equals"></div>
+          </td>
         </tr>
         <tr class="total">
           <td></td>
-          <td class="total-number" data-number="${total}"></td>
-          <td class="total-img">${totalImg}</td>
+          <td class="total-number activity-number">
+            <div class="card-holder" data-number="${total}"></div>
+          </td>
+          <td class="total-img activity-img">${totalImg}</td>
         </tr>
       </table>
       <ul class="options">${optionsHtml}</ul>
@@ -64,12 +77,12 @@ const AdditionActivityView = {
     for (let x = 0; x < number; x++) {
       html += `<img src="img/objects/${img}">`;
     }
-    return html;
+    return '<div>' + html + '</div>';
   },
   getOptionsHtml: function (options) {
     let html = '';
     options.forEach(function (number) {
-      html += `<li>${number}</li>`;
+      html += `<li><div class="card">${number}</div></li>`;
     });
     return html;
   }
