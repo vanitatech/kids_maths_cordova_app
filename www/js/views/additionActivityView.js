@@ -1,10 +1,12 @@
+import LessonActivityView from "./lessonActivityView.js";
+
 const AdditionActivityView = {
   render: function (augend, addend, total, options) {
-    const objectImg = this.getObjectImg();
-    const augendImg = this.getImagesHtml(augend, objectImg);
-    const addendImg = this.getImagesHtml(addend, objectImg);
-    const totalImg = this.getImagesHtml(total, objectImg);
-    const optionsHtml = this.getOptionsHtml(options);
+    const objectImg = LessonActivityView.getObjectImg();
+    const augendImg = LessonActivityView.getImagesHtml(augend, objectImg);
+    const addendImg = LessonActivityView.getImagesHtml(addend, objectImg);
+    const totalImg = LessonActivityView.getImagesHtml(total, objectImg);
+    const optionsHtml = LessonActivityView.getOptionsHtml(options);
 
     const activityHtml = `
       <table id="activity-table">
@@ -41,50 +43,6 @@ const AdditionActivityView = {
       `;
 
     document.getElementById('activity-content').innerHTML = activityHtml;
-  },
-  getObjectImg: function () {
-    const images = [
-      'aeroplace.svg',
-      'ambulance.svg',
-      'balloon.svg',
-      'banana.svg',
-      'basketball.svg',
-      'bike.svg',
-      'candy.svg',
-      'car.svg',
-      'cookie.svg',
-      'crown.svg',
-      'crown2.svg',
-      'cupcake.svg',
-      'diamond.svg',
-      'flower.svg',
-      'gem.svg',
-      'hamburger.svg',
-      'helicopter.svg',
-      'pineapple.svg',
-      'rocket.svg',
-      'sailboat.svg',
-      'school-bus.svg',
-      'strawberry.svg',
-      'tomato.svg'
-    ];
-
-    const random = Math.floor(Math.random() * images.length);
-    return images[random];
-  },
-  getImagesHtml: function (number, img) {
-    let html = '';
-    for (let x = 0; x < number; x++) {
-      html += `<img src="img/objects/${img}">`;
-    }
-    return '<div>' + html + '</div>';
-  },
-  getOptionsHtml: function (options) {
-    let html = '';
-    options.forEach(function (number) {
-      html += `<li><div class="card" data-number="${number}">${number}</div></li>`;
-    });
-    return html;
   }
 }
 

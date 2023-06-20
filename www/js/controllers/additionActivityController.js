@@ -18,6 +18,7 @@ const AdditionActivityController = {
     LessonActivityView.renderScore([]);
 
     AppView.showView('activity');
+    AppView.disableViewButtons();
   },
   getAugend: function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);

@@ -70,6 +70,50 @@ const LessonActivityView = {
       default:
         return '';
     }
+  },
+  getObjectImg: function () {
+    const images = [
+      'aeroplane.svg',
+      'ambulance.svg',
+      'balloon.svg',
+      'banana.svg',
+      'basketball.svg',
+      'bike.svg',
+      'candy.svg',
+      'car.svg',
+      'cookie.svg',
+      'crown.svg',
+      'crown2.svg',
+      'cupcake.svg',
+      'diamond.svg',
+      'flower.svg',
+      'gem.svg',
+      'hamburger.svg',
+      'helicopter.svg',
+      'pineapple.svg',
+      'rocket.svg',
+      'sailboat.svg',
+      'school-bus.svg',
+      'strawberry.svg',
+      'tomato.svg'
+    ];
+
+    const random = Math.floor(Math.random() * images.length);
+    return images[random];
+  },
+  getImagesHtml: function (number, img) {
+    let html = '';
+    for (let x = 0; x < number; x++) {
+      html += `<img src="img/objects/${img}">`;
+    }
+    return '<div>' + html + '</div>';
+  },
+  getOptionsHtml: function (options) {
+    let html = '';
+    options.forEach(function (number) {
+      html += `<li><div class="card" data-number="${number}">${number}</div></li>`;
+    });
+    return html;
   }
 }
 

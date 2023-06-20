@@ -21,14 +21,14 @@ async function onDeviceReady() {
     UserProgressController.showPoints();
 
     // Mascots
-    MascotController.showCurrent();
+    await MascotController.showCurrent();
 
     // Lesson View
-    LessonController.showCurrent();
-    LessonActivityController.showAllCurrent();
+    await LessonController.showCurrent();
+    await LessonActivityController.showAllCurrent();
 
     // Mascots library view
-    MascotController.showAll();
+    await MascotController.showAll();
 
     // Show app
     AppController.show();
