@@ -22,26 +22,24 @@ const AdditionActivityController = {
   getAugend: function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   },
-  getOptions: function (min, augend, addend, total) {
-    // Generate three random numbers
-    const randomNumbers = [];
-    for (let i = min; i < total; i++) {
-      const randomNumber = Math.floor(Math.random() * (total - min + 1)) + min;
-      randomNumbers.push(randomNumber);
-    }
+  getOptions: function (minimum, augend, addend, total) {
+    let numberArray = [augend, addend, total];
 
-    // Combine the random numbers with augend, addend, and total
-    let numberArray = [augend, addend, total, ...randomNumbers];
-
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+    // Generate unique random numbers
+    while (numberArray.length < 5) {
+      let randomNumber = Math.floor(Math.random() * (total - minimum + 1)) + minimum;
+      if (!numberArray.includes(randomNumber)) {
+        numberArray.push(randomNumber);
       }
-      return array;
     }
 
-    return shuffleArray(numberArray);
+    // Shuffle the array randomly
+    for (let i = numberArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [numberArray[i], numberArray[j]] = [numberArray[j], numberArray[i]];
+    }
+
+    return numberArray;
   }
 }
 

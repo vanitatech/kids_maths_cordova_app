@@ -82,7 +82,7 @@ const AdditionActivityView = {
   getOptionsHtml: function (options) {
     let html = '';
     options.forEach(function (number) {
-      html += `<li><div class="card">${number}</div></li>`;
+      html += `<li><div class="card" data-number="${number}">${number}</div></li>`;
     });
     return html;
   }
