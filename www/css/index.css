@@ -451,6 +451,16 @@ button {
   left: 0;
   width: 60px;
   height: 70px;
+  cursor: move;
+  touch-action: manipulation;
+  transition: transform 0.2s ease-in-out;
+  transform-origin: center center;
+}
+
+.card.dragging {
+  /* z-index: 1;
+  transform: scale(1.2); */
+  opacity: 0.7;
 }
 
 .card .card-inner {

@@ -132,7 +132,7 @@ const LessonActivityView = {
   },
   enableDraggableCards: function () {
     /* ---- Drag and Drop Functionality for cards ---- */
-
+    // TODO: Use https://interactjs.io/ - only this library supports touchscreens
   }
 }
 
