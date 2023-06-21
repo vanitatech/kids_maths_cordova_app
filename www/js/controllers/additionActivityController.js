@@ -11,22 +11,23 @@ const AdditionActivityController = {
 
     LessonActivityView.renderMascotSpeech('Addition', 'plus-circle.svg');
 
+    // Questions
     await QuestionModel.deleteAll();
     const questions = this.getQuestions(activity.augendMin, activity.augendMax, activity.addend);
-    QuestionModel.insertAll(questions);
+    await QuestionModel.insertAll(questions);
     UserProgressModel.setCurrentQuestionId(0);
-
-    // console.log(questions);
-
     AdditionActivityView.render(questions[0]);
 
-    // TODO: function to render next question, etc.
+    // Enable draggable cards
+    LessonActivityView.enableDraggableCards();
 
-    // // TODO: Score (stars)
+    // Score (stars)
     LessonActivityView.renderScore(questions);
 
     AppView.showView('activity');
     AppView.disableViewButtons();
+
+    // TODO: function to render next question, etc.
   },
   getQuestions: function (augendMin, augendMax, addend) {
     let questions = [];

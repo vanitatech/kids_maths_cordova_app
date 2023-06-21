@@ -8,16 +8,20 @@ const QuestionModel = {
     return db.questions.toArray();
   },
   insertAll: function (questions) {
-    db.questions.bulkAdd(questions);
+    const inserted = db.questions.bulkAdd(questions);
+    return inserted;
   },
   update: function (question) {
-    db.questions.put(question);
+    const updated = db.questions.put(question);
+    return updated;
   },
   updateAll: function (questions) {
-    db.questions.bulkPut(questions);
+    const updated = db.questions.bulkPut(questions);
+    return updated;
   },
   deleteAll: function () {
-    return db.questions.clear();
+    const deleted = db.questions.clear();
+    return deleted;
   }
 }
 

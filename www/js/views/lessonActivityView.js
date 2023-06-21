@@ -125,7 +125,14 @@ const LessonActivityView = {
       html += `<li><div class="card" data-number="${number}">${number}</div></li>`;
     });
     return html;
+  },
+  enableDraggableCards: function () {
+    /* ---- Drag and Drop Functionality for cards ---- */
+
   }
 }
 
 export default LessonActivityView;
+
+
+
