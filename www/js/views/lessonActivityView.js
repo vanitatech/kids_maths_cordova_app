@@ -35,13 +35,23 @@ const LessonActivityView = {
     document.getElementById('activity-icon').innerHTML = `<img src="img/${img}">`;
   },
   renderScore: function (questions) {
-    // TODO
     const activityProgress = document.getElementById('activity-progress-stars');
+    activityProgress.innerHTML = '';
+
     questions.forEach(function (question) {
-      // if (question.completed) {
-      //   if ()
-      // }
-      activityProgress.append('<img src="img/star-grey-hollow.svg">');
+      let imgElement = document.createElement('img');
+
+      if (question.completed) {
+        if (question.correct) {
+          imgElement.setAttribute('src', 'img/star-yellow.svg');
+        } else {
+          imgElement.setAttribute('src', 'img/star-red.svg');
+        }
+      } else {
+        imgElement.setAttribute('src', 'img/star-grey-hollow.svg');
+      }
+
+      activityProgress.appendChild(imgElement);
     });
   },
   getActivityIcon: function (activityType) {

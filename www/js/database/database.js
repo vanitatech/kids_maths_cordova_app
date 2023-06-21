@@ -12,6 +12,7 @@ db.version(databaseVersion).stores({
   countingActivities: "id",
   worksheetActivities: "id",
   lessonActivities: "id, lessonId",
+  questions: "id",
   mascots: "id",
 });
 

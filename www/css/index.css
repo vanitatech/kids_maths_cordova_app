@@ -344,13 +344,19 @@ button {
   border-radius: 15px 15px 0 0;
   gap: 25px;
   z-index: 2;
+  font-size: 1.35rem;
+  color: #4384f4;
 }
 
 #activity-progress-stars {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
+}
+
+#activity-progress-stars img {
+    width: 30px;
 }
 
 #activity-content {

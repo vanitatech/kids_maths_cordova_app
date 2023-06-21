@@ -2,7 +2,8 @@ import AppView from "../views/appView.js";
 import AdditionActivityModel from "../models/additionActivityModel.js";
 import AdditionActivityView from "../views/additionActivityView.js";
 import LessonActivityView from "../views/lessonActivityView.js";
-import QuestionsModel from "../models/questionsModel.js";
+import QuestionModel from "../models/questionModel.js";
+import UserProgressModel from "../models/userProgressModel.js";
 
 const AdditionActivityController = {
   show: async function (id) {
@@ -10,18 +11,19 @@ const AdditionActivityController = {
 
     LessonActivityView.renderMascotSpeech('Addition', 'plus-circle.svg');
 
+    await QuestionModel.deleteAll();
     const questions = this.getQuestions(activity.augendMin, activity.augendMax, activity.addend);
-    QuestionsModel.setQuestions(questions);
-    QuestionsModel.setCurrentQuestionIndex(0);
+    QuestionModel.insertAll(questions);
+    UserProgressModel.setCurrentQuestionId(0);
 
-    console.log(questions);
+    // console.log(questions);
 
     AdditionActivityView.render(questions[0]);
 
     // TODO: function to render next question, etc.
 
     // // TODO: Score (stars)
-    // LessonActivityView.renderScore(questions);
+    LessonActivityView.renderScore(questions);
 
     AppView.showView('activity');
     AppView.disableViewButtons();
@@ -34,10 +36,13 @@ const AdditionActivityController = {
       let total = augend + parseInt(addend);
 
       questions.push({
+        "id": x,
         "augend": augend,
         "addend": addend,
         "total": total,
-        "options": this.getOptions(augendMin, augend, addend, total)
+        "options": this.getOptions(augendMin, augend, addend, total),
+        "completed": false,
+        // "correct": null
       });
     }
 
