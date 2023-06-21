@@ -122,7 +122,11 @@ const LessonActivityView = {
   getOptionsHtml: function (options) {
     let html = '';
     options.forEach(function (number) {
-      html += `<li><div class="card" data-number="${number}">${number}</div></li>`;
+      html += `<li class="card-origin">
+                <div class="card" data-number="${number}">
+                  <div class="card-inner">${number}</div>
+                </div>
+              </li>`;
     });
     return html;
   },
