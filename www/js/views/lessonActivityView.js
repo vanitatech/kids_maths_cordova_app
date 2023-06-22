@@ -122,17 +122,11 @@ const LessonActivityView = {
   getOptionsHtml: function (options) {
     let html = '';
     options.forEach(function (number) {
-      html += `<li class="card-origin">
-                <div class="card" data-number="${number}">
-                  <div class="card-inner">${number}</div>
-                </div>
+      html += `<li class="card-container" onclick="LessonActivityController.chooseCard(this)">
+                <div class="card" data-number="${number}">${number}</div>
               </li>`;
     });
     return html;
-  },
-  enableDraggableCards: function () {
-    /* ---- Drag and Drop Functionality for cards ---- */
-    // TODO: Use https://interactjs.io/ - only this library supports touchscreens
   }
 }
 

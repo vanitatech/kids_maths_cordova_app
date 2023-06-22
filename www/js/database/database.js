@@ -1,5 +1,3 @@
-import Dexie from '../lib/dexie.mjs';
-
 const databaseName = "mathsappdb";
 const databaseVersion = 1;
 

@@ -18,9 +18,6 @@ const AdditionActivityController = {
     UserProgressModel.setCurrentQuestionId(0);
     AdditionActivityView.render(questions[0]);
 
-    // Enable draggable cards
-    LessonActivityView.enableDraggableCards();
-
     // Score (stars)
     LessonActivityView.renderScore(questions);
 
