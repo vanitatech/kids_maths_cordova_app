@@ -38,8 +38,34 @@ const LessonActivityController = {
       if (nextCardSlotIndex < cardSlots.length) {
         cardSlots[nextCardSlotIndex].classList.add('active');
         cardSlots[nextCardSlotIndex].innerHTML = '<span class="placeholder">?</span>';
+      } else {
+        LessonActivityView.hideOptions();
+        LessonActivityView.renderCheckAnswerButton();
       }
     }
+  },
+  checkAnswer: async function () {
+    let correct = true;
+
+    // Check if correct cards are in correct slots
+    const cardSlots = document.querySelectorAll('.card-slot');
+    cardSlots.forEach(function (cardSlot) {
+      const card = cardSlot.querySelector('.card');
+      if (cardSlot.getAttribute('data-number') !== card.getAttribute('data-number')) {
+        correct = false;
+      }
+    });
+
+    if (correct) {
+      await LessonActivityView.renderQuestionResponse('success');
+      // TODO: Award star
+      // TODO: Show next question
+    } else {
+      await LessonActivityView.renderQuestionResponse('failure');
+      // TODO: Reset question
+    }
+
+    console.log('ready');
   }
 }
 

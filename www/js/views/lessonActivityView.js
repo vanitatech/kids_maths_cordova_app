@@ -127,6 +127,39 @@ const LessonActivityView = {
               </li>`;
     });
     return html;
+  },
+  hideOptions: function () {
+    document.querySelector('#activity-content .options').style.display = 'none';
+  },
+  renderCheckAnswerButton: function () {
+    const checkAnswerButton = document.createElement('button');
+    checkAnswerButton.setAttribute('id', 'check-answer-button');
+    checkAnswerButton.setAttribute('onclick', 'LessonActivityController.checkAnswer()');
+    checkAnswerButton.innerHTML = '<span>Check Answer</span><img src="img/thick-arrow-right-long.svg">';
+    document.getElementById('activity-content').appendChild(checkAnswerButton);
+  },
+  renderQuestionResponse: async function (type) {
+    const questionResponse = document.createElement('img');
+    questionResponse.setAttribute('id', 'question-response');
+
+    if (type == 'success') {
+      questionResponse.setAttribute('src', 'img/happy.svg');
+    } else if (type == 'failure') {
+      questionResponse.setAttribute('src', 'img/sad.svg');
+    }
+
+    // Show for 2 seconds
+    document.getElementById('activity-content').appendChild(questionResponse);
+    await this.delay(2000);
+    document.getElementById('question-response').remove();
+  },
+  renderPopup: function (type) {
+    const popup = document.createElement('div');
+    popup.setAttribute('id', 'activity-popup');
+    popup.setAttribute('data-type', type);
+  },
+  delay: function (milliseconds) {
+    return new Promise(response => setTimeout(response, milliseconds));
   }
 }
 
