@@ -24,7 +24,7 @@ const UserProgressModel = {
   getNextQuestionId: function () {
     return parseInt(this.getCurrentQuestionId()) + 1;
   },
-  getCurrentQuestionsAttempts: function () {
+  getCurrentQuestionAttempts: function () {
     return localStorage.getItem('userProgress.currentQuestionAttempts') ?? 0;
   },
   getCurrentActivityType: function () {

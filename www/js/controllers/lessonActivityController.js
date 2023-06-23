@@ -21,19 +21,15 @@ const LessonActivityController = {
     UserProgressModel.setCurrentActivityType(lessonActivity.activityType);
 
     let activityController;
-    let activityView;
     switch (lessonActivity.activityType) {
       case 'addition':
         activityController = AdditionActivityController;
-        activityView = AdditionActivityView;
         break;
       // case 'counting':
       //   activityController = CountingActivityController;
-      //   activityView = CountingActivityView;
       //   break;
       // case 'subtraction':
       //   activityController = SubtractionActivityController;
-      //   activityView = SubtractionActivityView;
       //   break;
     }
 
@@ -44,18 +40,37 @@ const LessonActivityController = {
 
     // Show question and view
     LessonActivityView.renderMascotSpeech(lessonActivity.activityType);
-    LessonActivityController.showQuestion(activityView, 0);
+    LessonActivityController.showQuestion(lessonActivity.activityType, 0, 0);
     AppView.showView('activity');
     AppView.disableViewButtons();
   },
-  showQuestion: async function (activityView, id) {
-    UserProgressModel.setCurrentQuestionAttempts(0);
+  showQuestion: async function (activityType, id, attempts) {
+    let activityView;
+    switch (activityType) {
+      case 'addition':
+        activityView = AdditionActivityView;
+        break;
+      // case 'counting':
+      //   activityView = CountingActivityView;
+      //   break;
+      // case 'subtraction':
+      //   activityView = SubtractionActivityView;
+      //   break;
+    }
+
+    UserProgressModel.setCurrentQuestionAttempts(attempts);
     UserProgressModel.setCurrentQuestionId(id);
     const questions = await QuestionModel.getAll();
     activityView.render(questions[id]);
     LessonActivityView.renderScore(questions);
   },
-  showNext: async function () {
+  resetQuestion: async function () {
+    const activityType = UserProgressModel.getCurrentActivityType();
+    const questionId = UserProgressModel.getCurrentQuestionId()
+    const questionAttempts = UserProgressModel.getCurrentQuestionAttempts();
+    this.showQuestion(activityType, questionId, questionAttempts);
+  },
+  showNextStep: async function () {
     const activityType = UserProgressModel.getCurrentActivityType();
     const nextQuestionId = UserProgressModel.getNextQuestionId();
     const totalQuestions = await QuestionModel.getTotal();
@@ -64,8 +79,8 @@ const LessonActivityController = {
       // Show next question
       this.showQuestion(activityType, nextQuestionId);
     } else {
-      // TODO: Return to Lesson view
-
+      // TODO: Finish Activity (Mark activity complete, persist points and re-render lesson view)
+      console.log('Activity completed');
     }
   },
   chooseCard: function (cardContainer) {
@@ -102,11 +117,9 @@ const LessonActivityController = {
   },
   checkAnswer: async function () {
     LessonActivityView.removeCheckAnswerButton();
-    UserProgressModel.incrementCurrentQuestionsAttempts();
-
-    let correct = true;
 
     // Check if correct cards are in correct slots
+    let correct = true;
     const cardSlots = document.querySelectorAll('.card-slot');
     cardSlots.forEach(function (cardSlot) {
       const card = cardSlot.querySelector('.card');
@@ -115,30 +128,37 @@ const LessonActivityController = {
       }
     });
 
-
     if (correct) {
       await LessonActivityView.renderQuestionResponse('success');
 
-      // TODO: Award green star
+      // Mark question correct
+      this.markQuestion(true);
 
       // Show next step
-      this.showNext();
+      this.showNextStep();
 
     } else {
       await LessonActivityView.renderQuestionResponse('failure');
 
-      if (UserProgressModel.getCurrentQuestionsAttempts() < 2) {
-        // TODO: Reset question
+      if (UserProgressModel.getCurrentQuestionAttempts() < 2) {
+        // Reset question
+        this.resetQuestion();
 
       } else {
-        // TODO: Award red star
+        // Mark question incorrect
+        this.markQuestion(false);
 
         // Show next step
-        this.showNext();
+        this.showNextStep();
       }
     }
-
-    console.log('ready');
+  },
+  markQuestion: async function (correct) {
+    const currentQuestionId = UserProgressModel.getCurrentQuestionId();
+    let question = QuestionModel.get(currentQuestionId);
+    question.completed = true;
+    question.correct = correct;
+    QuestionModel.update(question);
   }
 }
 
