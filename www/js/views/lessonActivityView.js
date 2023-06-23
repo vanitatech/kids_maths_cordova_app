@@ -6,15 +6,13 @@ const LessonActivityView = {
     activities.forEach(activity => {
       const activityItem = document.createElement('div');
       activityItem.setAttribute('class', `activity-item activity-type-${activity.activityType}`);
-      const activityController = this.getActivityController(activity.activityType);
-      activityItem.setAttribute('onclick', `${activityController}.show(${activity.activityId})`);
+      activityItem.setAttribute('onclick', `LessonActivityController.show(${activity.id})`);
 
       if (activity.completed) {
         activityItem.setAttribute('data-completed', '');
       }
 
-      // Capatilize first letter
-      const activityType = activity.activityType.charAt(0).toUpperCase() + activity.activityType.slice(1)
+      const activityType = this.formatType(activity.activityType);
 
       let activityItemHtml = `
         <div class="activity-checkbox"></div>
@@ -30,7 +28,20 @@ const LessonActivityView = {
       activitiesListElement.appendChild(activityItem);
     });
   },
-  renderMascotSpeech: function (type, img) {
+  renderMascotSpeech: function (type) {
+    let img = '';
+    switch (type) {
+      case 'addition':
+        img = 'plus-circle.svg';
+        break;
+      case 'counting':
+        img = 'numbers-circle.svg';
+        break;
+      case 'subtraction':
+        img = 'minus-circle.svg';
+        break;
+    }
+
     document.getElementById('activity-type').innerHTML = type;
     document.getElementById('activity-icon').innerHTML = `<img src="img/${img}">`;
   },
@@ -54,6 +65,10 @@ const LessonActivityView = {
       activityProgress.appendChild(imgElement);
     });
   },
+  formatType: function (type) {
+    // Capatilize first letter
+    return type.charAt(0).toUpperCase() + type.slice(1);
+  },
   getActivityIcon: function (activityType) {
     switch (activityType) {
       case 'addition':
@@ -64,20 +79,6 @@ const LessonActivityView = {
         return 'minus-circle.svg';
       case 'worksheet':
         return 'printer.svg';
-      default:
-        return '';
-    }
-  },
-  getActivityController: function (activityType) {
-    switch (activityType) {
-      case 'addition':
-        return 'AdditionActivityController';
-      case 'counting':
-        return 'CountingActivityController';
-      case 'subtraction':
-        return 'SubtractionActivityController';
-      case 'worksheet':
-        return 'WorksheetActivityController';
       default:
         return '';
     }
@@ -135,23 +136,26 @@ const LessonActivityView = {
     const checkAnswerButton = document.createElement('button');
     checkAnswerButton.setAttribute('id', 'check-answer-button');
     checkAnswerButton.setAttribute('onclick', 'LessonActivityController.checkAnswer()');
-    checkAnswerButton.innerHTML = '<span>Check Answer</span><img src="img/thick-arrow-right-long.svg">';
+    checkAnswerButton.innerHTML = '<span>Check Answer</span><img src="img/thick-arrow-right-long-white.svg">';
     document.getElementById('activity-content').appendChild(checkAnswerButton);
+  },
+  removeCheckAnswerButton: function () {
+    document.getElementById('check-answer-button').remove();
   },
   renderQuestionResponse: async function (type) {
     const questionResponse = document.createElement('img');
     questionResponse.setAttribute('id', 'question-response');
 
     if (type == 'success') {
-      questionResponse.setAttribute('src', 'img/happy.svg');
+      questionResponse.setAttribute('src', 'img/happy-2.svg');
     } else if (type == 'failure') {
-      questionResponse.setAttribute('src', 'img/sad.svg');
+      questionResponse.setAttribute('src', 'img/sad-2.svg');
     }
 
     // Show for 2 seconds
     document.getElementById('activity-content').appendChild(questionResponse);
-    await this.delay(2000);
-    document.getElementById('question-response').remove();
+    // await this.delay(3000);
+    // document.getElementById('question-response').remove();
   },
   renderPopup: function (type) {
     const popup = document.createElement('div');

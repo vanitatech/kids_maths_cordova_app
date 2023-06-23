@@ -7,6 +7,9 @@ const QuestionModel = {
   getAll: function () {
     return db.questions.toArray();
   },
+  getTotal: function () {
+    return db.questions.count();
+  },
   insertAll: function (questions) {
     const inserted = db.questions.bulkAdd(questions);
     return inserted;

@@ -21,6 +21,15 @@ const UserProgressModel = {
   getCurrentQuestionId: function () {
     return localStorage.getItem('userProgress.currentQuestionId') ?? 0;
   },
+  getNextQuestionId: function () {
+    return parseInt(this.getCurrentQuestionId()) + 1;
+  },
+  getCurrentQuestionsAttempts: function () {
+    return localStorage.getItem('userProgress.currentQuestionAttempts') ?? 0;
+  },
+  getCurrentActivityType: function () {
+    return localStorage.getItem('userProgress.currentActivityType') ?? null;
+  },
   // Mutators
   setPointsAwarded: function (points) {
     localStorage.setItem('userProgress.pointsAwarded', points);
@@ -36,6 +45,17 @@ const UserProgressModel = {
   },
   setCurrentQuestionId: function (id) {
     localStorage.setItem('userProgress.currentQuestionId', id);
+  },
+  setCurrentQuestionAttempts: function (count) {
+    localStorage.setItem('userProgress.currentQuestionAttempts', count);
+  },
+  setCurrentActivityType: function (type) {
+    localStorage.setItem('userProgress.currentActivityType', type);
+  },
+  incrementCurrentQuestionsAttempts: function () {
+    let count = this.getCurrentQuestionsAttempts();
+    count++;
+    this.setCurrentQuestionAttempts(count);
   }
 }
 

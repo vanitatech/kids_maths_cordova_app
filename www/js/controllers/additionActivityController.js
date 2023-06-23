@@ -3,42 +3,23 @@ import AdditionActivityModel from "../models/additionActivityModel.js";
 import AdditionActivityView from "../views/additionActivityView.js";
 import LessonActivityView from "../views/lessonActivityView.js";
 import QuestionModel from "../models/questionModel.js";
-import UserProgressModel from "../models/userProgressModel.js";
+import LessonActivityController from "./lessonActivityController.js";
 
 const AdditionActivityController = {
-  show: async function (id) {
+  createQuestions: async function () {
     const activity = await AdditionActivityModel.get(id); // {id: 1, augendMin: 1, augendMax: 9, addend: 1}
-
-    LessonActivityView.renderMascotSpeech('Addition', 'plus-circle.svg');
-
-    // Questions
-    await QuestionModel.deleteAll();
-    const questions = this.getQuestions(activity.augendMin, activity.augendMax, activity.addend);
-    await QuestionModel.insertAll(questions);
-    UserProgressModel.setCurrentQuestionId(0);
-    AdditionActivityView.render(questions[0]);
-
-    // Score (stars)
-    LessonActivityView.renderScore(questions);
-
-    AppView.showView('activity');
-    AppView.disableViewButtons();
-
-    // TODO: function to render next question, etc.
-  },
-  getQuestions: function (augendMin, augendMax, addend) {
     let questions = [];
 
     for (let x = 0; x < 5; x++) {
-      let augend = this.getAugend(augendMin, augendMax);
-      let total = augend + parseInt(addend);
+      let augend = this.getAugend(activity.augendMin, activity.augendMax);
+      let total = augend + parseInt(activity.addend);
 
       questions.push({
         "id": x,
         "augend": augend,
         "addend": addend,
         "total": total,
-        "options": this.getOptions(augendMin, augend, addend, total),
+        "options": this.getOptions(activity.augendMin, augend, activity.addend, total),
         "completed": false,
         // "correct": null
       });
