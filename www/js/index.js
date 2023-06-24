@@ -5,6 +5,7 @@ import LessonController from './controllers/lessonController.js';
 import MascotController from './controllers/mascotController.js';
 import LessonActivityController from './controllers/lessonActivityController.js';
 import AdditionActivityController from './controllers/additionActivityController.js';
+import UserProgressModel from './models/userProgressModel.js';
 
 // Wait for the deviceready event before using any of Cordova's device APIs
 document.addEventListener('deviceready', onDeviceReady, false);

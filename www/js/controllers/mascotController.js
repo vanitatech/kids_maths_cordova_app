@@ -2,6 +2,8 @@ import MascotModel from "../models/mascotModel.js";
 import MascotView from "../views/mascotView.js";
 import UserProgressModel from "../models/userProgressModel.js";
 import UserProgressView from "../views/userProgressView.js";
+import UserProgressController from "./userProgressController.js";
+import AppView from "../views/appView.js";
 
 const MascotController = {
   showAll: async function () {
@@ -27,6 +29,22 @@ const MascotController = {
     const mascot = await MascotModel.get(id);
     const remainingPoints = UserProgressModel.getPointsRemaining();
 
+    if (!mascot.unlocked) {
+      // If user can afford mascot
+      const cost = parseInt(mascot.cost);
+      if (remainingPoints >= cost) {
+
+        // Unlock mascot
+        mascot.unlocked = true;
+        await MascotModel.update(mascot);
+
+        // Redeem user points
+        UserProgressModel.incrementPointsRedeemed(cost);
+        UserProgressController.showPoints();
+        viewChanged = true;
+      }
+    }
+
     if (mascot.unlocked) {
       const currentMascot = UserProgressModel.getCurrentMascot();
 
@@ -34,24 +52,13 @@ const MascotController = {
         UserProgressModel.setCurrentMascot(mascot.id);
         viewChanged = true;
       }
-    } else {
-      // If user can afford mascot
-      if (remainingPoints >= parseInt(mascot.cost)) {
-
-        // Unlock mascot
-        mascot.unlocked = true;
-        await MascotModel.update(mascot);
-
-        // Redeem user points
-        UserProgressModel.incrementPointsRedeemed(mascot.cost);
-        UserProgressView.renderProgressStars();
-        viewChanged = true;
-      }
     }
 
     if (viewChanged) {
-      this.showAll();
-      this.showCurrent();
+      AppView.showLoader();
+      await this.showAll();
+      await this.showCurrent();
+      AppView.removeLoader();
     }
   }
 }
