@@ -1,12 +1,14 @@
+import AppView from "../views/appView.js";
 import LessonActivityModel from "../models/lessonActivityModel.js";
 import LessonActivityView from "../views/lessonActivityView.js";
+import LessonController from "./lessonController.js";
+import UserProgressController from "./userProgressController.js";
 import UserProgressModel from "../models/userProgressModel.js";
+import QuestionModel from "../models/questionModel.js";
 import AdditionActivityController from "./additionActivityController.js";
 import AdditionActivityView from "../views/additionActivityView.js";
-import QuestionModel from "../models/questionModel.js";
-import LessonController from "./lessonController.js";
-import AppView from "../views/appView.js";
-import UserProgressController from "./userProgressController.js";
+import SubtractionActivityController from "./subtractionActivityController.js";
+import SubtractionActivityView from "../views/subtractionActivityView.js";
 
 const LessonActivityController = {
   showAllCurrent: async function () {
@@ -41,28 +43,27 @@ const LessonActivityController = {
         return await AdditionActivityController.createQuestions(id);
       // case 'counting':
       //   return await CountingActivityController.createQuestions(id);
-      // case 'subtraction':
-      //   return await SubtractionActivityController.createQuestions(id);
+      case 'subtraction':
+        return await SubtractionActivityController.createQuestions(id);
     }
   },
   showQuestion: async function (activityType, id, attempts, changeImg) {
-    let activityView;
-    switch (activityType) {
-      case 'addition':
-        activityView = AdditionActivityView;
-        break;
-      // case 'counting':
-      //   activityView = CountingActivityView;
-      //   break;
-      // case 'subtraction':
-      //   activityView = SubtractionActivityView;
-      //   break;
-    }
-
     UserProgressModel.setCurrentQuestionAttempts(attempts);
     UserProgressModel.setCurrentQuestionId(id);
     const questions = await QuestionModel.getAll();
-    activityView.render(questions[id], changeImg);
+
+    switch (activityType) {
+      case 'addition':
+        AdditionActivityView.render(questions[id], changeImg);
+        break;
+      // case 'counting':
+      //   CountingActivityView.render(questions[id], changeImg);
+      //   break;
+      case 'subtraction':
+        SubtractionActivityView.render(questions[id], changeImg);
+        break;
+    }
+
     LessonActivityView.renderScore(questions);
   },
   resetQuestion: async function () {

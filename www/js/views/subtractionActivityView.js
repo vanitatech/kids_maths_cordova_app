@@ -1,6 +1,57 @@
-const SubtractionActivityView = {
-  render: function (activity) {
+import UserProgressModel from "../models/userProgressModel.js";
+import LessonActivityView from "./lessonActivityView.js";
 
+const SubtractionActivityView = {
+  render: function (question, changeImg) {
+    let objectImg;
+    if (changeImg) {
+      objectImg = LessonActivityView.getObjectImg();
+      UserProgressModel.setCurrentObjectImage(objectImg);
+    } else {
+      objectImg = UserProgressModel.getCurrentObjectImage();
+    }
+    const augendImg = LessonActivityView.getImagesHtml(question.augend, objectImg);
+    const addendImg = LessonActivityView.getImagesHtml(question.addend, objectImg);
+    const totalImg = LessonActivityView.getImagesHtml(question.total, objectImg);
+    const optionsHtml = LessonActivityView.getOptionsHtml(question.options);
+
+    const activityHtml = `
+      <table id="activity-table">
+        <tr class="augend">
+          <td></td>
+          <td class="augend-number activity-number">
+            <div class="card-slot active" data-number="${question.augend}">
+              <span class="placeholder">?</span>
+            </div>
+          </td>
+          <td class="augend-img activity-img">${augendImg}</td>
+        </tr>
+        <tr class="addend">
+          <td class="activity-operator"><img src="img/plus.svg"></td>
+          <td class="addend-number activity-number">
+            <div class="card-slot" data-number="${question.addend}"></div>
+          </td>
+          <td class="addend-img activity-img">${addendImg}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan="2">
+            <div class="activity-equals"></div>
+            <div class="activity-equals"></div>
+          </td>
+        </tr>
+        <tr class="total">
+          <td></td>
+          <td class="total-number activity-number">
+            <div class="card-slot" data-number="${question.total}"></div>
+          </td>
+          <td class="total-img activity-img">${totalImg}</td>
+        </tr>
+      </table>
+      <ul class="options">${optionsHtml}</ul>
+      `;
+
+    document.getElementById('activity-content').innerHTML = activityHtml;
   }
 }
 

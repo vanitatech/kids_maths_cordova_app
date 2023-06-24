@@ -1,20 +1,20 @@
-import AdditionActivityModel from "../models/additionActivityModel.js";
+import SubtractionActivityModel from "../models/subtractionActivityModel";
 
-const AdditionActivityController = {
+const SubtractionActivityController = {
   createQuestions: async function (id) {
-    const activity = await AdditionActivityModel.get(id); // {id, augendMin, augendMax, addend}
+    const activity = await SubtractionActivityModel.get(id); // {id, minuendMin, minuendMax, subtrahend}
     let questions = [];
 
     for (let x = 0; x < 5; x++) {
-      let augend = this.getAugend(activity.augendMin, activity.augendMax);
-      let total = augend + parseInt(activity.addend);
+      let minuend = this.getAugend(activity.minuendMin, activity.minuendMax);
+      let total = minuend - parseInt(activity.subtrahend);
 
       questions.push({
         "id": x,
-        "augend": augend,
-        "addend": activity.addend,
+        "minuend": minuend,
+        "subtrahend": activity.subtrahend,
         "total": total,
-        "options": this.getOptions(activity.augendMin, augend, activity.addend, total),
+        "options": this.getOptions(activity.minuendMin, minuend, activity.subtrahend, total),
         "completed": false,
         // "correct": null
       });
@@ -22,15 +22,15 @@ const AdditionActivityController = {
 
     return questions;
   },
-  getAugend: function (min, max) {
+  getMinuend: function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   },
-  getOptions: function (minimum, augend, addend, total) {
+  getOptions: function (minimum, minuend, subtrahend, total) {
     // Create array of numbers
     let numbers = this.arrayRange(minimum, total);
-    let options = [augend, addend, total];
+    let options = [minuend, subtrahend, total];
 
-    // Filter to remove augend, addend, and total
+    // Filter to remove minuend, subtrahend, and total
     const numbersFiltered = numbers.filter(function (e) {
       return options.indexOf(e) > -1;
     });
@@ -50,4 +50,4 @@ const AdditionActivityController = {
   }
 }
 
-export default AdditionActivityController;
+export default SubtractionActivityController;
