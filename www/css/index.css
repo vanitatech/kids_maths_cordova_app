@@ -58,7 +58,6 @@ button {
   border: none;
   background: none;
   padding: 0;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -66,9 +65,6 @@ button {
 
 * {
   box-sizing: border-box;
-}
-
-body, button, span {
   font-family: "Comic Relief", "Comic Sans", cursive;
 }
 
@@ -263,7 +259,7 @@ body, button, span {
 }
 
 #next-lesson-button[disabled] {
-  opacity: 0.25;
+  opacity: 0.4;
 }
 
 #next-lesson-number {
