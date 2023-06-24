@@ -34,10 +34,10 @@ const LessonActivityController = {
       // Issue 5 points
       UserProgressModel.incrementPointsAwarded(5);
 
-      // TODO: Download
+      // Download
       WorksheetActivityController.download(lessonActivity.activityId);
 
-      // TODO: Re-render the lesson view (and if all activities completed, enable next-lesson button)
+      // Re-render the lesson view
       LessonController.showCurrent();
     } else {
       UserProgressModel.setCurrentLessonActivityId(id);
