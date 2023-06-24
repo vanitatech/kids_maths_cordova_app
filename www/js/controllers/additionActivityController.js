@@ -1,9 +1,4 @@
-import AppView from "../views/appView.js";
 import AdditionActivityModel from "../models/additionActivityModel.js";
-import AdditionActivityView from "../views/additionActivityView.js";
-import LessonActivityView from "../views/lessonActivityView.js";
-import QuestionModel from "../models/questionModel.js";
-import LessonActivityController from "./lessonActivityController.js";
 
 const AdditionActivityController = {
   createQuestions: async function (id) {

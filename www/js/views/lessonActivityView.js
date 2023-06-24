@@ -6,7 +6,11 @@ const LessonActivityView = {
     activities.forEach(activity => {
       const activityItem = document.createElement('div');
       activityItem.setAttribute('class', `activity-item activity-type-${activity.activityType}`);
-      activityItem.setAttribute('onclick', `LessonActivityController.show(${activity.id})`);
+      if (!activity.completed) {
+        activityItem.setAttribute('onclick', `LessonActivityController.show(${activity.id})`);
+      } else {
+        activityItem.classList.add('completed');
+      }
 
       if (activity.completed) {
         activityItem.setAttribute('data-completed', '');
@@ -154,7 +158,7 @@ const LessonActivityView = {
 
     // Show for 2 seconds
     document.getElementById('activity-content').appendChild(questionResponse);
-    await this.delay(3000);
+    await this.delay(2000);
     document.getElementById('question-response').remove();
   },
   renderPopup: function (type) {

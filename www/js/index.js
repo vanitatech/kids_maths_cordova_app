@@ -25,7 +25,6 @@ async function onDeviceReady() {
 
     // Lesson View
     await LessonController.showCurrent();
-    await LessonActivityController.showAllCurrent();
 
     // Mascots library view
     await MascotController.showAll();

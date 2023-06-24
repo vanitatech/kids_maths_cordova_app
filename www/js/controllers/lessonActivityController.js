@@ -6,6 +6,7 @@ import AdditionActivityView from "../views/additionActivityView.js";
 import QuestionModel from "../models/questionModel.js";
 import LessonController from "./lessonController.js";
 import AppView from "../views/appView.js";
+import UserProgressController from "./userProgressController.js";
 
 const LessonActivityController = {
   showAllCurrent: async function () {
@@ -97,6 +98,9 @@ const LessonActivityController = {
 
       // Empty questions
       await QuestionModel.deleteAll();
+
+      // Re-render points
+      UserProgressController.showPoints();
 
       // Re-render lesson view
       LessonController.showCurrent();

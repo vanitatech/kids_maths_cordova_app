@@ -1,19 +1,19 @@
 const UserProgressModel = {
   // Accessors
   getPointsAwarded: function () {
-    return localStorage.getItem('userProgress.pointsAwarded') ?? 0;
+    return parseInt(localStorage.getItem('userProgress.pointsAwarded') ?? 0);
   },
   getPointsRedeeded: function () {
-    return localStorage.getItem('userProgress.pointsRedeemed') ?? 0;
+    return parseInt(localStorage.getItem('userProgress.pointsRedeemed') ?? 0);
   },
   getPointsRemaining: function () {
     return parseInt(this.getPointsAwarded()) - parseInt(this.getPointsRedeeded());
   },
   getCurrentMascot: function () {
-    return localStorage.getItem('userProgress.currentMascot') ?? 1;
+    return parseInt(localStorage.getItem('userProgress.currentMascot') ?? 1);
   },
   getLessonsCompleted: function () {
-    return localStorage.getItem('userProgress.lessonsCompleted') ?? 0;
+    return parseInt(localStorage.getItem('userProgress.lessonsCompleted') ?? 0);
   },
   getCurrentLessonId: function () {
     return parseInt(this.getLessonsCompleted()) + 1;
@@ -22,16 +22,16 @@ const UserProgressModel = {
     return parseInt(this.getCurrentLessonId()) + 1;
   },
   getCurrentLessonActivityId: function () {
-    return localStorage.getItem('userProgress.currenyActivityId') ?? 0;
+    return parseInt(localStorage.getItem('userProgress.currentActivityId') ?? 0);
   },
   getCurrentQuestionId: function () {
-    return localStorage.getItem('userProgress.currentQuestionId') ?? 0;
+    return parseInt(localStorage.getItem('userProgress.currentQuestionId') ?? 0);
   },
   getNextQuestionId: function () {
     return parseInt(this.getCurrentQuestionId()) + 1;
   },
   getCurrentQuestionAttempts: function () {
-    return localStorage.getItem('userProgress.currentQuestionAttempts') ?? 0;
+    return parseInt(localStorage.getItem('userProgress.currentQuestionAttempts') ?? 0);
   },
   getCurrentActivityType: function () {
     return localStorage.getItem('userProgress.currentActivityType') ?? null;

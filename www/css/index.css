@@ -273,6 +273,9 @@ button {
   padding: 10px 12px;
   border-radius: 10px;
   gap: 20px;
+}
+
+#activities-list .activity-item:not(.completed) {
   cursor: pointer;
 }
 

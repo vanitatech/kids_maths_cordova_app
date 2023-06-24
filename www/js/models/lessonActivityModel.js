@@ -1,7 +1,7 @@
 import db from '../database/database.js';
 
 const LessonActivityModel = {
-  get: function (id) {
+  get: async function (id) {
     return db.lessonActivities.get(parseInt(id));
   },
   getAll: function () {

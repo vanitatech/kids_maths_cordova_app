@@ -2,6 +2,7 @@ import LessonModel from "../models/lessonModel.js";
 import LessonView from "../views/lessonView.js";
 import UserProgressModel from "../models/userProgressModel.js";
 import AppController from "./appController.js";
+import LessonActivityController from "./lessonActivityController.js";
 
 const LessonController = {
   showCurrent: async function () {
@@ -11,6 +12,9 @@ const LessonController = {
 
       // Curreny lesson number
       LessonView.renderCurrentLessonNumber(currentLesson.id);
+
+      // Show lesson activities
+      await LessonActivityController.showAllCurrent();
 
       // Next lesson button
       const nextLessonId = UserProgressModel.getNextLessonId();
