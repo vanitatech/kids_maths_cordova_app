@@ -2,7 +2,7 @@ import db from '../database/database.js';
 
 const MascotModel = {
   get: function (id) {
-    return db.mascots.get.equals(parseInt(id));
+    return db.mascots.get(parseInt(id));
   },
   getAll: function () {
     return db.mascots.toArray();

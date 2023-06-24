@@ -3,11 +3,11 @@ const UserProgressModel = {
   getPointsAwarded: function () {
     return parseInt(localStorage.getItem('userProgress.pointsAwarded') ?? 0);
   },
-  getPointsRedeeded: function () {
+  getPointsRedeemed: function () {
     return parseInt(localStorage.getItem('userProgress.pointsRedeemed') ?? 0);
   },
   getPointsRemaining: function () {
-    return parseInt(this.getPointsAwarded()) - parseInt(this.getPointsRedeeded());
+    return parseInt(this.getPointsAwarded()) - parseInt(this.getPointsRedeemed());
   },
   getCurrentMascot: function () {
     return parseInt(localStorage.getItem('userProgress.currentMascot') ?? 1);

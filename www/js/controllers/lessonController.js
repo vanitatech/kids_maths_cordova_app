@@ -6,9 +6,7 @@ import LessonActivityController from "./lessonActivityController.js";
 
 const LessonController = {
   show: async function (id) {
-    console.log('id', id);
     const lesson = await LessonModel.get(id);
-    console.log('lesson', lesson);
 
     // Curreny lesson number
     LessonView.renderCurrentLessonNumber(lesson.id);
