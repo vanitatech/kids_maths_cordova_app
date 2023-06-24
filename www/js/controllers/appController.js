@@ -4,11 +4,10 @@ const AppController = {
   show: function () {
     AppView.removeLoader();
   },
-  showView: function (button) {
-    const view = button.getAttribute('data-target-view');
+  showView: function (view) {
     AppView.showView(view);
-    AppView.activateViewButton(view)
-  }
+    AppView.activateViewButton(view);
+  },
 }
 
 export default AppController;

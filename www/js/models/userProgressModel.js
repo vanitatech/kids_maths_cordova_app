@@ -6,6 +6,9 @@ const UserProgressModel = {
   getPointsRedeeded: function () {
     return localStorage.getItem('userProgress.pointsRedeemed') ?? 0;
   },
+  getPointsRemaining: function () {
+    return parseInt(this.getPointsAwarded()) - parseInt(this.getPointsRedeeded());
+  },
   getCurrentMascot: function () {
     return localStorage.getItem('userProgress.currentMascot') ?? 1;
   },
@@ -17,6 +20,9 @@ const UserProgressModel = {
   },
   getNextLessonId: function () {
     return parseInt(this.getCurrentLessonId()) + 1;
+  },
+  getCurrentLessonActivityId: function () {
+    return localStorage.getItem('userProgress.currenyActivityId') ?? 0;
   },
   getCurrentQuestionId: function () {
     return localStorage.getItem('userProgress.currentQuestionId') ?? 0;
@@ -34,6 +40,11 @@ const UserProgressModel = {
   setPointsAwarded: function (points) {
     localStorage.setItem('userProgress.pointsAwarded', points);
   },
+  incrementPointsAwarded: function (newPoints) {
+    const currentPoints = parseInt(this.getPointsAwarded());
+    const updatedPoints = currentPoints + parseInt(newPoints);
+    this.setPointsAwarded(updatedPoints);
+  },
   setPointsRedeemed: function (points) {
     localStorage.setItem('userProgress.pointsRedeemed', points);
   },
@@ -42,6 +53,9 @@ const UserProgressModel = {
   },
   setLessonsCompleted: function (count) {
     localStorage.setItem('userProgress.lessonsCompleted', count);
+  },
+  setCurrentLessonActivityId: function (id) {
+    localStorage.setItem('userProgress.currentActivityId', id);
   },
   setCurrentQuestionId: function (id) {
     localStorage.setItem('userProgress.currentQuestionId', id);

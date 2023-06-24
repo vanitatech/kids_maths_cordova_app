@@ -9,6 +9,10 @@ const LessonActivityModel = {
   },
   getByLesson: function (lessonId) {
     return db.lessonActivities.where('lessonId').equals(lessonId).toArray();
+  },
+  update: function (lessonActivity) {
+    const updated = db.lessonActivities.put(lessonActivity);
+    return updated;
   }
 }
 

@@ -1,6 +1,7 @@
 import LessonModel from "../models/lessonModel.js";
 import LessonView from "../views/lessonView.js";
 import UserProgressModel from "../models/userProgressModel.js";
+import AppController from "./appController.js";
 
 const LessonController = {
   showCurrent: async function () {
@@ -18,12 +19,15 @@ const LessonController = {
         const nextLesson = await LessonModel.get(nextLessonId);
         LessonView.renderNextLessonButton(nextLesson.id);
       }
+
+      AppController.showView('lesson');
     } catch (error) {
       console.error('Error:', error);
     }
   },
   showNext: async function () {
     try {
+      // TODO
       const nextLessonId = UserProgressModel.getNextLessonId();
 
     } catch (error) {

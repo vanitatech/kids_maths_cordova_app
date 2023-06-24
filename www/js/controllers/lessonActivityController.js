@@ -4,6 +4,7 @@ import UserProgressModel from "../models/userProgressModel.js";
 import AdditionActivityController from "./additionActivityController.js";
 import AdditionActivityView from "../views/additionActivityView.js";
 import QuestionModel from "../models/questionModel.js";
+import LessonController from "./lessonController.js";
 
 const LessonActivityController = {
   showAllCurrent: async function () {
@@ -18,6 +19,7 @@ const LessonActivityController = {
   show: async function (id) {
     const lessonActivity = LessonActivityModel.get(id);
 
+    UserProgressModel.setCurrentLessonActivityId(id);
     UserProgressModel.setCurrentActivityType(lessonActivity.activityType);
 
     let activityController;
@@ -79,8 +81,28 @@ const LessonActivityController = {
       // Show next question
       this.showQuestion(activityType, nextQuestionId);
     } else {
-      // TODO: Finish Activity (Mark activity complete, persist points and re-render lesson view)
-      console.log('Activity completed');
+      // TODO: Finish Activity 
+      // Mark activity complete
+      const lessonActivityId = UserProgressModel.getCurrentLessonActivityId();
+      const lessonActivity = LessonActivityModel.get(lessonActivityId);
+      lessonActivity.completed = true;
+      LessonActivityModel.update(lessonActivity);
+
+      // Persist points
+      let points = 0;
+      const questions = QuestionModel.getAll();
+      questions.forEach(function (question) {
+        if (question.correct) {
+          points++;
+        }
+      });
+      UserProgressModel.incrementPointsAwarded(points);
+
+      // Empty questions
+      QuestionModel.deleteAll();
+
+      // Re-render lesson view
+      LessonController.showCurrent();
     }
   },
   chooseCard: function (cardContainer) {

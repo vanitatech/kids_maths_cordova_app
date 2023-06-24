@@ -21,7 +21,7 @@
     <div id="app">
         <div id="header">
             <button id="home-button" class="show-view-button active" data-target-view="lesson"
-                onclick="AppController.showView(this)">
+                onclick="AppController.showView('lesson')">
                 <img src="img/home.svg">
             </button>
 
@@ -33,14 +33,14 @@
             </div>
 
             <button id="progress-stars-button" class="show-view-button" data-target-view="mascot-library"
-                onclick="AppController.showView(this)">
+                onclick="AppController.showView('mascot-library')">
                 <img src="img/star-yellow.svg">
                 <span id="progress-stars-amount"></span>
             </button>
         </div>
 
         <div id="app-views">
-            <div id="lesson-view" class="app-view" data-view="lesson" data-active>
+            <div id="lesson-view" class="app-view" data-view="lesson">
                 <div class="mascot-header">
                     <div class="mascot-img-container mascot-img-left"></div>
 
