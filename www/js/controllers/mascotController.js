@@ -1,6 +1,7 @@
 import MascotModel from "../models/mascotModel.js";
 import MascotView from "../views/mascotView.js";
 import UserProgressModel from "../models/userProgressModel.js";
+import UserProgressView from "../views/userProgressView.js";
 
 const MascotController = {
   showAll: async function () {
@@ -19,6 +20,25 @@ const MascotController = {
       MascotView.renderMascot(mascot);
     } catch (error) {
       console.error('Error:', error);
+    }
+  },
+  unlock: async function (id) {
+    const mascot = await MascotModel.get(id);
+    const remainingPoints = UserProgressModel.getRemainingPoints();
+
+    // If use can afford mascot
+    if (remainingPoints >= parseInt(mascot.cost)) {
+
+      // Unlock mascot
+      mascot.unlocked = true;
+      await MascotModel.update(mascot);
+
+      // Redeem user points
+      UserProgressModel.incrementPointsRedeemed(mascot.cost);
+
+      UserProgressView.renderProgressStars();
+      this.showAll();
+      this.showCurrent();
     }
   }
 }

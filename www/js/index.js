@@ -37,5 +37,5 @@ async function onDeviceReady() {
     window.LessonController = LessonController;
     window.LessonActivityController = LessonActivityController;
     window.AdditionActivityController = AdditionActivityController;
-    // TODO: other activity controllers
+    window.MascotController = MascotController;
 }

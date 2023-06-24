@@ -48,6 +48,11 @@ const UserProgressModel = {
     const updatedPoints = currentPoints + parseInt(newPoints);
     this.setPointsAwarded(updatedPoints);
   },
+  incrementPointsRedeemed: function (pointsSpent) {
+    const currentPoints = parseInt(this.getPointsRedeemed());
+    const updatedPoints = currentPoints + parseInt(pointsSpent);
+    this.setPointsRedeemed(updatedPoints);
+  },
   setPointsRedeemed: function (points) {
     localStorage.setItem('userProgress.pointsRedeemed', points);
   },

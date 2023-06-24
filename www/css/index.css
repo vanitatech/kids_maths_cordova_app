@@ -140,7 +140,7 @@ button {
 }
 
 #progress-bar {
-  color: #00aa00;
+  background: #00aa00;
   height: 100%;
 }
 
@@ -525,14 +525,30 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 #mascots-list .mascot-item[data-locked] {
-  position: relative;
+  
 }
 
 #mascots-list .mascot-item[data-active] {
   background-color: #ddffdd;
+}
+
+#mascots-list .mascot-item[data-active]:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" fill="%2300bb55" /></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  opacity: 0.6;
 }
 
 #mascots-list .mascot-item[data-locked]:after {

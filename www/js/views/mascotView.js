@@ -21,7 +21,7 @@ const MascotView = {
       }
 
       mascotItem.setAttribute('class', 'mascot-item');
-      mascotItem.setAttribute('data-id', mascot.id);
+      mascotItem.setAttribute('onclick', `MascotController.unlock(${mascot.id})`);
 
       mascotItem.innerHTML = mascotItemHtml;
       mascotList.appendChild(mascotItem);

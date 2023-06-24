@@ -2,10 +2,14 @@ import db from '../database/database.js';
 
 const MascotModel = {
   get: function (id) {
-    return db.mascots.where('id').equals(id).first();
+    return db.mascots.get.equals(parseInt(id));
   },
   getAll: function () {
     return db.mascots.toArray();
+  },
+  update: function (mascot) {
+    const updated = db.mascots.put(mascot);
+    return updated;
   }
 }
 
