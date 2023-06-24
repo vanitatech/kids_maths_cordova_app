@@ -16,8 +16,7 @@ const SubtractionActivityController = {
         "subtrahend": activity.subtrahend,
         "total": total,
         "options": this.getOptions(activity.minuendMin, minuend, activity.subtrahend, total),
-        "completed": false,
-        // "correct": null
+        "completed": false
       });
     }
 
@@ -41,8 +40,6 @@ const SubtractionActivityController = {
 
     // Shuffle numbers
     Helpers.shuffleArray(options);
-
-    console.log('options', options);
 
     return options;
   }

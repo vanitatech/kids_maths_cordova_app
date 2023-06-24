@@ -16,8 +16,7 @@ const AdditionActivityController = {
         "addend": activity.addend,
         "total": total,
         "options": this.getOptions(activity.augendMin, augend, activity.addend, total),
-        "completed": false,
-        // "correct": null
+        "completed": false
       });
     }
 
@@ -41,8 +40,6 @@ const AdditionActivityController = {
 
     // Shuffle numbers
     Helpers.shuffleArray(options);
-
-    console.log('options', options);
 
     return options;
   }
