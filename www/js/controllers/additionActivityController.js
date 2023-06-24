@@ -1,4 +1,5 @@
 import AdditionActivityModel from "../models/additionActivityModel.js";
+import Helpers from "../services/helpers.js";
 
 const AdditionActivityController = {
   createQuestions: async function (id) {
@@ -27,21 +28,19 @@ const AdditionActivityController = {
   },
   getOptions: function (minimum, augend, addend, total) {
     // Create array of numbers
-    let numbers = this.arrayRange(minimum, total);
+    let numbers = this.arrayRange(minimum, parseInt(total) + 1);
     let options = [augend, addend, total];
 
     // Filter to remove augend, addend, and total
-    const numbersFiltered = numbers.filter(function (e) {
-      return options.indexOf(e) > -1;
-    });
+    numbers = numbers.filter(val => !options.includes(val));
 
     // Add two of the numbers to the options
-    for (let x = 0; x < 2; x++) {
-      // Get random index value
-      const randomIndex = Math.floor(Math.random() * numbersFiltered.length);
-      // Get random item
-      options.push(numbersFiltered[randomIndex]);
-    }
+    options = Helpers.combineArrays(options, numbers, 2);
+
+    // Shuffle numbers
+    Helpers.shuffleArray(options);
+
+    console.log('options', options);
 
     return options;
   },

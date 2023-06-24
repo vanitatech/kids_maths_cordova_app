@@ -1,4 +1,4 @@
-import SubtractionActivityModel from "../models/subtractionActivityModel";
+import SubtractionActivityModel from "../models/subtractionActivityModel.js";
 
 const SubtractionActivityController = {
   createQuestions: async function (id) {
@@ -27,21 +27,19 @@ const SubtractionActivityController = {
   },
   getOptions: function (minimum, minuend, subtrahend, total) {
     // Create array of numbers
-    let numbers = this.arrayRange(minimum, total);
+    let numbers = this.arrayRange(minimum, parseInt(total) + 1);
     let options = [minuend, subtrahend, total];
 
     // Filter to remove minuend, subtrahend, and total
-    const numbersFiltered = numbers.filter(function (e) {
-      return options.indexOf(e) > -1;
-    });
+    numbers = numbers.filter(val => !options.includes(val));
 
     // Add two of the numbers to the options
-    for (let x = 0; x < 2; x++) {
-      // Get random index value
-      const randomIndex = Math.floor(Math.random() * numbersFiltered.length);
-      // Get random item
-      options.push(numbersFiltered[randomIndex]);
-    }
+    options = Helpers.combineArrays(options, numbers, 2);
+
+    // Shuffle numbers
+    Helpers.shuffleArray(options);
+
+    console.log('options', options);
 
     return options;
   },
