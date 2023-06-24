@@ -10,28 +10,28 @@ const SubtractionActivityView = {
     } else {
       objectImg = UserProgressModel.getCurrentObjectImage();
     }
-    const augendImg = LessonActivityView.getImagesHtml(question.augend, objectImg);
-    const addendImg = LessonActivityView.getImagesHtml(question.addend, objectImg);
+    const minuendImg = LessonActivityView.getImagesHtml(question.minuend, objectImg);
+    const subtrahendImg = LessonActivityView.getImagesHtml(question.subtrahend, objectImg);
     const totalImg = LessonActivityView.getImagesHtml(question.total, objectImg);
     const optionsHtml = LessonActivityView.getOptionsHtml(question.options);
 
     const activityHtml = `
       <table id="activity-table">
-        <tr class="augend">
+        <tr class="minuend">
           <td></td>
-          <td class="augend-number activity-number">
-            <div class="card-slot active" data-number="${question.augend}">
+          <td class="minuend-number activity-number">
+            <div class="card-slot active" data-number="${question.minuend}">
               <span class="placeholder">?</span>
             </div>
           </td>
-          <td class="augend-img activity-img">${augendImg}</td>
+          <td class="minuend-img activity-img">${minuendImg}</td>
         </tr>
-        <tr class="addend">
-          <td class="activity-operator"><img src="img/plus.svg"></td>
-          <td class="addend-number activity-number">
-            <div class="card-slot" data-number="${question.addend}"></div>
+        <tr class="subtrahend">
+          <td class="activity-operator"><img src="img/minus.svg"></td>
+          <td class="subtrahend-number activity-number">
+            <div class="card-slot" data-number="${question.subtrahend}"></div>
           </td>
-          <td class="addend-img activity-img">${addendImg}</td>
+          <td class="subtrahend-img activity-img">${subtrahendImg}</td>
         </tr>
         <tr>
           <td></td>

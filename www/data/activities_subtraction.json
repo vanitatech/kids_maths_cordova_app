@@ -1,31 +1,31 @@
 [
   {
     "id": 1,
-    "minuendMin": "1",
+    "minuendMin": 1,
     "minuendMax": 10,
     "subtrahend": 1
   },
   {
     "id": 2,
-    "minuendMin": "1",
+    "minuendMin": 1,
     "minuendMax": 10,
     "subtrahend": 2
   },
   {
     "id": 3,
-    "minuendMin": "1",
+    "minuendMin": 1,
     "minuendMax": 10,
     "subtrahend": 3
   },
   {
     "id": 4,
-    "minuendMin": "1",
+    "minuendMin": 1,
     "minuendMax": 10,
     "subtrahend": 4
   },
   {
     "id": 5,
-    "minuendMin": "1",
+    "minuendMin": 1,
     "minuendMax": 10,
     "subtrahend": 5
   },

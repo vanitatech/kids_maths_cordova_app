@@ -25,6 +25,9 @@ const Helpers = {
     }
 
     return array1;
+  },
+  arrayRange: function (start, stop) {
+    return Array.from(Array(stop - start + 1).keys(), i => i + start);
   }
 }
 

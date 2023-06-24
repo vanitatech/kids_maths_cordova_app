@@ -24,11 +24,13 @@ const AdditionActivityController = {
     return questions;
   },
   getAugend: function (min, max) {
+    min = parseInt(min);
+    max = parseInt(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
   },
   getOptions: function (minimum, augend, addend, total) {
     // Create array of numbers
-    let numbers = this.arrayRange(minimum, parseInt(total) + 1);
+    let numbers = Helpers.arrayRange(minimum, parseInt(total) + 1);
     let options = [augend, addend, total];
 
     // Filter to remove augend, addend, and total
@@ -43,9 +45,6 @@ const AdditionActivityController = {
     console.log('options', options);
 
     return options;
-  },
-  arrayRange: function (start, stop) {
-    return Array.from(Array(stop - start + 1).keys(), i => i + start);
   }
 }
 
