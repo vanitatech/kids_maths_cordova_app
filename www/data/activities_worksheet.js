@@ -1,4 +1,4 @@
-[
+const activitiesWorksheetData = [
   {
     "id": 1,
     "worksheet": "placeholder-worksheet.pdf"
@@ -48,3 +48,5 @@
     "worksheet": "placeholder-worksheet.pdf"
   }
 ]
+
+export default activitiesWorksheetData;

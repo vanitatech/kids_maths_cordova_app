@@ -1,4 +1,4 @@
-[
+const activitiesCountingData = [
   {
     "id": 1,
     "min": 1,
@@ -50,3 +50,5 @@
     "max": 100
   }
 ]
+
+export default activitiesCountingData;

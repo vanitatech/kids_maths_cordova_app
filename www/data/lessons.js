@@ -1,4 +1,4 @@
-[
+const lessonsData = [
   {
     "id": 1,
     "type": "learn",
@@ -60,3 +60,5 @@
     "completed": false
   }
 ]
+
+export default lessonsData;

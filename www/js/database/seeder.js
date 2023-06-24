@@ -1,23 +1,21 @@
 import db from './database.js';
+import activitiesAdditionData from '../../data/activities_addition.js';
+import activitiesCountingData from '../../data/activities_counting.js';
+import activitiesSubtractionData from '../../data/activities_subtraction.js';
+import activitiesWorksheetData from '../../data/activities_worksheet.js';
+import lessonActivitiesData from '../../data/lesson_activities.js';
+import lessonsData from '../../data/lessons.js';
+import mascotsData from '../../data/mascots.js';
 
 const Seeder = {
   seedDatabase: async function () {
     try {
-      // Fetch JSON data
-      const lessonsData = await fetchJSON('../data/lessons.json');
-      const lessonActivitiesData = await fetchJSON('../data/lesson_activities.json');
-      const additionActivitiesData = await fetchJSON('../data/activities_addition.json');
-      const subtractionActivitiesData = await fetchJSON('../data/activities_subtraction.json');
-      const countingActivitiesData = await fetchJSON('../data/activities_counting.json');
-      const worksheetActivitiesData = await fetchJSON('../data/activities_worksheet.json');
-      const mascotsData = await fetchJSON('../data/mascots.json');
-
       // Seed database
       await seedTableIfEmpty('lessons', lessonsData);
-      await seedTableIfEmpty('additionActivities', additionActivitiesData);
-      await seedTableIfEmpty('subtractionActivities', subtractionActivitiesData);
-      await seedTableIfEmpty('countingActivities', countingActivitiesData);
-      await seedTableIfEmpty('worksheetActivities', worksheetActivitiesData);
+      await seedTableIfEmpty('additionActivities', activitiesAdditionData);
+      await seedTableIfEmpty('subtractionActivities', activitiesSubtractionData);
+      await seedTableIfEmpty('countingActivities', activitiesCountingData);
+      await seedTableIfEmpty('worksheetActivities', activitiesWorksheetData);
       await seedTableIfEmpty('lessonActivities', lessonActivitiesData);
       await seedTableIfEmpty('mascots', mascotsData);
     } catch (error) {
@@ -35,14 +33,6 @@ async function seedTableIfEmpty(tableName, data) {
       console.error('Error inserting data:', error);
     };
   }
-}
-
-async function fetchJSON(url) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch JSON data: ${response.status} ${response.statusText}`);
-  }
-  return response.json();
 }
 
 export default Seeder;

@@ -1,4 +1,4 @@
-[
+const activitiesSubtractionData = [
   {
     "id": 1,
     "minuendMin": 1,
@@ -60,3 +60,5 @@
     "subtrahend": 10
   }
 ]
+
+export default activitiesSubtractionData;

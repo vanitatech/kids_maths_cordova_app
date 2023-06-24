@@ -1,4 +1,4 @@
-[
+const lessonActivitiesData = [
   {
     "id": 1,
     "lessonId": 1,
@@ -336,3 +336,5 @@
     "completed": false
   }
 ]
+
+export default lessonActivitiesData;

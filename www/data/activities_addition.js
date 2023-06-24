@@ -1,4 +1,4 @@
-[
+const activitiesAdditionData = [
   {
     "id": 1,
     "augendMin": 1,
@@ -60,3 +60,5 @@
     "addend": 10
   }
 ]
+
+export default activitiesAdditionData;

@@ -1,4 +1,4 @@
-[
+const mascotsData = [
   {
     "id": 1,
     "name": "parrot",
@@ -28,3 +28,5 @@
     "unlocked": false
   }
 ]
+
+export default mascotsData;

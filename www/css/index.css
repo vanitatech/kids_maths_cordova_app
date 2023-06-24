@@ -25,6 +25,8 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
+  background: #ffffff;
+  color: #000000;
 }
 
 ol, ul {
