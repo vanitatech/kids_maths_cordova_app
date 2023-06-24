@@ -12,14 +12,14 @@ const UserProgressModel = {
   getCurrentMascot: function () {
     return parseInt(localStorage.getItem('userProgress.currentMascot') ?? 1);
   },
-  getLessonsCompleted: function () {
-    return parseInt(localStorage.getItem('userProgress.lessonsCompleted') ?? 0);
-  },
   getCurrentLessonId: function () {
-    return parseInt(this.getLessonsCompleted()) + 1;
+    return parseInt(localStorage.getItem('userProgress.currentLessonId') ?? 1);
   },
   getNextLessonId: function () {
     return parseInt(this.getCurrentLessonId()) + 1;
+  },
+  getLessonsCompleted: function () {
+    return this.getCurrentLessonId() - 1;
   },
   getCurrentLessonActivityId: function () {
     return parseInt(localStorage.getItem('userProgress.currentActivityId') ?? 0);
@@ -54,8 +54,8 @@ const UserProgressModel = {
   setCurrentMascot: function (mascotId) {
     localStorage.setItem('userProgress.currentMascot', mascotId);
   },
-  setLessonsCompleted: function (count) {
-    localStorage.setItem('userProgress.lessonsCompleted', count);
+  setCurrentLessonId: function (id) {
+    localStorage.setItem('userProgress.currentLessonId', id);
   },
   setCurrentLessonActivityId: function (id) {
     localStorage.setItem('userProgress.currentActivityId', id);

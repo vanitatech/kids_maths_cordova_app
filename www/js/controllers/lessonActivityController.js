@@ -27,7 +27,18 @@ const LessonActivityController = {
     const lessonActivity = await LessonActivityModel.get(id);
 
     if (lessonActivity.activityType == 'worksheet') {
+      // Mark as complete
+      lessonActivity.completed = true;
+      LessonActivityModel.update(lessonActivity);
+
+      // Issue 5 points
+      UserProgressModel.incrementPointsAwarded(5);
+
+      // TODO: Download
       WorksheetActivityController.download(lessonActivity.activityId);
+
+      // TODO: Re-render the lesson view (and if all activities completed, enable next-lesson button)
+      LessonController.showCurrent();
     } else {
       UserProgressModel.setCurrentLessonActivityId(id);
       UserProgressModel.setCurrentActivityType(lessonActivity.activityType);
@@ -191,6 +202,19 @@ const LessonActivityController = {
     question.completed = true;
     question.correct = correct;
     await QuestionModel.update(question);
+  },
+  checkAllCompleted: async function (lessonId) {
+    const activities = await LessonActivityModel.getByLesson(lessonId);
+
+    let completed = true;
+
+    activities.forEach(function (activity) {
+      if (!activity.completed) {
+        completed = false;
+      }
+    });
+
+    return completed;
   }
 }
 

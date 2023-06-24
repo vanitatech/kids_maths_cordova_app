@@ -5,38 +5,38 @@ import AppController from "./appController.js";
 import LessonActivityController from "./lessonActivityController.js";
 
 const LessonController = {
-  showCurrent: async function () {
-    try {
-      const currentLessonId = UserProgressModel.getCurrentLessonId();
-      const currentLesson = await LessonModel.get(currentLessonId);
+  show: async function (id) {
+    console.log('id', id);
+    const lesson = await LessonModel.get(id);
+    console.log('lesson', lesson);
 
-      // Curreny lesson number
-      LessonView.renderCurrentLessonNumber(currentLesson.id);
+    // Curreny lesson number
+    LessonView.renderCurrentLessonNumber(lesson.id);
 
-      // Show lesson activities
-      await LessonActivityController.showAllCurrent();
+    // Show lesson activities
+    await LessonActivityController.showAllCurrent();
 
-      // Next lesson button
-      const nextLessonId = UserProgressModel.getNextLessonId();
-      const totalLessons = await LessonModel.getTotal();
-      if (nextLessonId <= totalLessons) {
-        const nextLesson = await LessonModel.get(nextLessonId);
-        LessonView.renderNextLessonButton(nextLesson.id);
-      }
+    // Check if all activities completed, enable next-lesson button
+    const activitiesCompleted = await LessonActivityController.checkAllCompleted(lesson.id);
 
-      AppController.showView('lesson');
-    } catch (error) {
-      console.error('Error:', error);
+    // Next lesson button
+    const nextLessonId = UserProgressModel.getNextLessonId();
+    const totalLessons = await LessonModel.getTotal();
+    if (nextLessonId <= totalLessons) {
+      const nextLesson = await LessonModel.get(nextLessonId);
+      LessonView.renderNextLessonButton(nextLesson.id, activitiesCompleted);
     }
+
+    AppController.showView('lesson');
+  },
+  showCurrent: async function () {
+    const currentLessonId = UserProgressModel.getCurrentLessonId();
+    this.show(currentLessonId);
   },
   showNext: async function () {
-    try {
-      // TODO
-      const nextLessonId = UserProgressModel.getNextLessonId();
-
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    const nextLessonId = UserProgressModel.getNextLessonId();
+    UserProgressModel.setCurrentLessonId(nextLessonId);
+    this.show(nextLessonId);
   }
 }
 

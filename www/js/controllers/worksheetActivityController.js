@@ -2,6 +2,8 @@ import WorksheetActivityModel from "../models/worksheetActivityModel.js";
 
 const WorksheetActivityController = {
   download: async function (id) {
+    // TODO: Fix this function, so that it works on browser, android and iOS.
+
     const worksheetActivity = await WorksheetActivityModel.get(id);
 
     // File URL

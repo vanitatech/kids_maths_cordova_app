@@ -3,10 +3,10 @@ const LessonView = {
     // Update lesson number
     document.getElementById('current-lesson-number').innerHTML = number;
   },
-  renderNextLessonButton: function (number) {
+  renderNextLessonButton: function (number, enabled) {
     // Prepare button HTML
     const nextLessonButtonHtml = `
-    <button id="next-lesson-button" onclick="LessonController.showNext()" disabled>
+    <button id="next-lesson-button" onclick="LessonController.showNext()" ${enabled ? '' : 'disabled'}>
         <span>Next Lesson</span>
         <span id="next-lesson-number" class="lesson-number">${number}</span>
         <img src="img/thick-arrow-right-long.svg">
