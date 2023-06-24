@@ -11,6 +11,7 @@ import SubtractionActivityController from "./subtractionActivityController.js";
 import SubtractionActivityView from "../views/subtractionActivityView.js";
 import CountingActivityController from "./countingActivityController.js";
 import CountingActivityView from "../views/countingActivityView.js";
+import WorksheetActivityController from "./worksheetActivityController.js";
 
 const LessonActivityController = {
   showAllCurrent: async function () {
@@ -25,19 +26,23 @@ const LessonActivityController = {
   show: async function (id) {
     const lessonActivity = await LessonActivityModel.get(id);
 
-    UserProgressModel.setCurrentLessonActivityId(id);
-    UserProgressModel.setCurrentActivityType(lessonActivity.activityType);
+    if (lessonActivity.activityType == 'worksheet') {
+      WorksheetActivityController.download(lessonActivity.activityId);
+    } else {
+      UserProgressModel.setCurrentLessonActivityId(id);
+      UserProgressModel.setCurrentActivityType(lessonActivity.activityType);
 
-    // Create questions
-    const questions = await this.createQuestions(lessonActivity.activityType, lessonActivity.activityId);
-    await QuestionModel.deleteAll();
-    await QuestionModel.insertAll(questions);
+      // Create questions
+      const questions = await this.createQuestions(lessonActivity.activityType, lessonActivity.activityId);
+      await QuestionModel.deleteAll();
+      await QuestionModel.insertAll(questions);
 
-    // Show question and view
-    LessonActivityView.renderMascotSpeech(lessonActivity.activityType);
-    LessonActivityController.showQuestion(lessonActivity.activityType, 0, 0, true);
-    AppView.showView('activity');
-    AppView.disableViewButtons();
+      // Show question and view
+      LessonActivityView.renderMascotSpeech(lessonActivity.activityType);
+      LessonActivityController.showQuestion(lessonActivity.activityType, 0, 0, true);
+      AppView.showView('activity');
+      AppView.disableViewButtons();
+    }
   },
   createQuestions: async function (activityType, id) {
     switch (activityType) {
