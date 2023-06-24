@@ -7,7 +7,7 @@ const AdditionActivityController = {
     let questions = [];
 
     for (let x = 0; x < 5; x++) {
-      let augend = this.getAugend(activity.augendMin, activity.augendMax);
+      let augend = this.getAugend(activity.augendMin, activity.augendMax, questions);
       let total = augend + parseInt(activity.addend);
 
       questions.push({
@@ -22,10 +22,26 @@ const AdditionActivityController = {
 
     return questions;
   },
-  getAugend: function (min, max) {
+  getAugend: function (min, max, questions) {
     min = parseInt(min);
     max = parseInt(max);
-    return Math.floor(Math.random() * (max - min + 1) + min);
+
+    const augend = Math.floor(Math.random() * (max - min + 1) + min);
+
+    // Check augend is not already used in another question
+    let augendUnique = true;
+    questions.forEach(function (question) {
+      if (question.augend == augend) {
+        augendUnique = false;
+      }
+    });
+
+    // Only return augend if unique
+    if (augendUnique) {
+      return augend;
+    } else {
+      return this.getAugend(min, max, questions);
+    }
   },
   getOptions: function (minimum, augend, addend, total) {
     // Create array of numbers

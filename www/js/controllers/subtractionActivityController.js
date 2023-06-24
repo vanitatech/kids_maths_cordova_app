@@ -7,7 +7,7 @@ const SubtractionActivityController = {
     let questions = [];
 
     for (let x = 0; x < 5; x++) {
-      let minuend = this.getMinuend(activity.minuendMin, activity.minuendMax);
+      let minuend = this.getMinuend(activity.minuendMin, activity.minuendMax, questions);
       let total = minuend - parseInt(activity.subtrahend);
 
       questions.push({
@@ -22,10 +22,26 @@ const SubtractionActivityController = {
 
     return questions;
   },
-  getMinuend: function (min, max) {
+  getMinuend: function (min, max, questions) {
     min = parseInt(min);
     max = parseInt(max);
-    return Math.floor(Math.random() * (max - min + 1) + min);
+
+    const minuend = Math.floor(Math.random() * (max - min + 1) + min);
+
+    // Check minuend is not already used in another question
+    let minuendUnique = true;
+    questions.forEach(function (question) {
+      if (question.minuend == minuend) {
+        minuendUnique = false;
+      }
+    });
+
+    // Only return minuend if unique
+    if (minuendUnique) {
+      return minuend;
+    } else {
+      return this.getMinuend(min, max, questions);
+    }
   },
   getOptions: function (minimum, minuend, subtrahend, total) {
     // Create array of numbers
