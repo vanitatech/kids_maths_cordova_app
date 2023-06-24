@@ -1,8 +1,8 @@
 {
-  "name": "io.cordova.hellocordova",
-  "displayName": "HelloCordova",
+  "name": "vanitaapplebee.cordova.tm470mathsapp",
+  "displayName": "TM470MathsApp",
   "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "description": "Mathematics learning app for 5 year old children, built using Apache Cordova.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Apache Cordova Team",
+  "author": "Vanita Applebee",
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^9.1.0",
