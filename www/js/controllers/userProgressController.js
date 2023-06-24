@@ -14,7 +14,7 @@ const UserProgressController = {
   },
   showPoints: function () {
     const pointsAwarded = UserProgressModel.getPointsAwarded();
-    const pointsRedeemed = UserProgressModel.getPointsRedeeded();
+    const pointsRedeemed = UserProgressModel.getPointsRedeemed();
     const pointsRemaining = pointsAwarded - pointsRedeemed;
     UserProgressView.renderProgressStars(pointsRemaining);
   }
