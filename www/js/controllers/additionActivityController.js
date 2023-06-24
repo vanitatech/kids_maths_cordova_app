@@ -6,7 +6,7 @@ import QuestionModel from "../models/questionModel.js";
 import LessonActivityController from "./lessonActivityController.js";
 
 const AdditionActivityController = {
-  createQuestions: async function () {
+  createQuestions: async function (id) {
     const activity = await AdditionActivityModel.get(id); // {id: 1, augendMin: 1, augendMax: 9, addend: 1}
     let questions = [];
 
@@ -17,7 +17,7 @@ const AdditionActivityController = {
       questions.push({
         "id": x,
         "augend": augend,
-        "addend": addend,
+        "addend": activity.addend,
         "total": total,
         "options": this.getOptions(activity.augendMin, augend, activity.addend, total),
         "completed": false,

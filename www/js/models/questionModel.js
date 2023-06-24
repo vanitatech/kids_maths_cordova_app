@@ -2,7 +2,7 @@ import db from '../database/database.js';
 
 const QuestionModel = {
   get: function (id) {
-    return db.questions.where('id').equals(id).first();
+    return db.questions.get(parseInt(id));
   },
   getAll: function () {
     return db.questions.toArray();

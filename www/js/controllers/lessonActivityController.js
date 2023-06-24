@@ -5,6 +5,7 @@ import AdditionActivityController from "./additionActivityController.js";
 import AdditionActivityView from "../views/additionActivityView.js";
 import QuestionModel from "../models/questionModel.js";
 import LessonController from "./lessonController.js";
+import AppView from "../views/appView.js";
 
 const LessonActivityController = {
   showAllCurrent: async function () {
@@ -17,36 +18,33 @@ const LessonActivityController = {
     }
   },
   show: async function (id) {
-    const lessonActivity = LessonActivityModel.get(id);
+    const lessonActivity = await LessonActivityModel.get(id);
 
     UserProgressModel.setCurrentLessonActivityId(id);
     UserProgressModel.setCurrentActivityType(lessonActivity.activityType);
 
-    let activityController;
-    switch (lessonActivity.activityType) {
-      case 'addition':
-        activityController = AdditionActivityController;
-        break;
-      // case 'counting':
-      //   activityController = CountingActivityController;
-      //   break;
-      // case 'subtraction':
-      //   activityController = SubtractionActivityController;
-      //   break;
-    }
-
     // Create questions
-    const questions = activityController.createQuestions();
+    const questions = await this.createQuestions(lessonActivity.activityType, lessonActivity.activityId);
     await QuestionModel.deleteAll();
     await QuestionModel.insertAll(questions);
 
     // Show question and view
     LessonActivityView.renderMascotSpeech(lessonActivity.activityType);
-    LessonActivityController.showQuestion(lessonActivity.activityType, 0, 0);
+    LessonActivityController.showQuestion(lessonActivity.activityType, 0, 0, true);
     AppView.showView('activity');
     AppView.disableViewButtons();
   },
-  showQuestion: async function (activityType, id, attempts) {
+  createQuestions: async function (activityType, id) {
+    switch (activityType) {
+      case 'addition':
+        return await AdditionActivityController.createQuestions(id);
+      // case 'counting':
+      //   return await CountingActivityController.createQuestions(id);
+      // case 'subtraction':
+      //   return await SubtractionActivityController.createQuestions(id);
+    }
+  },
+  showQuestion: async function (activityType, id, attempts, changeImg) {
     let activityView;
     switch (activityType) {
       case 'addition':
@@ -63,14 +61,14 @@ const LessonActivityController = {
     UserProgressModel.setCurrentQuestionAttempts(attempts);
     UserProgressModel.setCurrentQuestionId(id);
     const questions = await QuestionModel.getAll();
-    activityView.render(questions[id]);
+    activityView.render(questions[id], changeImg);
     LessonActivityView.renderScore(questions);
   },
   resetQuestion: async function () {
     const activityType = UserProgressModel.getCurrentActivityType();
     const questionId = UserProgressModel.getCurrentQuestionId()
     const questionAttempts = UserProgressModel.getCurrentQuestionAttempts();
-    this.showQuestion(activityType, questionId, questionAttempts);
+    this.showQuestion(activityType, questionId, questionAttempts, false);
   },
   showNextStep: async function () {
     const activityType = UserProgressModel.getCurrentActivityType();
@@ -79,18 +77,17 @@ const LessonActivityController = {
 
     if (nextQuestionId < totalQuestions) {
       // Show next question
-      this.showQuestion(activityType, nextQuestionId);
+      this.showQuestion(activityType, nextQuestionId, 0, true);
     } else {
-      // TODO: Finish Activity 
       // Mark activity complete
       const lessonActivityId = UserProgressModel.getCurrentLessonActivityId();
-      const lessonActivity = LessonActivityModel.get(lessonActivityId);
+      const lessonActivity = await LessonActivityModel.get(lessonActivityId);
       lessonActivity.completed = true;
-      LessonActivityModel.update(lessonActivity);
+      await LessonActivityModel.update(lessonActivity);
 
       // Persist points
       let points = 0;
-      const questions = QuestionModel.getAll();
+      const questions = await QuestionModel.getAll();
       questions.forEach(function (question) {
         if (question.correct) {
           points++;
@@ -99,7 +96,7 @@ const LessonActivityController = {
       UserProgressModel.incrementPointsAwarded(points);
 
       // Empty questions
-      QuestionModel.deleteAll();
+      await QuestionModel.deleteAll();
 
       // Re-render lesson view
       LessonController.showCurrent();
@@ -139,6 +136,7 @@ const LessonActivityController = {
   },
   checkAnswer: async function () {
     LessonActivityView.removeCheckAnswerButton();
+    UserProgressModel.incrementCurrentQuestionAttempts();
 
     // Check if correct cards are in correct slots
     let correct = true;
@@ -154,7 +152,7 @@ const LessonActivityController = {
       await LessonActivityView.renderQuestionResponse('success');
 
       // Mark question correct
-      this.markQuestion(true);
+      await this.markQuestion(true);
 
       // Show next step
       this.showNextStep();
@@ -168,7 +166,7 @@ const LessonActivityController = {
 
       } else {
         // Mark question incorrect
-        this.markQuestion(false);
+        await this.markQuestion(false);
 
         // Show next step
         this.showNextStep();
@@ -177,10 +175,10 @@ const LessonActivityController = {
   },
   markQuestion: async function (correct) {
     const currentQuestionId = UserProgressModel.getCurrentQuestionId();
-    let question = QuestionModel.get(currentQuestionId);
+    let question = await QuestionModel.get(currentQuestionId);
     question.completed = true;
     question.correct = correct;
-    QuestionModel.update(question);
+    await QuestionModel.update(question);
   }
 }
 

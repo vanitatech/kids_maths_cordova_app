@@ -2,7 +2,7 @@ import db from '../database/database.js';
 
 const LessonActivityModel = {
   get: function (id) {
-    return db.lessonActivities.where('id').equals(id).first();
+    return db.lessonActivities.get(parseInt(id));
   },
   getAll: function () {
     return db.lessonActivities.toArray();

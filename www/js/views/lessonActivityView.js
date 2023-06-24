@@ -154,8 +154,8 @@ const LessonActivityView = {
 
     // Show for 2 seconds
     document.getElementById('activity-content').appendChild(questionResponse);
-    // await this.delay(3000);
-    // document.getElementById('question-response').remove();
+    await this.delay(3000);
+    document.getElementById('question-response').remove();
   },
   renderPopup: function (type) {
     const popup = document.createElement('div');

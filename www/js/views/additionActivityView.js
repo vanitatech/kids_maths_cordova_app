@@ -1,8 +1,15 @@
+import UserProgressModel from "../models/userProgressModel.js";
 import LessonActivityView from "./lessonActivityView.js";
 
 const AdditionActivityView = {
-  render: function (question) {
-    const objectImg = LessonActivityView.getObjectImg();
+  render: function (question, changeImg) {
+    let objectImg;
+    if (changeImg) {
+      objectImg = LessonActivityView.getObjectImg();
+      UserProgressModel.setCurrentObjectImage(objectImg);
+    } else {
+      objectImg = UserProgressModel.getCurrentObjectImage();
+    }
     const augendImg = LessonActivityView.getImagesHtml(question.augend, objectImg);
     const addendImg = LessonActivityView.getImagesHtml(question.addend, objectImg);
     const totalImg = LessonActivityView.getImagesHtml(question.total, objectImg);

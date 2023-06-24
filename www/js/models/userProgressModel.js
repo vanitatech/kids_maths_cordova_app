@@ -36,6 +36,9 @@ const UserProgressModel = {
   getCurrentActivityType: function () {
     return localStorage.getItem('userProgress.currentActivityType') ?? null;
   },
+  getCurrentObjectImage: function () {
+    return localStorage.getItem('userProgress.currentObjectImage') ?? null;
+  },
   // Mutators
   setPointsAwarded: function (points) {
     localStorage.setItem('userProgress.pointsAwarded', points);
@@ -66,10 +69,13 @@ const UserProgressModel = {
   setCurrentActivityType: function (type) {
     localStorage.setItem('userProgress.currentActivityType', type);
   },
-  incrementCurrentQuestionsAttempts: function () {
-    let count = this.getCurrentQuestionsAttempts();
+  incrementCurrentQuestionAttempts: function () {
+    let count = this.getCurrentQuestionAttempts();
     count++;
     this.setCurrentQuestionAttempts(count);
+  },
+  setCurrentObjectImage: function (image) {
+    localStorage.setItem('userProgress.currentObjectImage', image);
   }
 }
 
