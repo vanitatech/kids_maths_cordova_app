@@ -1,3 +1,10 @@
+/* Fonts */
+@font-face {
+  font-family: "Comic Relief";
+  src: url("../fonts/ComicRelief.ttf");
+}
+
+
 /* CSS Reset */
 
 html, body, div, span, applet, object, iframe,
@@ -24,7 +31,6 @@ footer, header, hgroup, menu, nav, section {
 
 body {
   line-height: 1;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
   background: #ffffff;
   color: #000000;
 }
@@ -60,6 +66,10 @@ button {
 
 * {
   box-sizing: border-box;
+}
+
+body, button, span {
+  font-family: "Comic Relief", "Comic Sans", cursive;
 }
 
 /* App */
