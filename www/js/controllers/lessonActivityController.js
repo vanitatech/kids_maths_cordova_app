@@ -9,6 +9,8 @@ import AdditionActivityController from "./additionActivityController.js";
 import AdditionActivityView from "../views/additionActivityView.js";
 import SubtractionActivityController from "./subtractionActivityController.js";
 import SubtractionActivityView from "../views/subtractionActivityView.js";
+import CountingActivityController from "./countingActivityController.js";
+import CountingActivityView from "../views/countingActivityView.js";
 
 const LessonActivityController = {
   showAllCurrent: async function () {
@@ -41,8 +43,8 @@ const LessonActivityController = {
     switch (activityType) {
       case 'addition':
         return await AdditionActivityController.createQuestions(id);
-      // case 'counting':
-      //   return await CountingActivityController.createQuestions(id);
+      case 'counting':
+        return await CountingActivityController.createQuestions(id);
       case 'subtraction':
         return await SubtractionActivityController.createQuestions(id);
     }
@@ -56,9 +58,9 @@ const LessonActivityController = {
       case 'addition':
         AdditionActivityView.render(questions[id], changeImg);
         break;
-      // case 'counting':
-      //   CountingActivityView.render(questions[id], changeImg);
-      //   break;
+      case 'counting':
+        CountingActivityView.render(questions[id], changeImg);
+        break;
       case 'subtraction':
         SubtractionActivityView.render(questions[id], changeImg);
         break;
