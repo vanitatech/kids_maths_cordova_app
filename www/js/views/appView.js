@@ -35,6 +35,14 @@ const AppView = {
     document.querySelectorAll('.show-view-button').forEach(function (buttonElement) {
       buttonElement.classList.remove('active');
     });
+  },
+  showReset: function (number1, number2, correctAnswer) {
+    document.getElementById('reset-question').innerHTML = `${number1} x ${number2} =`;
+    document.getElementById('reset-answer').setAttribute('data-answer', correctAnswer);
+    document.getElementById('reset-check-cover').style.display = 'flex';
+  },
+  hideReset: function () {
+    document.getElementById('reset-check-cover').style.display = 'none';
   }
 }
 

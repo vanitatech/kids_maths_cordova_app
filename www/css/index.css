@@ -318,22 +318,25 @@ body, span, button {
 
 #reset-check {
   background: #ff6464;
-  width: 150px;
+  width: 200px;
   border-radius: 15px;
-  padding: 20px;
+  padding: 30px;
   text-align: center;
+  position: relative;
 }
 
 #reset-check label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  font-size: 18px;
 }
 
 #reset-check input {
   display: block;
   padding: 5px;
+  font-size: 18px;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   appearance: none;
   background: #ffffff;
   border-radius: 5px;
@@ -351,6 +354,21 @@ body, span, button {
   width: 100%;
   text-align: center;
   cursor: pointer;
+  font-size: 16px;
+}
+
+#reset-cancel {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#reset-cancel svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* Activities List */
