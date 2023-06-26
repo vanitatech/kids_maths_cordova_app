@@ -339,6 +339,7 @@ body, span, button {
   margin-bottom: 15px;
   appearance: none;
   background: #ffffff;
+  color: #000000;
   border-radius: 5px;
   border: none;
   text-align: center;
