@@ -177,6 +177,7 @@ body, span, button {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #000000;
 }
 
 #app-views {
