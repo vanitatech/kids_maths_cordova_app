@@ -261,6 +261,7 @@ body, span, button {
   font-size: 1.25rem;
   justify-content: center;
   margin: 20px auto 15px auto;
+  color: #000;
 }
 
 #next-lesson-number {

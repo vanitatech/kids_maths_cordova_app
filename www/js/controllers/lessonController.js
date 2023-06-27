@@ -3,6 +3,7 @@ import LessonView from "../views/lessonView.js";
 import UserProgressModel from "../models/userProgressModel.js";
 import AppController from "./appController.js";
 import LessonActivityController from "./lessonActivityController.js";
+import UserProgressController from "./userProgressController.js";
 
 const LessonController = {
   show: async function (id) {
@@ -34,6 +35,7 @@ const LessonController = {
   showNext: async function () {
     const nextLessonId = UserProgressModel.getNextLessonId();
     UserProgressModel.setCurrentLessonId(nextLessonId);
+    UserProgressController.showLessonsCompleted();
     this.show(nextLessonId);
   }
 }
