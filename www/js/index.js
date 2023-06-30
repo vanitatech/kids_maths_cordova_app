@@ -11,7 +11,7 @@ import UserProgressModel from './models/userProgressModel.js';
 document.addEventListener('deviceready', onDeviceReady, false);
 
 async function onDeviceReady() {
-    // Cordova is now initialized
+    // Cordova is now initialised
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
 
     // Seed database if empty
