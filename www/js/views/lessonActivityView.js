@@ -4,29 +4,33 @@ const LessonActivityView = {
     activitiesListElement.innerHTML = '';
 
     activities.forEach(activity => {
-      const activityItem = document.createElement('div');
-      activityItem.setAttribute('class', `activity-item activity-type-${activity.activityType}`);
-      activityItem.setAttribute('onclick', `LessonActivityController.show(${activity.id})`);
+      if (activity.activityType == 'worksheet') {
+        // Temporarily disable worksheet activities
+      } else {
+        const activityItem = document.createElement('div');
+        activityItem.setAttribute('class', `activity-item activity-type-${activity.activityType}`);
+        activityItem.setAttribute('onclick', `LessonActivityController.show(${activity.id})`);
 
-      if (activity.completed) {
-        activityItem.classList.add('completed');
-        activityItem.setAttribute('data-completed', '');
+        if (activity.completed) {
+          activityItem.classList.add('completed');
+          activityItem.setAttribute('data-completed', '');
+        }
+
+        const activityType = this.formatType(activity.activityType);
+
+        let activityItemHtml = `
+          <div class="activity-checkbox"></div>
+          <div class="activity-type">${activityType}</div>
+          `;
+
+        const activityIcon = this.getActivityIcon(activity.activityType);
+        if (activityIcon) {
+          activityItemHtml += `<img src="img/${activityIcon}">`;
+        }
+
+        activityItem.innerHTML = activityItemHtml;
+        activitiesListElement.appendChild(activityItem);
       }
-
-      const activityType = this.formatType(activity.activityType);
-
-      let activityItemHtml = `
-        <div class="activity-checkbox"></div>
-        <div class="activity-type">${activityType}</div>
-        `;
-
-      const activityIcon = this.getActivityIcon(activity.activityType);
-      if (activityIcon) {
-        activityItemHtml += `<img src="img/${activityIcon}">`;
-      }
-
-      activityItem.innerHTML = activityItemHtml;
-      activitiesListElement.appendChild(activityItem);
     });
   },
   renderMascotSpeech: function (type) {

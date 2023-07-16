@@ -8,11 +8,12 @@ import AdditionActivityController from './controllers/additionActivityController
 import UserProgressModel from './models/userProgressModel.js';
 
 // Wait for the deviceready event before using any of Cordova's device APIs
-document.addEventListener('deviceready', onDeviceReady, false);
+// document.addEventListener('deviceready', onDeviceReady, false);
+document.addEventListener('DOMContentLoaded', onDeviceReady, false);
 
 async function onDeviceReady() {
     // Cordova is now initialised
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
+    // console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
 
     // Seed database if empty
     await Seeder.seedDatabase();
