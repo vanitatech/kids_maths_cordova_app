@@ -181,13 +181,14 @@ const LessonActivityController = {
       this.showNextStep();
 
     } else {
-      await LessonActivityView.renderQuestionResponse('failure');
-
       if (UserProgressModel.getCurrentQuestionAttempts() < 2) {
+        await LessonActivityView.renderQuestionResponse('try-again');
+
         // Reset question
         this.resetQuestion();
-
       } else {
+        await LessonActivityView.renderQuestionResponse('failure');
+
         // Mark question incorrect
         await this.markQuestion(false);
 
@@ -209,7 +210,10 @@ const LessonActivityController = {
     let completed = true;
 
     activities.forEach(function (activity) {
-      if (!activity.completed) {
+      if (
+        !activity.completed
+        && activity.activityType !== 'worksheet' // Temporarily disabled worksheets
+      ) {
         completed = false;
       }
     });

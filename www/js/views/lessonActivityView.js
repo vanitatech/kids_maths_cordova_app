@@ -148,17 +148,35 @@ const LessonActivityView = {
     document.getElementById('check-answer-button').remove();
   },
   renderQuestionResponse: async function (type) {
-    const questionResponse = document.createElement('img');
+    const questionResponseWrapper = document.createElement('div');
+    questionResponseWrapper.setAttribute('id', 'question-response-wrapper');
+
+    const questionResponse = document.createElement('div');
     questionResponse.setAttribute('id', 'question-response');
 
+    const questionResponseText = document.createElement('h3');
+    const questionResponseImg = document.createElement('img');
+
     if (type == 'success') {
-      questionResponse.setAttribute('src', 'img/happy-2.svg');
+      questionResponseImg.setAttribute('src', 'img/happy-2.svg');
+      questionResponseText.innerHTML = 'Well Done!';
+      questionResponse.classList.add('success');
+    } else if (type == 'try-again') {
+      questionResponseImg.setAttribute('src', 'img/sad-2.svg');
+      questionResponseText.innerHTML = 'Please try again';
+      questionResponse.classList.add('failure');
     } else if (type == 'failure') {
-      questionResponse.setAttribute('src', 'img/sad-2.svg');
+      questionResponseImg.setAttribute('src', 'img/sad-2.svg');
+      questionResponseText.innerHTML = 'Oh dear';
+      questionResponse.classList.add('failure');
     }
 
+    questionResponse.appendChild(questionResponseImg);
+    questionResponse.appendChild(questionResponseText);
+    questionResponseWrapper.appendChild(questionResponse);
+
     // Show for 2 seconds
-    document.getElementById('activity-content').appendChild(questionResponse);
+    document.getElementById('activity-content').appendChild(questionResponseWrapper);
     await this.delay(2000);
     document.getElementById('question-response').remove();
   },
