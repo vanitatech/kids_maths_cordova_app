@@ -70,16 +70,55 @@ completion and the native download plugin were not verified. No horizontal overf
 was observed at 390px and 320px widths. These checks are not a full WCAG audit;
 screen-reader and native mobile verification remain pending.
 
-## 4. Security and regression coverage
+## 4. Browser hardening and regression coverage (implemented; native migration deferred)
 
 - Audit dependency/platform advisories and review plugin upgrades.
 - Remove unnecessary permissions and inline handlers; tighten CSP.
 - Test question generation, scoring, persistence, resets and worksheets.
 - Add browser lesson-completion coverage.
 
-The initial static security review found no confirmed exploitable
-vulnerabilities. Dependency, native platform and runtime checks remain pending;
-this is not a guarantee against attacks.
+Inline handlers and controller globals were removed in favour of delegated,
+allowlisted module actions. Pending actions are serialized to avoid duplicate
+requests, with explicit logged/live errors. CSP no longer permits inline
+scripts/styles, eval, arbitrary network/media sources or embedded objects.
+Bundled fonts and CSS image data URLs remain allowed; the documented narrow
+Android TalkBack script path and legacy iOS gap frame bridge were retained.
+The app declares no remote network/URL-intent permissions. Saved object-image
+names must match the bundled allowlist before rendering.
+
+Dexie was pinned and the shipped runtime updated from 3.2.4 to 3.2.7 with a
+repeatable vendor/check command retaining upstream license notices.
+Cordova browser tooling was updated to 7.0.0 and non-breaking dependency
+fixes applied. The user chose to defer Android/iOS/platform-plugin migration.
+Their direct installed versions remain unchanged. The full npm audit on
+2026-10-08 decreased from 24 findings (including one critical) to 9
+(7 high, 2 moderate). Remaining chains are braces/micromatch/fast-glob through
+Cordova common/platform tooling and uuid/xcode through iOS tooling.
+The production-only audit reports zero findings. No native build or plugin
+execution was verified. The suggested forced audit fixes include downgrades
+and were deliberately not applied.
+
+Curriculum regression tests exposed subtraction questions below zero.
+With user approval, the generated minuend now starts at the subtrahend when
+needed, so answers are non-negative and match the object-counting interface.
+Existing saved progress and database schema are preserved.
+
+Verification: 23 Node tests pass, including all bundled counting/addition/
+subtraction definitions, action serialization/error reporting, CSP structure
+and unsafe image rejection. Four Chromium tests pass under the mounted path:
+keyboard completion of all three activities, worksheet request/re-request
+(20 total stars without duplicate bonus), reload/advance to Lesson 2,
+wrong-answer retry/advance, mascot cost feedback, reset preserving sibling
+storage, invalid saved-image errors and blocked inline-script execution.
+Normal interactions produce no CSP violations; 390px layout has no horizontal
+overflow. Worksheet clicks are intercepted and PDF serving checked, not actual
+download completion. CI now runs these checks without deploying.
+
+The initial static review found no confirmed exploitable vulnerabilities;
+the dependency audit is not a runtime exploit assessment. Outstanding native
+migration, native CSP/plugin verification, screen-reader testing, and
+same-origin isolation remain separate work. This is not a guarantee against
+attacks or clearance of every development-tool advisory.
 
 ## 5. Deployment
 

@@ -1,3 +1,5 @@
+import { objectImages, objectImageUrl } from '../services/objectImages.js';
+
 const LessonActivityView = {
   renderList: function (activities) {
     const activitiesListElement = document.getElementById('activities-list');
@@ -7,7 +9,8 @@ const LessonActivityView = {
       const activityItem = document.createElement('button');
       activityItem.type = 'button';
       activityItem.setAttribute('class', `activity-item activity-type-${activity.activityType}`);
-      activityItem.setAttribute('onclick', `LessonActivityController.show(${activity.id})`);
+      activityItem.setAttribute('data-action', 'activity');
+      activityItem.setAttribute('data-id', activity.id);
 
       if (activity.completed) {
         activityItem.classList.add('completed');
@@ -45,7 +48,7 @@ const LessonActivityView = {
         break;
     }
 
-    document.getElementById('activity-type').innerHTML = type;
+    document.getElementById('activity-type').textContent = type;
     document.getElementById('activity-icon').innerHTML = `<img src="img/${img}" alt="">`;
   },
   renderScore: function (questions) {
@@ -88,46 +91,21 @@ const LessonActivityView = {
     }
   },
   getObjectImg: function () {
-    const images = [
-      'aeroplane.svg',
-      'ambulance.svg',
-      'balloon.svg',
-      'banana.svg',
-      'basketball.svg',
-      'bike.svg',
-      'candy.svg',
-      'car.svg',
-      'cookie.svg',
-      'crown.svg',
-      'crown2.svg',
-      'cupcake.svg',
-      'diamond.svg',
-      'flower.svg',
-      'gem.svg',
-      'hamburger.svg',
-      'helicopter.svg',
-      'pineapple.svg',
-      'rocket.svg',
-      'sailboat.svg',
-      'school-bus.svg',
-      'strawberry.svg',
-      'tomato.svg'
-    ];
-
-    const random = Math.floor(Math.random() * images.length);
-    return images[random];
+    const random = Math.floor(Math.random() * objectImages.length);
+    return objectImages[random];
   },
   getImagesHtml: function (number, img) {
     let html = '';
+    const imageUrl = objectImageUrl(img);
     for (let x = 0; x < number; x++) {
-      html += `<img src="img/objects/${img}" alt="">`;
+      html += `<img src="${imageUrl}" alt="">`;
     }
     return `<div role="img" aria-label="${number} objects">` + html + '</div>';
   },
   getOptionsHtml: function (options) {
     let html = '';
     options.forEach(function (number) {
-      html += `<li><button type="button" class="card-container" aria-label="Choose ${number}" onclick="LessonActivityController.chooseCard(this)">
+      html += `<li><button type="button" class="card-container" aria-label="Choose ${number}" data-action="choose-card">
                 <div class="card" data-number="${number}">${number}</div>
               </button></li>`;
     });
@@ -139,7 +117,7 @@ const LessonActivityView = {
   renderCheckAnswerButton: function () {
     const checkAnswerButton = document.createElement('button');
     checkAnswerButton.setAttribute('id', 'check-answer-button');
-    checkAnswerButton.setAttribute('onclick', 'LessonActivityController.checkAnswer()');
+    checkAnswerButton.setAttribute('data-action', 'check-answer');
     checkAnswerButton.innerHTML = '<span>Check Answer</span><img src="img/thick-arrow-right-long-white.svg" alt="">';
     document.getElementById('activity-content').appendChild(checkAnswerButton);
     checkAnswerButton.focus();

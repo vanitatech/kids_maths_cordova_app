@@ -1,3 +1,5 @@
+import { objectImageUrl } from './objectImages.js';
+
 const progressFields = {
   pointsAwarded: 0,
   pointsRedeemed: 0,
@@ -40,6 +42,8 @@ export function validateProgress(storage, lessonIds, mascotIds, activityIds) {
   if (type !== null && !['counting', 'addition', 'subtraction', 'worksheet'].includes(type)) {
     throw new Error('Saved Maths Kids activity type is invalid.');
   }
+  const image = storage.getItem('userProgress.currentObjectImage');
+  if (image !== null) objectImageUrl(image);
 }
 
 export async function resetMathsData(database, storage, reload) {

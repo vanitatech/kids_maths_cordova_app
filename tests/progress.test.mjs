@@ -1,10 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFileSync } from 'node:fs';
-
-const source = readFileSync(new URL('../www/js/services/progressStorage.js', import.meta.url), 'utf8');
+import { loadModule } from './helpers/loadModule.mjs';
 const { mathsStorageKeys, validateProgress, resetMathsData, isResetAnswerCorrect } =
-  await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+  await loadModule('www/js/services/progressStorage.js');
 
 function storage(entries = []) {
   const data = new Map(entries);
@@ -28,6 +26,8 @@ test('invalid numbers, references and overspent points report errors without era
     ['pointsAwarded', '9007199254740992'], ['pointsAwarded', ''],
     ['currentLessonId', '99'], ['currentMascot', '99'], ['currentActivityId', '99'],
     ['currentQuestionId', '5'], ['pointsRedeemed', '1'], ['currentActivityType', 'unknown'],
+    ['currentObjectImage', '../home.svg'], ['currentObjectImage', 'banana.svg" onerror="alert(1)'],
+    ['currentObjectImage', 'https://example.com/image.svg'],
   ]) {
     const saved = storage([[`userProgress.${field}`, value]]);
     assert.throws(() => validateProgress(saved, [1, 2], [1], [1]), /Saved Maths Kids/);

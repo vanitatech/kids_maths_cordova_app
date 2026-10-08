@@ -7,7 +7,8 @@ const SubtractionActivityController = {
     let questions = [];
 
     for (let x = 0; x < 5; x++) {
-      let minuend = this.getMinuend(activity.minuendMin, activity.minuendMax, questions);
+      const minimum = Math.max(parseInt(activity.minuendMin), parseInt(activity.subtrahend));
+      let minuend = this.getMinuend(minimum, activity.minuendMax, questions);
       let total = minuend - parseInt(activity.subtrahend);
 
       questions.push({

@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFileSync } from 'node:fs';
+import { loadModule } from './helpers/loadModule.mjs';
 
 async function loadView(name) {
-  const source = readFileSync(new URL(`../www/js/views/${name}.js`, import.meta.url), 'utf8');
-  return (await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`)).default;
+  return (await loadModule(`www/js/views/${name}.js`)).default;
 }
 
 test('answer choices are labelled native buttons', async () => {

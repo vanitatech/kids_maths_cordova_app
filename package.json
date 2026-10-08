@@ -5,7 +5,10 @@
   "description": "Mathematics learning app for 5 year old children, built using Apache Cordova.",
   "main": "index.js",
   "scripts": {
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test",
+    "check:vendor": "node tools/vendor-dexie.mjs --check",
+    "vendor:dexie": "node tools/vendor-dexie.mjs"
   },
   "keywords": [
     "ecosystem:cordova"
@@ -13,8 +16,9 @@
   "author": "Vanita Applebee",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@playwright/test": "1.64.0",
     "cordova-android": "^9.1.0",
-    "cordova-browser": "^6.0.0",
+    "cordova-browser": "^7.0.0",
     "cordova-ios": "^6.3.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-file-opener2": "^3.0.5",
@@ -37,6 +41,6 @@
     ]
   },
   "dependencies": {
-    "dexie": "^3.2.4"
+    "dexie": "3.2.7"
   }
 }

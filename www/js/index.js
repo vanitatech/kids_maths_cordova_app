@@ -4,7 +4,7 @@ import UserProgressController from './controllers/userProgressController.js';
 import LessonController from './controllers/lessonController.js';
 import MascotController from './controllers/mascotController.js';
 import LessonActivityController from './controllers/lessonActivityController.js';
-import AdditionActivityController from './controllers/additionActivityController.js';
+import { bindActions, actionId } from './services/actions.js';
 import { startWhenReady } from './services/startup.js';
 import { validateProgress } from './services/progressStorage.js';
 import db from './database/database.js';
@@ -22,12 +22,6 @@ async function onDeviceReady() {
     if (window.cordova) {
         console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     }
-
-    window.AppController = AppController;
-    window.LessonController = LessonController;
-    window.LessonActivityController = LessonActivityController;
-    window.AdditionActivityController = AdditionActivityController;
-    window.MascotController = MascotController;
 
     // Seed database if empty
     await Seeder.seedDatabase();
@@ -48,6 +42,24 @@ async function onDeviceReady() {
 
     // Mascots library view
     await MascotController.showAll();
+
+    bindActions(document.getElementById('app'), {
+        'view-lesson': () => AppController.showView('lesson'),
+        'view-mascots': () => AppController.showView('mascot-library'),
+        'open-reset': () => AppController.showReset(),
+        'cancel-reset': () => AppController.cancelReset(),
+        'confirm-reset': () => AppController.confirmReset(),
+        'next-lesson': () => LessonController.showNext(),
+        activity: button => LessonActivityController.show(actionId(button)),
+        'choose-card': button => LessonActivityController.chooseCard(button),
+        'check-answer': () => LessonActivityController.checkAnswer(),
+        'unlock-mascot': button => MascotController.unlock(actionId(button)),
+    }, error => {
+        console.error('Maths Kids action failed:', error);
+        AppController.show();
+        document.getElementById('app-feedback').textContent =
+            'That action could not finish. Reload the app before trying again. Your progress has not been reset.';
+    });
 
     // Show app
     AppController.show();

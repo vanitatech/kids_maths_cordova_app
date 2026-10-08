@@ -18,8 +18,35 @@ reset prompt requires acknowledgement and a correct challenge answer.
 Lesson activities, number choices and mascots support keyboard activation as
 well as taps. Progress and answer feedback include accessible text, and worksheet
 completion stars are awarded once even if the PDF is downloaded again.
-Run `npm test` for startup, seeding and worksheet-path regression checks.
+Run `npm test` for startup, seeding, progress, question-generation and security
+regression checks. `npm run test:browser` exercises lesson completion, keyboard
+interaction, scoring, persistence, reset and CSP enforcement in Chromium.
 Native platform builds still require separate device/emulator verification.
+
+## Browser hardening and dependency status
+
+Inline event handlers and global controller exports have been replaced with
+module-bound actions. Pending actions cannot overlap, and failures are logged
+and displayed rather than reported as success. CSP blocks inline scripts,
+`eval`, remote media and embedded objects. It allows bundled styles/fonts/images
+and existing image-only CSS data URLs. A narrow Android TalkBack script path
+and the legacy iOS `gap:` frame bridge remain for Cordova compatibility.
+The offline app no longer declares wildcard network access or external URL
+intents. These restrictions do not remove native plugin permissions.
+
+The browser ships pinned Dexie 3.2.7. Its vendored file is generated from npm
+without stripping upstream license notices; `npm run check:vendor` checks the
+bytes match. When changing Dexie, run `npm run vendor:dexie` and commit both
+dependency files and the generated runtime.
+
+On 2026-10-08, `npm audit --omit=dev` reported no production dependency
+advisories. The full audit still reports **9 Cordova-tooling findings
+(7 high, 2 moderate)**, including the browser platform's shared build tooling.
+Native platform/plugin major upgrades were explicitly deferred; Android/iOS
+builds are not verified or ready to certify for distribution. Do not use
+`npm audit fix --force`: its current suggestions include platform downgrades.
+An npm advisory count is not a runtime exploit assessment or a guarantee of
+security. Apps sharing an origin can still access each other's browser storage.
 
 The Maths App is an educational game-style app where learners:
 
@@ -99,7 +126,7 @@ This keeps the project easy to navigate while showing modular design patterns an
 
 On app startup, the application:
 
-1. waits for the Cordova device ready event
+1. starts in the browser, or waits for Cordova device readiness on native platforms
 2. seeds the local database if it is empty
 3. loads the current lesson and related activities
 4. shows user progress and points
@@ -112,24 +139,44 @@ This makes the app feel dynamic while maintaining a simple data model for educat
 
 ### Prerequisites
 
-- Node.js and npm
+- Node.js 22 and npm for the test tooling
 - Apache Cordova CLI
 - Android/iOS/browser platform tooling if you want to run on device/emulator
 
 ### Installation
 
 ```bash
-npm install
+npm ci --ignore-scripts
+npm run check:vendor
+npm test
 ```
 
-### Run in a browser
+### Browser preview and regression tests
 
 ```bash
-npx cordova platform add browser
-npx cordova run browser
+node tools/serve.mjs
 ```
 
+Open `http://127.0.0.1:8769/demos/kids-maths/`. This loopback-only preview
+server is for development/tests, not production hosting. Stop it before running
+the browser suite, which starts its own server on that port.
+
+```bash
+npx playwright install --only-shell chromium
+npm run test:browser
+```
+
+On a Linux machine missing browser libraries, use
+`npx playwright install --with-deps --only-shell chromium`. CI runs unit/browser
+checks, the vendored-file check and the production dependency audit. It does
+not build native apps or deploy yet. Browser tests intercept worksheet click
+requests and verify the PDF is served; they do not verify a saved download.
+
 ### Build for a platform
+
+Native migration is pending. Retained platform versions need their own
+compatible SDK/JDK/Xcode setup and device testing; the browser CI is not
+evidence that these native builds work.
 
 ```bash
 npx cordova build android
@@ -163,14 +210,13 @@ This project is a working prototype / learning-focused application demonstrating
 
 This project could be extended with:
 
-- automated tests
 - a more advanced analytics dashboard
 - audio feedback and sound effects
 - accessibility improvements for children
 - drag-and-drop activities
 - teacher/parent progress export
 - stronger error handling and validation
-- deployment pipeline and CI/CD
+- automated deployment (test CI is already configured)
 
 ## License
 

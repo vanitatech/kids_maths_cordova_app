@@ -36,7 +36,7 @@ const LessonController = {
     const nextLessonId = UserProgressModel.getNextLessonId();
     UserProgressModel.setCurrentLessonId(nextLessonId);
     UserProgressController.showLessonsCompleted();
-    this.show(nextLessonId);
+    await this.show(nextLessonId);
   }
 }
 
