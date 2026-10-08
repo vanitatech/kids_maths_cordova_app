@@ -120,7 +120,7 @@ migration, native CSP/plugin verification, screen-reader testing, and
 same-origin isolation remain separate work. This is not a guarantee against
 attacks or clearance of every development-tool advisory.
 
-## 5. Deployment (repository prepared; live setup and verification pending)
+## 5. Deployment (live browser deployment verified)
 
 - Package browser assets in a private GHCR image.
 - Extract releases into host Nginx's static directory.
@@ -150,6 +150,14 @@ assets, including full lesson completion, persistence, reset, CSP and no Cordova
 request. Release tests cover file inventory/hash tampering, symlinks, traversal,
 invalid SHAs, IAM/document restrictions and SSM success/failure reporting.
 All shell scripts pass syntax checks.
-Local Docker daemon access is denied, so image building remains for CI.
-Nginx/CloudFormation/live AWS/OIDC/SSM checks are not yet performed.
-No server/AWS changes, live demo claim or native release certification was made.
+Local Docker daemon access is denied; image building was subsequently verified
+in GitHub Actions. On 2026-10-08 the owner completed server/Nginx installation,
+manual release and CloudFormation setup, confirmed the public demo opens, and
+enabled automatic deployment.
+[CI run 37836568754](https://github.com/vanitatech/kids_maths_cordova_app/actions/runs/37836568754)
+passed tests, image publishing, OIDC authentication and the SSM deployment job.
+The public release marker independently matches
+`6743837dcb338c67f1ee734eee30ce3a4e5ea5b8`.
+The browser demo is live at https://vanitatech.co.uk/demos/kids-maths/.
+Native release certification, full live interaction/accessibility checks,
+dependency migration and release/backup retention remain outstanding.

@@ -1,5 +1,7 @@
 # Kids Cordova Maths App
 
+**Live browser demo:** [Maths Kids](https://vanitatech.co.uk/demos/kids-maths/).
+
 A mobile-first mathematics learning application for young children, built with Apache Cordova and vanilla JavaScript. The app helps children build confidence with core numeracy skills such as counting, addition, subtraction, and worksheet practice, while tracking progress across lessons and unlocking mascots as they advance.
 
 This project is designed to showcase practical front-end development skills, data-driven UX, and cross-platform mobile app structure in a portfolio-friendly format.

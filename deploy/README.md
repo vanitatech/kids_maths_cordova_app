@@ -8,10 +8,13 @@ replace the portfolio, store or password-protected Hindi routes.
 
 The repository provides browser packaging, test/image/deploy CI, root-installed
 release scripts, an Nginx location snippet, and a CloudFormation template for
-the restricted GitHub role and SSM command. These are not yet installed on AWS.
-Local release and browser tests pass. Docker image building, Nginx configuration,
-CloudFormation validation and the actual OIDC/SSM deployment still require
-verification in CI/on the server. Native builds are not part of this deployment.
+the restricted GitHub role and SSM command. Server installation and CloudFormation
+setup were completed by the owner on 2026-10-08. The owner confirmed the public
+demo opens. [CI run 37836568754](https://github.com/vanitatech/kids_maths_cordova_app/actions/runs/37836568754)
+passed browser checks, image publishing, OIDC authentication and the SSM deployment
+job. The public release marker was independently checked and matches
+`6743837dcb338c67f1ee734eee30ce3a4e5ea5b8`.
+Automatic deployment is enabled. Native builds are not part of this deployment.
 
 The user chose to keep the short URL throughout, rather than versioned public
 URLs. The current release symlink changes atomically, and responses use
