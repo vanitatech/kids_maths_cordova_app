@@ -4,14 +4,17 @@ const MascotView = {
     mascotList.innerHTML = '';
 
     mascots.forEach(function (mascot) {
-      const mascotItem = document.createElement('div');
-      let mascotItemHtml = `<img class="mascot-item-img" src="img/mascots/${mascot.img}">`;
+      const mascotItem = document.createElement('button');
+      mascotItem.type = 'button';
+      mascotItem.setAttribute('aria-label', `${mascot.name}${mascot.unlocked ? ', choose friend' : `, unlock for ${mascot.cost} stars`}`);
+      mascotItem.setAttribute('aria-pressed', String(mascot.id == currentMascotId));
+      let mascotItemHtml = `<img class="mascot-item-img" src="img/mascots/${mascot.img}" alt="">`;
 
       if (!mascot.unlocked) {
         mascotItem.setAttribute('data-locked', '');
         mascotItemHtml += `
         <div class="mascot-cost">
-          <img src="img/star-yellow.svg">
+          <img src="img/star-yellow.svg" alt="">
           <span>${mascot.cost}</span>
         </div>`;
       }
@@ -30,7 +33,7 @@ const MascotView = {
   renderMascot: function (mascot) {
     const mascotImgContainers = document.querySelectorAll('.mascot-img-container');
     mascotImgContainers.forEach(function (container) {
-      container.innerHTML = `<img src="img/mascots/${mascot.img}">`;
+      container.innerHTML = `<img src="img/mascots/${mascot.img}" alt="${mascot.name} mascot">`;
     });
   }
 }

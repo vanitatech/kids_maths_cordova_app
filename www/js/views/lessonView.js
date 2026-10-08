@@ -9,7 +9,7 @@ const LessonView = {
     <button id="next-lesson-button" onclick="LessonController.showNext()" ${enabled ? '' : 'disabled'}>
         <span>Next Lesson</span>
         <span id="next-lesson-number" class="lesson-number">${number}</span>
-        <img src="img/thick-arrow-right-long.svg">
+        <img src="img/thick-arrow-right-long.svg" alt="">
     </button>`;
 
     // Update the DOM

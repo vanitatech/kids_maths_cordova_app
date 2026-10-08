@@ -27,7 +27,7 @@ const SubtractionActivityView = {
           <td class="minuend-img activity-img">${minuendImg}</td>
         </tr>
         <tr class="subtrahend">
-          <td class="activity-operator"><img src="img/minus.svg"></td>
+          <td class="activity-operator"><img src="img/minus.svg" alt="minus"></td>
           <td class="subtrahend-number activity-number">
             <div class="card-slot" data-number="${question.subtrahend}"></div>
           </td>
@@ -35,7 +35,7 @@ const SubtractionActivityView = {
         </tr>
         <tr>
           <td></td>
-          <td colspan="2">
+          <td colspan="2" aria-label="equals">
             <div class="activity-equals"></div>
             <div class="activity-equals"></div>
           </td>

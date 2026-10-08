@@ -34,6 +34,9 @@ const MascotController = {
         UserProgressModel.incrementPointsRedeemed(cost);
         UserProgressController.showPoints();
         viewChanged = true;
+      } else {
+        document.getElementById('app-feedback').textContent =
+          `You need ${cost} stars to unlock ${mascot.name}. You have ${remainingPoints}.`;
       }
     }
 
@@ -51,6 +54,8 @@ const MascotController = {
       await this.showAll();
       await this.showCurrent();
       AppView.removeLoader();
+      document.getElementById('app-feedback').textContent = `${mascot.name} is your selected friend.`;
+      document.querySelector('.mascot-item[aria-pressed="true"]')?.focus();
     }
   }
 }

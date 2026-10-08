@@ -44,12 +44,31 @@ and focus restoration work at a 390px viewport without horizontal overflow.
 An invalid saved lesson ID shows the startup error and is not silently erased.
 Native WebView keyboard/focus behavior remains unverified.
 
-## 3. Usability and accessibility
+## 3. Usability and accessibility (implemented; native/accessibility audit pending)
 
 - Label icon controls and announce progress and feedback.
 - Review touch targets, responsive layouts and answer interactions.
 - Add keyboard/tap alternatives to drag-only interactions.
 - Explain device-local storage and lack of account synchronization.
+
+Lessons, answer cards and mascot choices now use native buttons with accessible
+names, keyboard activation and visible focus. Progress has accessible values;
+answer feedback includes live text rather than relying on faces/colours alone.
+Activity controls retain the existing tap interaction and add keyboard support
+(the reviewed implementation did not require drag-and-drop).
+Activity colours were darkened for white text contrast, and device-local
+progress is explained. Worksheet re-download remains available and no longer
+awards the same completion bonus repeatedly.
+
+Verification: all 14 tests pass. Browser keyboard checks completed all five
+counting questions, awarded five stars and returned focus to lessons.
+Addition slot selection/checking and subtraction retry/advance were exercised.
+Locked mascots announce the required and available stars. Intercepted browser
+download requests used the mounted worksheet URL; two requests awarded only
+one five-star bonus, and reload preserved the total. Actual PDF download
+completion and the native download plugin were not verified. No horizontal overflow
+was observed at 390px and 320px widths. These checks are not a full WCAG audit;
+screen-reader and native mobile verification remain pending.
 
 ## 4. Security and regression coverage
 

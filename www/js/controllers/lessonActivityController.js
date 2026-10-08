@@ -23,18 +23,20 @@ const LessonActivityController = {
     const lessonActivity = await LessonActivityModel.get(id);
 
     if (lessonActivity.activityType == 'worksheet') {
+      await WorksheetActivityController.download(lessonActivity.activityId);
       // Mark as complete
-      lessonActivity.completed = true;
-      LessonActivityModel.update(lessonActivity);
+      if (!lessonActivity.completed) {
+        lessonActivity.completed = true;
+        await LessonActivityModel.update(lessonActivity);
 
-      // Issue 5 points
-      UserProgressModel.incrementPointsAwarded(5);
-
-      // Download
-      WorksheetActivityController.download(lessonActivity.activityId);
+        // Award once, even when a worksheet is downloaded again.
+        UserProgressModel.incrementPointsAwarded(5);
+      }
+      UserProgressController.showPoints();
 
       // Re-render the lesson view
-      LessonController.showCurrent();
+      await LessonController.showCurrent();
+      document.getElementById('app-feedback').textContent = 'Worksheet requested. You can download it again without earning extra stars.';
     } else {
       UserProgressModel.setCurrentLessonActivityId(id);
       UserProgressModel.setCurrentActivityType(lessonActivity.activityType);
@@ -46,9 +48,11 @@ const LessonActivityController = {
 
       // Show question and view
       LessonActivityView.renderMascotSpeech(lessonActivity.activityType);
-      LessonActivityController.showQuestion(lessonActivity.activityType, 0, 0, true);
+      await LessonActivityController.showQuestion(lessonActivity.activityType, 0, 0, true);
       AppView.showView('activity');
       AppView.disableViewButtons();
+      document.getElementById('app-feedback').textContent = 'Choose a number for each question mark.';
+      document.querySelector('.options button')?.focus();
     }
   },
   createQuestions: async function (activityType, id) {
@@ -84,7 +88,7 @@ const LessonActivityController = {
     const activityType = UserProgressModel.getCurrentActivityType();
     const questionId = UserProgressModel.getCurrentQuestionId()
     const questionAttempts = UserProgressModel.getCurrentQuestionAttempts();
-    this.showQuestion(activityType, questionId, questionAttempts, false);
+    await this.showQuestion(activityType, questionId, questionAttempts, false);
   },
   showNextStep: async function () {
     const activityType = UserProgressModel.getCurrentActivityType();
@@ -93,7 +97,8 @@ const LessonActivityController = {
 
     if (nextQuestionId < totalQuestions) {
       // Show next question
-      this.showQuestion(activityType, nextQuestionId, 0, true);
+      await this.showQuestion(activityType, nextQuestionId, 0, true);
+      document.querySelector('.options button')?.focus();
     } else {
       // Mark activity complete
       const lessonActivityId = UserProgressModel.getCurrentLessonActivityId();
@@ -118,7 +123,9 @@ const LessonActivityController = {
       UserProgressController.showPoints();
 
       // Re-render lesson view
-      LessonController.showCurrent();
+      await LessonController.showCurrent();
+      document.getElementById('app-feedback').textContent = `Activity complete. You earned ${points} stars.`;
+      document.querySelector('#activities-list button:not(:disabled)')?.focus();
     }
   },
   chooseCard: function (cardContainer) {
@@ -129,6 +136,7 @@ const LessonActivityController = {
       activeCardSlot.innerHTML = '';
       activeCardSlot.appendChild(card.cloneNode(true));
       card.remove();
+      cardContainer.disabled = true;
 
       // Find the index of the active card slot, as compared to all card slots
       let activeCardSlotIndex = 0;
@@ -147,6 +155,7 @@ const LessonActivityController = {
       if (nextCardSlotIndex < cardSlots.length) {
         cardSlots[nextCardSlotIndex].classList.add('active');
         cardSlots[nextCardSlotIndex].innerHTML = '<span class="placeholder">?</span>';
+        document.querySelector('.options button:not(:disabled)')?.focus();
       } else {
         LessonActivityView.hideOptions();
         LessonActivityView.renderCheckAnswerButton();
@@ -174,21 +183,26 @@ const LessonActivityController = {
       await this.markQuestion(true);
 
       // Show next step
-      this.showNextStep();
+      await this.showNextStep();
 
     } else {
-      await LessonActivityView.renderQuestionResponse('failure');
+      await LessonActivityView.renderQuestionResponse('failure',
+        UserProgressModel.getCurrentQuestionAttempts() < 2
+          ? 'Not quite right. Count the objects and try again.'
+          : 'Keep practising. Moving to the next question.');
 
       if (UserProgressModel.getCurrentQuestionAttempts() < 2) {
         // Reset question
-        this.resetQuestion();
+        await this.resetQuestion();
+        document.querySelector('.options button')?.focus();
 
       } else {
         // Mark question incorrect
         await this.markQuestion(false);
 
         // Show next step
-        this.showNextStep();
+        document.getElementById('app-feedback').textContent = 'Keep practising. Moving to the next question.';
+        await this.showNextStep();
       }
     }
   },

@@ -61,6 +61,22 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: inherit;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+button:focus-visible { outline: 3px solid #18312f; outline-offset: 4px; }
+button:disabled { cursor: default; }
+.storage-note, .activity-instructions, .app-feedback {
+  margin: 12px 20px;
+  font: 16px/1.5 system-ui, sans-serif;
+}
+.storage-note { color: #444; font-size: 14px; }
+.app-feedback:empty { display: none; }
+.app-feedback { background: #edf4ff; border-radius: 8px; padding: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  #loading img { animation: none; }
 }
 
 * {
@@ -397,6 +413,7 @@ body, span, button {
 /* Activities List */
 
 #activities-list .activity-item {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -444,19 +461,19 @@ body, span, button {
 }
 
 #activities-list .activity-type-addition {
-  background: #3399ff;
+  background: #1765b3;
 }
 
 #activities-list .activity-type-counting {
-  background: #ff3333;
+  background: #ba2323;
 }
 
 #activities-list .activity-type-subtraction {
-  background: #00cc66;
+  background: #087841;
 }
 
 #activities-list .activity-type-worksheet {
-  background: #ff9933;
+  background: #9c5000;
 }
 
 /* Activity View */
@@ -616,7 +633,7 @@ body, span, button {
 
 #check-answer-button {
   padding: 15px 20px;
-  background: #00cc66;
+  background: #087841;
   border-radius: 10px;
   margin: 20px;
   width: calc(100% - 40px);
@@ -647,6 +664,7 @@ body, span, button {
 }
 
 #mascots-list .mascot-item {
+  width: 100%;
   background-color: #eeeeee;
   border-radius: 10px;
   padding: 20px 80px 20px 25px;

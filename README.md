@@ -15,6 +15,9 @@ Startup storage errors are shown without automatically resetting progress.
 Progress stays on this device/browser and is not account-synced. Reset affects
 only Maths Kids' database and known storage keys, not other demos. The parental
 reset prompt requires acknowledgement and a correct challenge answer.
+Lesson activities, number choices and mascots support keyboard activation as
+well as taps. Progress and answer feedback include accessible text, and worksheet
+completion stars are awarded once even if the PDF is downloaded again.
 Run `npm test` for startup, seeding and worksheet-path regression checks.
 Native platform builds still require separate device/emulator verification.
 

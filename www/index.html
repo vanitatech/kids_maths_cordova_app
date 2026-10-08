@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -25,25 +25,27 @@
 
     <div id="app">
         <div id="header">
-            <button id="home-button" class="show-view-button active" data-target-view="lesson"
+            <button id="home-button" aria-label="Lessons" class="show-view-button active" data-target-view="lesson"
                 onclick="AppController.showView('lesson')">
-                <img src="img/home.svg">
+                <img src="img/home.svg" alt="">
             </button>
 
-            <div id="progress-background">
+            <div id="progress-background" role="progressbar" aria-label="Lessons completed" aria-valuemin="0">
                 <div id="progress-bar"></div>
                 <div id="progress-numbers">
                     <span id="progress-numbers-count"></span>/<span id="progress-numbers-total"></span>
                 </div>
             </div>
 
-            <button id="progress-stars-button" class="show-view-button" data-target-view="mascot-library"
+            <button id="progress-stars-button" aria-label="Mascot friends, 0 stars available" class="show-view-button" data-target-view="mascot-library"
                 onclick="AppController.showView('mascot-library')">
-                <img src="img/star-yellow.svg">
+                <img src="img/star-yellow.svg" alt="">
                 <span id="progress-stars-amount"></span>
             </button>
         </div>
 
+        <p class="storage-note">Progress is saved in this browser on this device, not in an online account.</p>
+        <p id="app-feedback" class="app-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
         <div id="app-views">
             <div id="lesson-view" class="app-view" data-view="lesson">
                 <div class="mascot-header">
@@ -86,6 +88,8 @@
                     <div class="mascot-img-container mascot-img-right"></div>
                 </div>
 
+                <p class="activity-instructions">Choose a number for each question mark, then choose Check Answer.
+                    You can tap or use Tab and Enter.</p>
                 <div id="activity-content" class="card-dragging-zone"></div>
 
                 <div id="activity-progress">
@@ -101,7 +105,7 @@
                     <div class="mascot-speech mascot-speech-right">
                         <div class="mascot-speech-part">Yahoo! Unlock new friends</div>
                         <div class="mascot-speech-part">
-                            <img id="mascot-unlock-img" src="img/unlock-keyhole.svg">
+                            <img id="mascot-unlock-img" src="img/unlock-keyhole.svg" alt="">
                         </div>
                     </div>
                 </div>

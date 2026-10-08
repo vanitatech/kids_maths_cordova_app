@@ -27,7 +27,7 @@ const AdditionActivityView = {
           <td class="augend-img activity-img">${augendImg}</td>
         </tr>
         <tr class="addend">
-          <td class="activity-operator"><img src="img/plus.svg"></td>
+          <td class="activity-operator"><img src="img/plus.svg" alt="plus"></td>
           <td class="addend-number activity-number">
             <div class="card-slot" data-number="${question.addend}"></div>
           </td>
@@ -35,7 +35,7 @@ const AdditionActivityView = {
         </tr>
         <tr>
           <td></td>
-          <td colspan="2">
+          <td colspan="2" aria-label="equals">
             <div class="activity-equals"></div>
             <div class="activity-equals"></div>
           </td>
