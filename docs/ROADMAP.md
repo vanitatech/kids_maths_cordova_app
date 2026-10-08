@@ -120,7 +120,7 @@ migration, native CSP/plugin verification, screen-reader testing, and
 same-origin isolation remain separate work. This is not a guarantee against
 attacks or clearance of every development-tool advisory.
 
-## 5. Deployment
+## 5. Deployment (repository prepared; live setup and verification pending)
 
 - Package browser assets in a private GHCR image.
 - Extract releases into host Nginx's static directory.
@@ -129,3 +129,27 @@ attacks or clearance of every development-tool advisory.
 - Test public routing and isolation from sibling demo storage.
 - Preserve Cordova builds separately; do not claim native verification without
   building and testing on the target platforms.
+
+Browser-only packaging strips the native runtime tag/bridge CSP allowances
+without modifying Cordova source. Releases include the source SHA and a strict
+SHA-256 file inventory. The delivery image is extracted from a stopped container,
+never executed. The root script validates the full release before atomically
+switching the current symlink, retains old releases and records the previous
+target. Origin HTTPS checks compare served HTML/JS/CSS/Dexie/PDF/marker bytes.
+The user chose to retain the short public URL; no-store headers reduce stale
+caching, but already-open pages may need reloading after an update.
+
+A scoped CloudFormation template creates the dedicated GitHub role and fixed
+SSM document using the verified repository ID. CI publishes main-branch images
+after testing, with AWS deployment gated by MATHS_DEPLOY_ENABLED until server
+installation, manual release and infrastructure setup pass.
+See [the deployment guide](../deploy/README.md) for the staged setup.
+
+Verification: 30 unit tests and five Chromium tests pass against built browser
+assets, including full lesson completion, persistence, reset, CSP and no Cordova
+request. Release tests cover file inventory/hash tampering, symlinks, traversal,
+invalid SHAs, IAM/document restrictions and SSM success/failure reporting.
+All shell scripts pass syntax checks.
+Local Docker daemon access is denied, so image building remains for CI.
+Nginx/CloudFormation/live AWS/OIDC/SSM checks are not yet performed.
+No server/AWS changes, live demo claim or native release certification was made.

@@ -3,7 +3,9 @@ import { readFile } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = fileURLToPath(new URL('../www/', import.meta.url));
+const root = process.env.MATHS_PREVIEW_ROOT
+  ? resolve(process.env.MATHS_PREVIEW_ROOT)
+  : fileURLToPath(new URL('../www/', import.meta.url));
 const mount = '/demos/kids-maths/';
 const types = {
   '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
@@ -31,7 +33,11 @@ http.createServer(async (request, response) => {
   }
   try {
     const content = await readFile(filename);
-    response.writeHead(200, { 'Content-Type': types[extname(filename)] || 'application/octet-stream' });
+    response.writeHead(200, {
+      'Content-Type': types[extname(filename)] || 'application/octet-stream',
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+    });
     response.end(content);
   } catch (error) {
     if (error.code === 'ENOENT' || error.code === 'EISDIR') {

@@ -1,0 +1,102 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Restricted GitHub OIDC and SSM deployment for the Maths Kids browser demo",
+  "Parameters": {
+    "InstanceId": {
+      "Type": "String",
+      "Default": "i-019b5c487c103508a",
+      "AllowedPattern": "^i-[0-9a-f]+$"
+    }
+  },
+  "Resources": {
+    "DeployDocument": {
+      "Type": "AWS::SSM::Document",
+      "Properties": {
+        "Name": "Vanitatech-DeployKidsMaths",
+        "DocumentType": "Command",
+        "DocumentFormat": "JSON",
+        "UpdateMethod": "NewVersion",
+        "Content": {
+          "schemaVersion": "2.2",
+          "description": "Deploy the Maths Kids browser release on the existing demo server",
+          "parameters": {
+            "CommitSha": {
+              "type": "String",
+              "description": "Full lowercase source commit SHA",
+              "allowedPattern": "^[0-9a-f]{40}$",
+              "interpolationType": "ENV_VAR"
+            }
+          },
+          "mainSteps": [
+            {
+              "action": "aws:runShellScript",
+              "name": "deployKidsMaths",
+              "precondition": { "StringEquals": ["platformType", "Linux"] },
+              "inputs": {
+                "timeoutSeconds": "1200",
+                "runCommand": ["/usr/local/sbin/deploy-kids-maths \"$SSM_CommitSha\""]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "DeployRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "github-deploy-kids-maths",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Federated": {
+                  "Fn::Sub": "arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com"
+                }
+              },
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": {
+                "StringEquals": {
+                  "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+                  "token.actions.githubusercontent.com:sub": "repo:vanitatech@132825275/kids_maths_cordova_app@637397646:ref:refs/heads/main"
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "DeployKidsMathsOnDemoServer",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "ssm:SendCommand",
+                  "Resource": [
+                    { "Fn::Sub": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:document/${DeployDocument}" },
+                    { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/${InstanceId}" }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "ssm:GetCommandInvocation",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "DeployRoleArn": {
+      "Value": { "Fn::GetAtt": ["DeployRole", "Arn"] }
+    },
+    "DeployDocumentName": {
+      "Value": { "Ref": "DeployDocument" }
+    }
+  }
+}

@@ -7,6 +7,7 @@ This project is designed to showcase practical front-end development skills, dat
 ## Project overview
 
 Improvement and deployment plan: [docs/ROADMAP.md](docs/ROADMAP.md).
+Browser release and AWS setup guide: [deploy/README.md](deploy/README.md).
 The app now initializes in ordinary browsers as well as Cordova. Serve `www/`
 over HTTP(S), including under a trailing-slash subdirectory; do not open the
 HTML directly with `file://` for browser testing. Browser worksheets use
@@ -168,9 +169,24 @@ npm run test:browser
 
 On a Linux machine missing browser libraries, use
 `npx playwright install --with-deps --only-shell chromium`. CI runs unit/browser
-checks, the vendored-file check and the production dependency audit. It does
-not build native apps or deploy yet. Browser tests intercept worksheet click
+checks, the vendored-file check and the production dependency audit before
+publishing a SHA-tagged browser image on main. AWS deployment is gated by
+`MATHS_DEPLOY_ENABLED=true` after the setup guide is complete. CI does not build
+native apps. Browser tests intercept worksheet click
 requests and verify the PDF is served; they do not verify a saved download.
+
+### Build a browser release
+
+```bash
+RELEASE_SHA=$(git rev-parse HEAD) npm run build:browser
+MATHS_PREVIEW_ROOT=dist/site npm run test:browser
+```
+
+The builder requires a new output directory (`dist/site` by default); remove
+only that generated directory before rebuilding, or pass a different output
+directory with `npm run build:browser -- /absolute/path/to/new-site`.
+Release output has no Cordova runtime request and includes a SHA-256 inventory.
+The source remains suitable for separate Cordova builds.
 
 ### Build for a platform
 
@@ -216,7 +232,7 @@ This project could be extended with:
 - drag-and-drop activities
 - teacher/parent progress export
 - stronger error handling and validation
-- automated deployment (test CI is already configured)
+- complete server setup and verify automated AWS deployment
 
 ## License
 

@@ -1,0 +1,6 @@
+**
+!Dockerfile
+!tools/
+!tools/build-browser.mjs
+!www/
+!www/**

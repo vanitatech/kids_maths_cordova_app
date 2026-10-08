@@ -7,6 +7,7 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
+    "build:browser": "node tools/build-browser.mjs",
     "check:vendor": "node tools/vendor-dexie.mjs --check",
     "vendor:dexie": "node tools/vendor-dexie.mjs"
   },

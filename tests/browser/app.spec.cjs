@@ -124,3 +124,17 @@ test('failed action reports an error instead of claiming success or awarding sta
   await expect(page.locator('#app-feedback')).toBeVisible();
   await expect(page.locator('#loading')).not.toBeVisible();
 });
+
+test('packaged release starts without requesting Cordova and disables response caching', async ({ page }) => {
+  test.skip(!process.env.MATHS_PREVIEW_ROOT, 'Run against the built browser release.');
+  const requests = [];
+  page.on('request', request => requests.push(request.url()));
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Counting', exact: true })).toBeVisible();
+  expect(requests.some(url => url.endsWith('/cordova.js'))).toBe(false);
+  const response = await page.request.get('./');
+  expect(response.headers()['cache-control']).toBe('no-store');
+  expect(response.headers()['x-content-type-options']).toBe('nosniff');
+  expect(await response.text()).not.toContain('cordova.js');
+  expect(await page.evaluate(() => window.cspViolations)).toEqual([]);
+});
