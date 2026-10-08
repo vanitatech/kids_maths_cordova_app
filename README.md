@@ -6,6 +6,15 @@ This project is designed to showcase practical front-end development skills, dat
 
 ## Project overview
 
+Improvement and deployment plan: [docs/ROADMAP.md](docs/ROADMAP.md).
+The app now initializes in ordinary browsers as well as Cordova. Serve `www/`
+over HTTP(S), including under a trailing-slash subdirectory; do not open the
+HTML directly with `file://` for browser testing. Browser worksheets use
+relative bundled PDF downloads; native builds retain the file plugins.
+Startup storage errors are shown without automatically resetting progress.
+Run `npm test` for startup, seeding and worksheet-path regression checks.
+Native platform builds still require separate device/emulator verification.
+
 The Maths App is an educational game-style app where learners:
 
 - progress through a series of maths lessons

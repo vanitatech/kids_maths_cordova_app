@@ -4,13 +4,9 @@ import LessonModel from "../models/lessonModel.js";
 
 const UserProgressController = {
   showLessonsCompleted: async function () {
-    try {
       const completedLessons = UserProgressModel.getLessonsCompleted();
       const totalLessons = await LessonModel.getTotal();
       UserProgressView.renderProgressBar(completedLessons, totalLessons);
-    } catch (error) {
-      console.error('Error:', error);
-    }
   },
   showPoints: function () {
     const pointsAwarded = UserProgressModel.getPointsAwarded();

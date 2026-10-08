@@ -1,26 +1,26 @@
 import WorksheetActivityModel from "../models/worksheetActivityModel.js";
+import { worksheetUrl } from "../services/startup.js";
 
 const WorksheetActivityController = {
   download: async function (id) {
     const worksheetActivity = await WorksheetActivityModel.get(id);
 
     // File URL
-    const worksheetsDirectory = cordova.file.applicationDirectory + 'www/worksheets/';
     const fileName = worksheetActivity.worksheet;
-    const fileUrl = worksheetsDirectory + fileName;
+    const browserUrl = worksheetUrl(fileName, document.baseURI);
 
-    if (cordova.platformId === 'browser') {
+    if (!window.cordova || cordova.platformId === 'browser') {
       // Running in a web browser
       var link = document.createElement('a');
-      link.setAttribute('href', fileUrl);
+      link.setAttribute('href', browserUrl);
       // Set the desired filename for the downloaded file
-      link.setAttribute('download', '');
-      link.setAttribute('target', '_blank');
+      link.setAttribute('download', fileName);
 
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     } else {
+      const fileUrl = worksheetUrl(fileName, cordova.file.applicationDirectory + 'www/');
       // Running on Android or iOS
       const fileTransfer = new FileTransfer();
       // Temporary path

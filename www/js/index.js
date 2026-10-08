@@ -5,20 +5,33 @@ import LessonController from './controllers/lessonController.js';
 import MascotController from './controllers/mascotController.js';
 import LessonActivityController from './controllers/lessonActivityController.js';
 import AdditionActivityController from './controllers/additionActivityController.js';
-import UserProgressModel from './models/userProgressModel.js';
+import { startWhenReady } from './services/startup.js';
 
 // Wait for the deviceready event before using any of Cordova's device APIs
-document.addEventListener('deviceready', onDeviceReady, false);
+startWhenReady(document, Boolean(window.cordova), onDeviceReady, (error) => {
+    console.error('Maths Kids startup failed:', error);
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('startup-error').hidden = false;
+});
 
 async function onDeviceReady() {
     // Cordova is now initialised
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
+    if (window.cordova) {
+        console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
+    }
+
+    window.AppController = AppController;
+    window.LessonController = LessonController;
+    window.LessonActivityController = LessonActivityController;
+    window.AdditionActivityController = AdditionActivityController;
+    window.MascotController = MascotController;
 
     // Seed database if empty
     await Seeder.seedDatabase();
 
     // User Progress
-    UserProgressController.showLessonsCompleted();
+    await UserProgressController.showLessonsCompleted();
     UserProgressController.showPoints();
 
     // Mascots
@@ -33,10 +46,4 @@ async function onDeviceReady() {
     // Show app
     AppController.show();
 
-    // Make controllers globally accessible
-    window.AppController = AppController;
-    window.LessonController = LessonController;
-    window.LessonActivityController = LessonActivityController;
-    window.AdditionActivityController = AdditionActivityController;
-    window.MascotController = MascotController;
 }

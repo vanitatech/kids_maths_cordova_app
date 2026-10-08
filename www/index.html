@@ -14,6 +14,11 @@
 </head>
 
 <body>
+    <div id="startup-error" role="alert" hidden>
+        <h1>Maths Kids could not start</h1>
+        <p>Check that this browser allows site storage, then reload the page.
+            If the problem continues, contact the app owner. Your progress has not been reset.</p>
+    </div>
     <div id="loading">
         <img src="img/spinner.svg" alt="Loading...">
     </div>
@@ -119,6 +124,7 @@
             </div>
         </div>
     </div>
+    <!-- Cordova platforms supply this runtime; ordinary web hosting does not. -->
     <script src="cordova.js"></script>
     <script src="js/lib/dexie.min.js"></script>
     <script type="module" src="js/index.js"></script>

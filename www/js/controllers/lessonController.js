@@ -30,7 +30,7 @@ const LessonController = {
   },
   showCurrent: async function () {
     const currentLessonId = UserProgressModel.getCurrentLessonId();
-    this.show(currentLessonId);
+    await this.show(currentLessonId);
   },
   showNext: async function () {
     const nextLessonId = UserProgressModel.getNextLessonId();
