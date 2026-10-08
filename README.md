@@ -12,6 +12,9 @@ over HTTP(S), including under a trailing-slash subdirectory; do not open the
 HTML directly with `file://` for browser testing. Browser worksheets use
 relative bundled PDF downloads; native builds retain the file plugins.
 Startup storage errors are shown without automatically resetting progress.
+Progress stays on this device/browser and is not account-synced. Reset affects
+only Maths Kids' database and known storage keys, not other demos. The parental
+reset prompt requires acknowledgement and a correct challenge answer.
 Run `npm test` for startup, seeding and worksheet-path regression checks.
 Native platform builds still require separate device/emulator verification.
 

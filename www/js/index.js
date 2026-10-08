@@ -6,6 +6,8 @@ import MascotController from './controllers/mascotController.js';
 import LessonActivityController from './controllers/lessonActivityController.js';
 import AdditionActivityController from './controllers/additionActivityController.js';
 import { startWhenReady } from './services/startup.js';
+import { validateProgress } from './services/progressStorage.js';
+import db from './database/database.js';
 
 // Wait for the deviceready event before using any of Cordova's device APIs
 startWhenReady(document, Boolean(window.cordova), onDeviceReady, (error) => {
@@ -29,6 +31,10 @@ async function onDeviceReady() {
 
     // Seed database if empty
     await Seeder.seedDatabase();
+    validateProgress(localStorage,
+        await db.lessons.toCollection().primaryKeys(),
+        await db.mascots.toCollection().primaryKeys(),
+        await db.lessonActivities.toCollection().primaryKeys());
 
     // User Progress
     await UserProgressController.showLessonsCompleted();

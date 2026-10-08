@@ -61,7 +61,7 @@
 
                 <div id="next-lesson-button-container"></div>
 
-                <button id="reset-open" onclick="AppController.showReset();">
+                <button id="reset-open" aria-label="Reset Maths Kids progress" onclick="AppController.showReset();">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 25 25">
                         <path
                             d="m4.56 13.5-.42.43.43.42.42-.43-.43-.42Zm5.36 2.42 6-6-.84-.84-6 6 .84.84Zm-.84-6 6 6 .84-.84-6-6-.84.84ZM19.9 12.5a7.4 7.4 0 0 1-7.4 7.4v1.2a8.6 8.6 0 0 0 8.6-8.6h-1.2Zm-14.8 0a7.4 7.4 0 0 1 7.4-7.4V3.9a8.6 8.6 0 0 0-8.6 8.6h1.2Zm7.4-7.4a7.4 7.4 0 0 1 7.4 7.4h1.2a8.6 8.6 0 0 0-8.6-8.6v1.2Zm-7.34 8.33c-.04-.3-.06-.62-.06-.93H3.9c0 .36.02.72.07 1.07l1.19-.14Zm7.34 6.47a7.4 7.4 0 0 1-6.12-3.24l-1 .68a8.6 8.6 0 0 0 7.12 3.76v-1.2ZM5 13.92l2.43-2.5-.86-.84-2.44 2.5.86.84Zm-.02-.85-2.56-2.5-.84.86 2.56 2.5.84-.86Z"
@@ -110,16 +110,24 @@
             </div>
 
             <div id="reset-check-cover">
-                <div id="reset-check">
-                    <button id="reset-cancel" onclick="AppController.cancelReset();">
+                <div id="reset-check" role="dialog" aria-modal="true" aria-labelledby="reset-title" aria-describedby="reset-description">
+                    <h2 id="reset-title">Parent or carer: reset progress</h2>
+                    <p id="reset-description">This erases Maths Kids lessons, stars and unlocked friends on this device.
+                        It cannot be undone. Other apps will not be reset.</p>
+                    <button id="reset-cancel" aria-label="Cancel reset" onclick="AppController.cancelReset();">
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                             <path
                                 d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
                         </svg>
                     </button>
-                    <label id="reset-question">5 x 3</label>
-                    <input type="number" id="reset-answer" step="1" min="0">
-                    <button id="reset-confirm" onclick="AppController.confirmReset();">RESET</button>
+                    <label id="reset-question" for="reset-answer">5 x 3</label>
+                    <input type="number" id="reset-answer" step="1" min="0" inputmode="numeric">
+                    <label class="reset-acknowledgement">
+                        <input type="checkbox" id="reset-acknowledge">
+                        I want to erase Maths Kids progress on this device.
+                    </label>
+                    <p id="reset-error" role="alert"></p>
+                    <button id="reset-confirm" onclick="AppController.confirmReset();">Erase Maths Kids progress</button>
                 </div>
             </div>
         </div>

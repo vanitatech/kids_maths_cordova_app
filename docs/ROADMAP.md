@@ -20,11 +20,29 @@ Native download and device builds remain unverified. Ordinary web hosting
 currently returns a harmless 404 for the optional `cordova.js` runtime; browser
 release packaging should remove that script tag, not ship a fake Cordova runtime.
 
-## 2. Safe local progress
+## 2. Safe local progress (implemented; verification below)
 
 - Replace broad localStorage clearing with app-specific reset.
 - Validate stored progress and improve parental reset confirmation.
 - Preserve existing progress where possible; document any migrations.
+
+Retains existing key names and database name; no migration or silent reset.
+Startup validates numeric progress, lesson/mascot/activity references and
+reward totals. Invalid data is reported through the startup error panel.
+Reset deletes only the known `userProgress.*` and `dailyTarget.*` fields,
+not arbitrary prefixes or other apps' keys. The dialog explains data loss,
+requires explicit acknowledgement and the parent maths challenge, and includes
+keyboard focus containment and Escape cancellation.
+Storage isolation prevents accidental clearing, not same-origin security
+isolation between apps. Browser privacy settings and clearing site data can
+still remove device-local progress.
+
+Verification: all 11 startup/progress tests pass. Mounted browser checks
+confirmed reset returns to Lesson 1 with zero points while preserving a sibling
+store key. The acknowledgement guard, focus containment, Escape cancellation
+and focus restoration work at a 390px viewport without horizontal overflow.
+An invalid saved lesson ID shows the startup error and is not silently erased.
+Native WebView keyboard/focus behavior remains unverified.
 
 ## 3. Usability and accessibility
 

@@ -1,5 +1,6 @@
 import AppView from "../views/appView.js";
 import db from '../database/database.js';
+import { resetMathsData, isResetAnswerCorrect } from '../services/progressStorage.js';
 
 const AppController = {
   show: function () {
@@ -24,17 +25,31 @@ const AppController = {
     const correctAnswer = answerElement.getAttribute('data-answer');
     const userAnswer = answerElement.value;
 
-    if (userAnswer == correctAnswer) {
-      this.resetAppData();
+    if (!document.getElementById('reset-acknowledge').checked) {
+      AppView.showResetError('Confirm that you want to erase Maths Kids progress on this device.');
+      return;
+    }
+    if (!isResetAnswerCorrect(userAnswer, correctAnswer)) {
+      AppView.showResetError('That answer is not correct. Please try again or cancel.');
+      return;
+    }
+    const button = document.getElementById('reset-confirm');
+    if (button.disabled) return;
+    button.disabled = true;
+    try {
+      await this.resetAppData();
+    } catch (error) {
+      console.error('Maths Kids reset failed:', error);
+      AppView.showResetError('Reset could not finish. Reload the app before trying again.');
+    } finally {
+      button.disabled = false;
     }
   },
   cancelReset: function () {
     AppView.hideReset();
   },
   resetAppData: async function () {
-    await db.delete();
-    localStorage.clear();
-    location.reload();
+    await resetMathsData(db, localStorage, () => location.reload());
   }
 }
 
